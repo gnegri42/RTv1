@@ -36,6 +36,7 @@ typedef struct		s_map
 {
 	char			*str;
 	char			**content;
+	int				nb_line;
 }					t_map;
 
 typedef struct		s_img
@@ -54,5 +55,7 @@ typedef struct		s_mlx
 	t_img			*img;
 	t_map			*map;
 }					t_mlx;
+
+int			ft_reader(int argc, char *argv, t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 12:20:54 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/01/29 12:26:22 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:28:19 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 int	main(int argc, char **argv)
 {
-	t_img	img;
+	t_mlx	*mlx;
+	t_img	*img;
+	t_map	*map;
 
+	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
+		return (-1);
+	if (!(map = (t_map *)malloc(sizeof(t_map))))
+		return (-1);
 	if (!(img = (t_img *)malloc(sizeof(t_img))))
 		return (-1);
+	mlx->map = map;
 	mlx->img = img;
 	if (ft_reader(argc, argv[1], map) != 0)
 		return (-1);
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "Wolf3d 42");
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1 42");
 	return (0);
 }

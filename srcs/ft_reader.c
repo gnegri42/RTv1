@@ -27,7 +27,7 @@ static int	ft_verifs(int fd, t_map *map, char *line)
 		free(map->content);
 		return (-1);
 	}
-	if (str[0] == '\0')
+	if (map->str[0] == '\0')
 	{
 		ft_putstr("Error: file is empty.\n");
 		return (-1);
