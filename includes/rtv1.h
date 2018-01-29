@@ -32,18 +32,26 @@
 # define ORANGE 0x00FFA500
 # define RED 0xFF0000
 
+typedef struct		s_vec3
+{
+	double			x;
+	double			y;
+	double			z;
+}					t_vec3;
+
 typedef	struct 		s_sphere
 {
 	t_vec3			*position;
 	double			rayon;
 }					t_sphere;
 
-typedef	struct 		s_camera
+typedef	struct 		s_cam
 {
 	t_vec3			*camPos;
 	t_vec3			*viewDir;
 	double			screenDist;
-}					t_camera;
+	t_vec3			screenCenter;
+}					t_cam;
 
 typedef	struct		s_ray
 {
@@ -51,13 +59,6 @@ typedef	struct		s_ray
 	t_vec3			*destination;
 	double			length;
 }					t_ray;
-
-typedef struct		s_vec3
-{
-	double			x;
-	double			y;
-	double			z;
-}					t_vec3;
 
 typedef struct		s_map
 {
@@ -81,8 +82,11 @@ typedef struct		s_mlx
 	void			*win;
 	t_img			*img;
 	t_map			*map;
+	t_cam			*cam;
 }					t_mlx;
 
 int			ft_reader(int argc, char *argv, t_map *map);
+int			ft_init_camera(t_mlx *mlx);
+
 
 #endif

@@ -14,7 +14,8 @@ NAME = rtv1
 
 SRC_PATH = srcs
 SRC_NAME = main.c\
-			ft_reader.c\
+			reader.c\
+			init_camera.c\
 			
 			
 OBJ_PATH = objs
