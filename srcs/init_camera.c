@@ -20,8 +20,8 @@ int	ft_init_camera(t_mlx *mlx)
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
 	mlx->cam = cam;
-	cam->camPos = (0, 0, 0);
-	cam->viewDir = (0, 5, 0);
+	cam->camPos = (1, 2, 3);
+	cam->viewDir = (4, 5, 6);
 	cam->screenDist = 100;
 	cam->screenCenter = (cam->camPos + cam->viewDir * cam->screenDist);
 	printf("%f\n", cam->screenCenter.x);

@@ -87,6 +87,7 @@ typedef struct		s_mlx
 
 int			ft_reader(int argc, char *argv, t_map *map);
 int			ft_init_camera(t_mlx *mlx);
+t_vec3		vector_addition(t_vec3 v1, t_vec3 v2)
 
 
 #endif
