@@ -11,21 +11,20 @@
 /* ************************************************************************** */
 
 #include <rtv1.h>
-#include <stdio.h>
 
-int	ft_init_camera(t_mlx *mlx)
+int	init_camera(t_mlx *mlx)
 {
-	t_cam *cam;
+	t_cam 	*cam;
+	t_vec3	v1;
 
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
 	mlx->cam = cam;
-	cam->camPos = (1, 2, 3);
-	cam->viewDir = (4, 5, 6);
-	cam->screenDist = 100;
-	cam->screenCenter = (cam->camPos + cam->viewDir * cam->screenDist);
-	printf("%f\n", cam->screenCenter.x);
-	printf("%f\n", cam->screenCenter.y);
-	printf("%f\n", cam->screenCenter.z);
+	cam->camPos = vector_assign_values(1.0, 2.0, 3.0);
+	cam->viewDir = vector_assign_values(4.0, 5.0, 6.0);
+	cam->screenDist = 10;
+	//cam->screenCenter = (cam->camPos + cam->viewDir * cam->screenDist);
+	v1 = vector_float_multiplication(cam->viewDir, cam->screenDist);
+	cam->screenCenter = vector_addition(cam->camPos, v1);
 	return (0);
 }

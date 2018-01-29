@@ -30,5 +30,6 @@ int	main(int argc, char **argv)
 		return (-1);
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1 42");
+	init_camera(mlx);
 	return (0);
 }

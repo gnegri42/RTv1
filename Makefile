@@ -16,7 +16,8 @@ SRC_PATH = srcs
 SRC_NAME = main.c\
 			reader.c\
 			init_camera.c\
-			vector_calc1.c\			
+			vector_calc1.c\
+			
 			
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)

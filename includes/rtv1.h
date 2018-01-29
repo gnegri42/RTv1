@@ -34,30 +34,30 @@
 
 typedef struct		s_vec3
 {
-	double			x;
-	double			y;
-	double			z;
+	float			x;
+	float			y;
+	float			z;
 }					t_vec3;
 
 typedef	struct 		s_sphere
 {
-	t_vec3			*position;
-	double			rayon;
+	t_vec3			position;
+	float			rayon;
 }					t_sphere;
 
 typedef	struct 		s_cam
 {
-	t_vec3			*camPos;
-	t_vec3			*viewDir;
-	double			screenDist;
+	t_vec3			camPos;
+	t_vec3			viewDir;
+	float			screenDist;
 	t_vec3			screenCenter;
 }					t_cam;
 
 typedef	struct		s_ray
 {
-	t_vec3			*origin;
-	t_vec3			*destination;
-	double			length;
+	t_vec3			origin;
+	t_vec3			destination;
+	float			length;
 }					t_ray;
 
 typedef struct		s_map
@@ -86,8 +86,10 @@ typedef struct		s_mlx
 }					t_mlx;
 
 int			ft_reader(int argc, char *argv, t_map *map);
-int			ft_init_camera(t_mlx *mlx);
-t_vec3		vector_addition(t_vec3 v1, t_vec3 v2)
+int			init_camera(t_mlx *mlx);
+t_vec3		vector_addition(t_vec3 v1, t_vec3 v2);
+t_vec3 		vector_float_multiplication(t_vec3 v1, float i);
+t_vec3		vector_assign_values(float x, float y, float z);
 
 
 #endif
