@@ -23,7 +23,6 @@ int	init_camera(t_mlx *mlx)
 	cam->camPos = vector_assign_values(1.0, 2.0, 3.0);
 	cam->viewDir = vector_assign_values(4.0, 5.0, 6.0);
 	cam->screenDist = 10;
-	//cam->screenCenter = (cam->camPos + cam->viewDir * cam->screenDist);
 	v1 = vector_float_multiplication(cam->viewDir, cam->screenDist);
 	cam->screenCenter = vector_addition(cam->camPos, v1);
 	return (0);
