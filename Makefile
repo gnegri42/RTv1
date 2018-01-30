@@ -17,6 +17,10 @@ SRC_NAME = main.c\
 			reader.c\
 			init_camera.c\
 			vector_calc1.c\
+			vector_calc2.c\
+			key.c\
+			draw.c\
+			sphere.c\
 			
 			
 OBJ_PATH = objs
