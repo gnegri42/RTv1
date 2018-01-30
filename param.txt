@@ -1,0 +1,18 @@
+#Fenetre 
+	WIDTH : 800	
+	HEIGHT : 800
+			
+#Camera : 
+	Position (vecteur) : (0, 0, 0)
+	Direction(vecteur) : (0, 0, 42)
+	DistanceEcran(float) : 50							
+
+#FORME	
+	Type		: SP/CY/CO/PL
+	Position	: (0, 0, 0)
+	Translation	: (0, 0, 0)	
+	Rotation	: (0, 0, 0)
+	Rayon		: 5
+	Couleur		: rgb				
+
+#end

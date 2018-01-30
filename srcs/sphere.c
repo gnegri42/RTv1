@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float projection, int x, int y)
 {
@@ -30,10 +29,7 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 		mlx->cam->ray->sphere_intersection = 1;
 	}
 	if (mlx->cam->ray->sphere_intersection == 1)
-	{
 		draw(mlx, x, y);
-		printf("%f ", distance_sq);
-	}
 	return (0);
 }
 
@@ -49,8 +45,8 @@ int	check_sphere(t_mlx *mlx, int x, int y)
 		return (-1);
 	mlx->map->sphere = sphere;
 	mlx->cam->ray->sphere_intersection = 0;
-	mlx->map->sphere->radius = 10;
-	sphere->position = vector_assign_values(0, 0, 0);
+	mlx->map->sphere->radius = 8;
+	sphere->position = vector_assign_values(0, 0, 40);
 	origin_to_sphere = vector_substraction(sphere->position, mlx->cam->ray->origin);
 	projection = vector_dot_product(origin_to_sphere, mlx->cam->ray->direction);
 	distance_vector = vector_substraction(origin_to_sphere, vector_float_product(mlx->cam->ray->direction, projection));
