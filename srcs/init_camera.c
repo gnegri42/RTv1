@@ -64,7 +64,7 @@ int			init_camera(t_mlx *mlx)
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
 	mlx->cam = cam;
-	cam->camPos = vector_assign_values(0, 0, -50);
+	cam->camPos = vector_assign_values(0, 0, -5);
 	cam->viewDir = vector_assign_values(0, 0, 0);
 	cam->screenDist = 100;
 	v1 = vector_float_product(cam->viewDir, cam->screenDist);
