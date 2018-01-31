@@ -22,12 +22,9 @@ static int	read_objects(t_map *map)
 	{
 		j = 0;
 		j = skip_space(map->content[i], j);
-		if(map->content[i][j] == )
-		{
-
-		}
 		i++;
 	}
+	return (true);
 }
 
 static int	ft_verifs(int fd, t_map *map, char *line)

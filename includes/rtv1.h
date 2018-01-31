@@ -65,10 +65,10 @@ typedef	struct		s_ray
 
 typedef	struct 		s_cam
 {
-	t_vec3			camPos;
-	t_vec3			viewDir;
-	float			screenDist;
-	t_vec3			screenCenter;
+	t_vec3			cam_pos;
+	t_vec3			view_dir;
+	float			screen_dist;
+	t_vec3			screen_center;
 	t_vec3			p0;
 	t_vec3			p1;
 	t_vec3			p2;
@@ -114,7 +114,7 @@ float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			ft_key_events(int keycode);
 void		draw(t_mlx *mlx , int x, int y);
-int			check_errors(t_mlx *mlx, t_map map);
+int			check_errors(t_mlx *mlx, t_map *map);
 int			atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);
 int			read_first_letters(char *str, int i);
