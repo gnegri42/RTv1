@@ -23,23 +23,16 @@ static int	check_cam(t_cam *cam, char *str)
 {
 	int		j;
 	int		c;
-	float		x;
-	float		y;
-	float		z;
 
 	j = 0;
-	c = 0;
-	while (str[j] >= '0' && str[j] <= '9')
+	if ((c = count_int(str)) != 7)
+		return (false);
+	cam->cam_pos = assign_vectors(str, &j, cam->cam_pos);
+	cam->view_dir = assign_vectors(str, &j, cam->view_dir);
+	while (str[j] < '0' || str[j] > '9')
 		j++;
-	x = atoi_custom(str, &j);
-	while (str[j] >= '0' && str[j] <= '9')
-		j++;
-	y = atoi_custom(str, &j);
-	while (str[j] >= '0' && str[j] <= '9')
-		j++;
-	z = atoi_custom(str, &j);
-	cam->cam_pos = vector_assign_values(x, y, z);
-	return (0);
+	cam->screen_dist = atoi_custom(str, &j);
+	return (true);
 }
 
 int			check_errors(t_mlx *mlx, t_map *map)
