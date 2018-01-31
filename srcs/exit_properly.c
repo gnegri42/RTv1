@@ -20,7 +20,7 @@ static void	rtv1_free_map(t_mlx *mlx)
 	while (x < mlx->map->nb_line)
 		free(mlx->map->content[x++]);
 	mlx->map->sphere ? free(mlx->map->sphere) : (0);
-	mlx->map->cylindre ? free(mlx->map->cylindre ) : (0);
+//	mlx->map->cylindre ? free(mlx->map->cylindre ) : (0);
 	free(mlx->map->str);
 }
 
