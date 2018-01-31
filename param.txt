@@ -1,19 +1,10 @@
-#WINDOW 
-	WIDTH : 800	
-	HEIGHT : 800
-			
-#CAMERA : 
-	Position (vecteur) : (0, 0, 0)
-	Direction(vecteur) : (0, 0, 42)
-	DistanceEcran(float) : 50							
+NOM de la map : nom de la fenetre
 
-#FORM	
-	Type		: SP/CY/CO/PL/LT
-	Position	: (0, 0, 0)
-	Translation	: (0, 0, 0)	
-	Rotation	: (0, 0, 0)
-	Rayon		: 5
-	Couleur		: rgb
-	Si LT alors direction : Direction(vecteur) : (0, 0, 42)
+WIN 	WIDTH : 800	HEIGHT : 800
+CAM		Position : (0, 0, 0) Direction: (0, 0, 42)	Distance_ecran : 50
+
+--------------------------------------------------------------------------------------------------
+
+Objets		: SPH/CYL/CON/PLA/LIT	Position	Translation 	Rotation	Rayon	Couleur	Direction
 
 #end
