@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <rtv1.h>
+#include <stdio.h>
 
 static int	check_ray_objects(t_mlx *mlx, float x, float y)
 {
@@ -67,14 +68,23 @@ int			init_camera(t_mlx *mlx)
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
 	mlx->cam = cam;
-	cam->cam_pos = vector_assign_values(0, 0, 0);
+	/*cam->cam_pos = vector_assign_values(0, 0, 0);
 	cam->view_dir = vector_assign_values(0, 0, 20);
-	cam->screen_dist = 100;
-	/*if (init_data(mlx, mlx->map) == false)
+	cam->screen_dist = 100;*/
+	if (init_data(mlx, mlx->map) == false)
 	{
 		ft_putstr("Error : unable to read data from file");
 		return(false);
-	}*/
+	}
+
+	printf("%f ", cam->cam_pos.x);
+	printf("%f ", cam->cam_pos.y);
+	printf("%f\n", cam->cam_pos.z);
+	printf("%f ", cam->view_dir.x);
+	printf("%f ", cam->view_dir.y);
+	printf("%f\n", cam->view_dir.z);
+	printf("%f\n", cam->screen_dist);
+
 	v1 = vector_float_product(cam->view_dir, cam->screen_dist);
 	cam->screen_center = vector_addition(cam->cam_pos, v1);
 	v1 = vector_assign_values(-WIN_WIDTH, WIN_HEIGHT, 0);
