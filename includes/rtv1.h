@@ -119,7 +119,7 @@ int			key_events(int keycode);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			check_cylindre(t_mlx *mlx, int x, int y);
-void		draw(t_mlx *mlx , int x, int y);
+void		draw(t_mlx *mlx , float x, float y);
 int			check_errors(t_mlx *mlx, t_map *map);
 float		atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);

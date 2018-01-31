@@ -12,6 +12,13 @@
 
 #include <rtv1.h>
 
+static int	check_ray_objects(t_mlx *mlx, float x, float y)
+{
+	check_sphere(mlx, x, y);
+	//check_cylindre(mlx, x, y);
+	return(0);
+}
+
 static int	create_ray(t_cam *cam, float i, float j)
 {
 	t_vec3	point_on_screen;
@@ -44,7 +51,7 @@ static int	ray_loop(t_mlx *mlx)
 			i = x / WIN_WIDTH;
 			j = y / WIN_HEIGHT;
 			create_ray(mlx->cam, i ,j);
-			check_sphere(mlx, x, y);
+			check_ray_objects(mlx, x, y);
 			x++;
 		}
 		y++;

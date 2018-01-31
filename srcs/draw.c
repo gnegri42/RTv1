@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-void	draw(t_mlx *mlx , int x, int y)
+void	draw(t_mlx *mlx , float x, float y)
 {
 	int i;
 
