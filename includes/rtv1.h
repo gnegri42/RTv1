@@ -86,6 +86,7 @@ typedef struct		s_map
 	char			**content;
 	int				nb_line;
 	t_sphere		*sphere;
+	t_cylindre		*cylindre;
 }					t_map;
 
 typedef struct		s_img
@@ -115,7 +116,7 @@ t_vec3		vector_substraction(t_vec3 v1, t_vec3 v2);
 t_vec3 		vector_int_product(t_vec3 v1, int i);
 t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
-int			key_events(int keycode);
+int			key_events(int keycode, t_mlx *mlx);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			check_cylindre(t_mlx *mlx, int x, int y);
@@ -133,5 +134,6 @@ int 		init_cone(t_mlx *mlx, char *str);
 int 		init_plan(t_mlx *mlx, char *str);
 int			count_int(char *str);
 t_vec3		assign_vectors(char *str, int *j, t_vec3 vec);
+int			exit_properly(t_mlx *mlx);
 
 #endif

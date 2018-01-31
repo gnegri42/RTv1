@@ -12,10 +12,11 @@
 
 #include "rtv1.h"
 
-int			key_events(int keycode)
+int			key_events(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
 	{
+		exit_properly(mlx);
 		exit(1);
 	}
 	return (0);
