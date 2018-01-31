@@ -1,13 +1,17 @@
-#Fenetre 
+#WINDOW 
 	WIDTH : 800	
 	HEIGHT : 800
 			
-#Camera : 
+#CAMERA : 
 	Position (vecteur) : (0, 0, 0)
 	Direction(vecteur) : (0, 0, 42)
 	DistanceEcran(float) : 50							
 
-#FORME	
+#LIGHT :
+	Position (vecteur) : (0, 0, 0)
+	Direction(vecteur) : (0, 0, 42)
+
+#FORM	
 	Type		: SP/CY/CO/PL
 	Position	: (0, 0, 0)
 	Translation	: (0, 0, 0)	
