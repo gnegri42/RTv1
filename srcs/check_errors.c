@@ -38,7 +38,7 @@ static int	check_win(t_map *map)
 	WIN_HEIGHT = atoi_custom(map->content[i], &j);
 }
 
-int			check_errors(t_map *map)
+int			check_errors(t_mlx *mlx, t_map *map)
 {
 	if (check_win(map) == false)
 		return (false);
