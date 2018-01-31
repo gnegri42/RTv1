@@ -32,6 +32,14 @@
 # define ORANGE 0x00FFA500
 # define RED 0xFF0000
 
+# define WIN 11
+# define CAM 12
+# define LIG 13
+# define SPH 14
+# define CYL 15
+# define CON 16
+# define PLA 17
+
 typedef struct		s_vec3
 {
 	float			x;
@@ -91,7 +99,7 @@ typedef struct		s_mlx
 	t_cam			*cam;
 }					t_mlx;
 
-int			ft_reader(int argc, char *argv, t_map *map);
+int			ft_reader(int argc, char *argv, t_mlx *mlx, t_map *map);
 int			init_camera(t_mlx *mlx);
 t_vec3		vector_addition(t_vec3 v1, t_vec3 v2);
 t_vec3 		vector_float_product(t_vec3 v1, float i);
@@ -104,6 +112,9 @@ float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			ft_key_events(int keycode);
 void		draw(t_mlx *mlx , int x, int y);
-
+int			check_errors(t_mlx *mlx, t_map map);
+int			atoi_custom(const char *str, int *i);
+int			skip_space(char *str, int i);
+int			read_first_letters(char *str, int i);
 
 #endif

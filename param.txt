@@ -5,7 +5,7 @@ CAM		Position : (0, 0, 0) Direction: (0, 0, 42)	Distance_ecran : 50
 
 --------------------------------------------------------------------------------------------------
 
-Objets	: SPH/CYL/CON/PLA/LIT | Position | Rayon | Couleur | Translation | Rotation | SI LT : Direction |
+Objets	: SPH/CYL/CON/PLA/LIG | Position | Rayon | Couleur | Translation | Rotation | SI LT : Direction |
 
 CYL
 

@@ -12,7 +12,7 @@
 
 #include <rtv1.h>
 
-static int	check_window(t_map map)
+static int	check_window(t_mlx *mlx, t_map *map)
 {
 	int		i;
 
@@ -32,8 +32,8 @@ static int	check_window(t_map map)
 	WIN_HEIGHT = ft_atoi_custom(map->content[2], &i);
 }
 
-int			check_errors(t_mlx *mlx, t_map map)
+int			check_errors(t_mlx *mlx, t_map *map)
 {
-	if (check_window(map) == 0)
+	if (check_window(mlx, map) == 0)
 		return (0);
 }
