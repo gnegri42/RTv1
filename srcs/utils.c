@@ -81,10 +81,10 @@ int		count_int(char *str)
 	return (nb_int);
 }
 
-int		atoi_custom(const char *str, int *i)
+float	atoi_custom(const char *str, int *i)
 {
-	int v;
-	int posneg;
+	float v;
+	float posneg;
 
 	v = 0;
 	posneg = 1;

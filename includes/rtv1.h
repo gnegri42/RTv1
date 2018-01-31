@@ -121,7 +121,7 @@ int			check_sphere(t_mlx *mlx, int x, int y);
 int			check_cylindre(t_mlx *mlx, int x, int y);
 void		draw(t_mlx *mlx , int x, int y);
 int			check_errors(t_mlx *mlx, t_map *map);
-int			atoi_custom(const char *str, int *i);
+float		atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);
 int			read_first_letters(char *str, int i);
 int			init_objects(t_mlx *mlx, int o);
