@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	assign_vectors(char *str, int *j, t_vec3 vect)
+#include "rtv1.h"
+
+t_vec3	assign_vectors(char *str, int *j, t_vec3 vec)
 {
 	float x;
 	float y;
@@ -18,15 +20,13 @@ void	assign_vectors(char *str, int *j, t_vec3 vect)
 
 	while (str[*j] < '0' || str[*j] > '9')
 		(*j)++;
-	(*j)--;
-	x = atoi_custom(str, &j);
+	x = atoi_custom(str, j);
 	while (str[*j] < '0' || str[*j] > '9')
 		(*j)++;
-	(*j)--;
-	y = atoi_custom(str, &j);
+	y = atoi_custom(str, j);
 	while (str[*j] < '0' || str[*j] > '9')
 		(*j)++;
-	(*j)--;
-	z = atoi_custom(str, &j);
-	vect = vector_assign_values(x, y, z);
+	z = atoi_custom(str, j);
+	vec = vector_assign_values(x, y, z);
+	return (vec);
 }

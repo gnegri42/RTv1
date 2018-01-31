@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	mlx->map = map;
 	mlx->img = img;
-	if (ft_reader(argc, argv[1], mlx, map) != 0)
+	if (ft_reader(argc, argv[1], map) != 0)
 		return (-1);
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1 42");

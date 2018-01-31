@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_errors.c                                     :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnegri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 11:07:35 by gnegri            #+#    #+#             */
-/*   Updated: 2018/01/31 11:07:37 by gnegri           ###   ########.fr       */
+/*   Created: 2018/01/31 17:10:09 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/01/31 17:10:12 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	check_cam(t_cam *cam, char *str)
 	if ((c = count_int(str)) != 7)
 		return (false);
 	cam->cam_pos = assign_vectors(str, &j, cam->cam_pos);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
 	cam->view_dir = assign_vectors(str, &j, cam->view_dir);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
@@ -35,7 +37,7 @@ static int	check_cam(t_cam *cam, char *str)
 	return (true);
 }
 
-int			check_errors(t_mlx *mlx, t_map *map)
+int			init_data(t_mlx *mlx, t_map *map)
 {
 	int		i;
 	int		j;

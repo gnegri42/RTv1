@@ -82,7 +82,7 @@ static int	ft_check_read(int argc, char *argv, int *fd)
 {
 	if (argc != 2)
 	{
-		ft_putstr("Usage: ./rtv1 [param.txt]\n");
+		ft_putstr("Usage: ./rtv1 [input_file]\n");
 		return (-1);
 	}
 	if ((*fd = open(argv, O_RDONLY)) < 0)
@@ -94,7 +94,7 @@ static int	ft_check_read(int argc, char *argv, int *fd)
 	return (0);
 }
 
-int			ft_reader(int argc, char *argv, t_mlx *mlx, t_map *map)
+int			ft_reader(int argc, char *argv, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -115,7 +115,7 @@ int			ft_reader(int argc, char *argv, t_mlx *mlx, t_map *map)
 		free(line);
 	}
 	map->content = ft_strsplit(map->str, '\n');
-	if (ft_verifs(fd, map, line) != 0 && check_errors(mlx, map) != 0)
+	if (ft_verifs(fd, map, line) != 0)
 		return (-1);
 	return (0);
 }

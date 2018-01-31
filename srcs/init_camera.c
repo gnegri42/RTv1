@@ -70,6 +70,11 @@ int			init_camera(t_mlx *mlx)
 	cam->cam_pos = vector_assign_values(0, 0, 0);
 	cam->view_dir = vector_assign_values(0, 0, 20);
 	cam->screen_dist = 100;
+	/*if (init_data(mlx, mlx->map) == false)
+	{
+		ft_putstr("Error : unable to read data from file");
+		return(false);
+	}*/
 	v1 = vector_float_product(cam->view_dir, cam->screen_dist);
 	cam->screen_center = vector_addition(cam->cam_pos, v1);
 	v1 = vector_assign_values(-WIN_WIDTH, WIN_HEIGHT, 0);

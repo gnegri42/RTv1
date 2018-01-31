@@ -45,7 +45,7 @@ int	check_cylindre(t_mlx *mlx, float x, float y)
 		return (-1);
 	mlx->map->cylindre = cylindre;
 	mlx->cam->ray->cylindre_intersection = 0;
-	mlx->map->cylindre->radius = 8;
+	mlx->map->cylindre->radius = 5;
 	cylindre->position = vector_assign_values(0, 0, 40);
 	origin_to_cylindre = vector_substraction(cylindre->position, mlx->cam->ray->origin);
 	projection = vector_dot_product(origin_to_cylindre, mlx->cam->ray->direction);
