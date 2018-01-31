@@ -48,11 +48,10 @@ typedef struct		s_vec3
 	float			z;
 }					t_vec3;
 
-typedef	struct 		s_cylindre
+typedef	struct 		s_plan
 {
 	t_vec3			position;
-	float			radius;
-}					t_cylindre;
+}					t_plan;
 
 typedef	struct 		s_sphere
 {
