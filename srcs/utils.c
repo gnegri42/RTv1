@@ -19,7 +19,7 @@ int		skip_space(char *str, int i)
 	return (i);
 }
 
-int		ft_atoi_custom(const char *str, int *i)
+int		atoi_custom(const char *str, int *i)
 {
 	int v;
 	int posneg;
