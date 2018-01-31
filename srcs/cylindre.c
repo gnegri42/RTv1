@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-static int	cylindre_intersection(t_mlx *mlx, t_vec3 distance_vector, float projection, int x, int y)
+static int	cylindre_intersection(t_mlx *mlx, t_vec3 distance_vector, float projection, float x, float y)
 {
 	float	distance_sq;
 	float	radius_sq;
@@ -33,7 +33,7 @@ static int	cylindre_intersection(t_mlx *mlx, t_vec3 distance_vector, float proje
 	return (0);
 }
 
-int	check_cylindre(t_mlx *mlx, int x, int y)
+int	check_cylindre(t_mlx *mlx, float x, float y)
 {
 	t_cylindre	*cylindre;
 	t_vec3		origin_to_cylindre;
