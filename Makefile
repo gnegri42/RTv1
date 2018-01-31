@@ -21,6 +21,8 @@ SRC_NAME = 	main.c\
 			key.c\
 			draw.c\
 			sphere.c\
+			utils.c\
+			check_errors.c\
 			
 			
 OBJ_PATH = objs

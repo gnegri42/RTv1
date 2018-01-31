@@ -12,15 +12,14 @@
 
 #include <rtv1.h>
 
-static int	check_first_char(t_map map, int i)
+static int	check_first_char(t_map *map, int i)
 {
 	if (map->content[i][0] < 'A' || map->content[i][0] > 'Z')
 		return (false);
 	return (true);
 }
 
-static int	check_win(t_map map, t_cam *cam)
-
+static int	check_win(t_map *map)
 {
 	int		i;
 	int		j;
@@ -39,8 +38,8 @@ static int	check_win(t_map map, t_cam *cam)
 	WIN_HEIGHT = atoi_custom(map->content[i], &j);
 }
 
-int			check_errors(t_mlx *mlx, t_map *map)
+int			check_errors(t_map *map)
 {
-	if (check_win(map, mlx->cam) == false)
+	if (check_win(map) == false)
 		return (false);
 }

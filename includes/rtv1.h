@@ -114,9 +114,17 @@ float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			ft_key_events(int keycode);
 void		draw(t_mlx *mlx , int x, int y);
-int			check_errors(t_mlx *mlx, t_map map);
+int			check_errors(t_map *map);
 int			atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);
 int			read_first_letters(char *str, int i);
+int			init_objects(t_mlx *mlx, int o);
+int			read_objects(t_mlx *mlx, t_map *map, char *str);
+int 		init_light(t_mlx *mlx, char *str);
+int 		init_sphere(t_mlx *mlx, char *str);
+int 		init_cylindre(t_mlx *mlx, char *str);
+int 		init_cone(t_mlx *mlx, char *str);
+int 		init_plan(t_mlx *mlx, char *str);
+int			count_int(char *str);
 
 #endif
