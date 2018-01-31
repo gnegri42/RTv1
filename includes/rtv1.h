@@ -85,7 +85,7 @@ typedef struct		s_map
 	char			**content;
 	int				nb_line;
 	t_sphere		*sphere;
-	t_cylindre		*cylindre;
+	t_plan			*plan;
 }					t_map;
 
 typedef struct		s_img
