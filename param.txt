@@ -7,16 +7,13 @@
 	Direction(vecteur) : (0, 0, 42)
 	DistanceEcran(float) : 50							
 
-#LIGHT :
-	Position (vecteur) : (0, 0, 0)
-	Direction(vecteur) : (0, 0, 42)
-
 #FORM	
-	Type		: SP/CY/CO/PL
+	Type		: SP/CY/CO/PL/LT
 	Position	: (0, 0, 0)
 	Translation	: (0, 0, 0)	
 	Rotation	: (0, 0, 0)
 	Rayon		: 5
-	Couleur		: rgb				
+	Couleur		: rgb
+	Si LT alors direction : Direction(vecteur) : (0, 0, 42)
 
 #end
