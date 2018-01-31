@@ -51,5 +51,6 @@ int	check_sphere(t_mlx *mlx, int x, int y)
 	projection = vector_dot_product(origin_to_sphere, mlx->cam->ray->direction);
 	distance_vector = vector_substraction(origin_to_sphere, vector_float_product(mlx->cam->ray->direction, projection));
 	sphere_intersection(mlx, distance_vector, projection, x, y);
+	free(sphere);
 	return (0);
 }

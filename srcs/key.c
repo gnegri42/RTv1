@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-int			ft_key_events(int keycode)
+int			key_events(int keycode)
 {
 	if (keycode == 53)
 	{

@@ -17,8 +17,6 @@ static int		find_form(char *str)
 	int i;
 
 	i = 0;
-	if (ft_strcmp(str, "WIN") == 0)
-		i = WIN;
 	if (ft_strcmp(str, "CAM") == 0)
 		i = CAM;
 	if (ft_strcmp(str, "LIG") == 0)

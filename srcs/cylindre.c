@@ -51,5 +51,6 @@ int	check_cylindre(t_mlx *mlx, int x, int y)
 	projection = vector_dot_product(origin_to_cylindre, mlx->cam->ray->direction);
 	distance_vector = vector_substraction(origin_to_cylindre, vector_float_product(mlx->cam->ray->direction, projection));
 	cylindre_intersection(mlx, distance_vector, projection, x, y);
+	free(cylindre);
 	return (0);
 }

@@ -39,30 +39,7 @@ static int	check_cam(t_cam *cam, char *str)
 		j++;
 	z = atoi_custom(str, &j);
 	cam->cam_pos = vector_assign_values(x, y, z);
-}
-
-static int	check_win(t_cam *cam, char *str)
-{
-	int		j;
-	int		c;
-
-	j = 0;
-	c = 0;
-	while (str[j] != ':')
-		j++;
-	j = skip_space(str, j);
-	if (str[j] >= '0' && str[j] <= '9')
-		WIN_WIDTH = atoi_custom(str, &j);
-	else
-		return (false);
-	while (str[j] != ':')
-		j++;
-	j = skip_space(str, j);
-	if (str[j] >= '0' && str[j] <= '9')
-		WIN_HEIGHT = atoi_custom(str, &j);
-	else
-		return (false);
-	return (true);
+	return (0);
 }
 
 int			check_errors(t_mlx *mlx, t_map *map)
@@ -78,12 +55,7 @@ int			check_errors(t_mlx *mlx, t_map *map)
 		j = skip_space(map->content[i], j);
 		if (check_first_char(map, i) == true)
 		{
-			if (read_first_letters(map->content[i], j) == WIN)
-			{
-				if (check_win(mlx->cam, map->content[i]) == false)
-					return (false);
-			}
-			else if (read_first_letters(map->content[i], j) == CAM)
+			if (read_first_letters(map->content[i], j) == CAM)
 			{
 				if (check_cam(mlx->cam, map->content[i]) == false)
 					return (false);

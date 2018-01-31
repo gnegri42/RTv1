@@ -34,7 +34,6 @@
 # define ORANGE 0x00FFA500
 # define RED 0xFF0000
 
-# define WIN 11
 # define CAM 12
 # define LIG 13
 # define SPH 14
@@ -49,11 +48,11 @@ typedef struct		s_vec3
 	float			z;
 }					t_vec3;
 
-typedef	struct 		s_sphere
+typedef	struct 		s_cylindre
 {
 	t_vec3			position;
 	float			radius;
-}					t_sphere;
+}					t_cylindre;
 
 typedef	struct 		s_sphere
 {
@@ -116,6 +115,7 @@ t_vec3		vector_substraction(t_vec3 v1, t_vec3 v2);
 t_vec3 		vector_int_product(t_vec3 v1, int i);
 t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
+int			key_events(int keycode);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
 int			check_cylindre(t_mlx *mlx, int x, int y);

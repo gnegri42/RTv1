@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		&(img->bpp), &(img->s_l), &(img->endian));
 	init_camera(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
-	mlx_hook(mlx->win, 2, 1L << 0, ft_key_events, mlx);
+	mlx_hook(mlx->win, 2, 1L << 0, key_events, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);
 }
