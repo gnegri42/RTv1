@@ -12,7 +12,7 @@
 
 #include <rtv1.h>
 
-static int	check_first_char(t_map map, int i)
+static int	check_first_char(t_map *map, int i)
 {
 	if (map->content[i][0] < 'A' || map->content[i][0] > 'Z')
 		return (false);

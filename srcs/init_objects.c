@@ -12,3 +12,27 @@
 
 #include <rtv1.h>
 
+int init_light(t_mlx *mlx, char *str)
+{
+	
+}
+
+int init_sphere(t_mlx *mlx, char *str)
+{
+
+}
+
+int init_cylindre(t_mlx *mlx, char *str)
+{
+
+}
+
+int init_cone(t_mlx *mlx, char *str)
+{
+
+}
+
+int init_plan(t_mlx *mlx, char *str)
+{
+
+}

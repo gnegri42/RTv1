@@ -12,19 +12,47 @@
 
 #include "rtv1.h"
 
-static int	read_objects(t_map *map)
+static int init_object(t_mlx *mlx, t_map *map, char *str, int o)
 {
-	int	i;
-	int j;
-
-	i = 0;
-	while (map->content[i] != '\0')
+	int i;
+	if (str)
 	{
-		j = 0;
-		j = skip_space(map->content[i], j);
-		i++;
+		if (mlx)
+		{
+			if(map)
+			{
+					o = 1;
+			}
+		}
 	}
-	return (true);
+	i = 0;
+	/*if (o == LIG)
+		i = init_light(mlx, str);
+	if (o == SPH);
+		i = init_sphere(mlx, str);
+	if (o == CYL)
+		i = init_cylindre(mlx, str);
+	if (o == CON)
+		i = init_cone(mlx, str);
+	if (o == PLA);
+		i = init_plan(mlx, str);*/
+	return (i);
+}
+
+int	read_objects(t_mlx *mlx, t_map *map, char *str)
+{
+	int j;
+	int o;
+		
+	j = 0;
+	j = skip_space(str, j);
+	o = read_first_letters(str, j);
+	if (o != 0)
+	{
+		if (init_object(mlx, map, str, o) == -1)
+			return (-1);
+	}
+	return (0);
 }
 
 static int	ft_verifs(int fd, t_map *map, char *line)
@@ -89,6 +117,5 @@ int			ft_reader(int argc, char *argv, t_mlx *mlx, t_map *map)
 	map->content = ft_strsplit(map->str, '\n');
 	if (ft_verifs(fd, map, line) != 0 && check_errors(mlx, map) != 0)
 		return (-1);
-	read_objects(map);
 	return (0);
 }

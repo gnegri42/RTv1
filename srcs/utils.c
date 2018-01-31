@@ -40,8 +40,9 @@ int		read_first_letters(char *str, int i)
 	int		j;
 	int		f;
 
-	if (!tmp_str = malloc(sizeof char) * 4)
-		return(0);
+	tmp_str = 0;
+	if (!(tmp_str == malloc(sizeof(char) * 4)))
+		return (-1);
 	j = 0;
 	while (j < 3)
 	{
@@ -60,6 +61,26 @@ int		skip_space(char *str, int i)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	return (i);
+}
+
+int		count_int(char *str)
+{
+	int i;
+	int nb_int;
+
+	i = 0;
+	nb_int = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+		{
+			nb_int++;
+			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+				i++;
+		}
+		i++;
+	}
+	return (nb_int);
 }
 
 int		atoi_custom(const char *str, int *i)
