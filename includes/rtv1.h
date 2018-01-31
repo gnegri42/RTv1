@@ -24,6 +24,8 @@
 
 # define WIN_WIDTH		800
 # define WIN_HEIGHT		800
+# define true			0
+# define false			-1
 
 # define BLACK 0x000000
 # define BLUE 0x0041FF

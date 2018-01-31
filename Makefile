@@ -12,8 +12,8 @@
 
 NAME = rtv1
 
-SRC_PATH = srcs
-SRC_NAME = main.c\
+SRC_PATH = 	srcs
+SRC_NAME = 	main.c\
 			reader.c\
 			init_camera.c\
 			vector_calc1.c\

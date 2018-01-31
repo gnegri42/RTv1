@@ -12,28 +12,35 @@
 
 #include <rtv1.h>
 
-static int	check_window(t_mlx *mlx, t_map *map)
+static int	check_first_char(t_map map, int i)
+{
+	if (map->content[i][0] < 'A' || map->content[i][0] > 'Z')
+		return (false);
+	return (true);
+}
+
+static int	check_win(t_map map, t_cam *cam)
+
 {
 	int		i;
+	int		j;
 
 	i = 0;
-	while (map->content[1][i] != ':')
+	j = 0;
+	while (check_first_char(map, i) != true)
 		i++;
-	i = skip_space(map->content[1], i);
-	if (map->content[1][i] < '0' || map->content[1][i] > '9' || map->content[1][i] == '\0')
-		return (0);
-	WIN_WIDTH = ft_atoi_custom(map->content[1], &i);
-	i = 0;
-	while (map->content[2][i] != ':')
-		i++;
-	i = skip_space(map->content[1], i);
-	if (map->content[2][i] < '0' || map->content[2][i] > '9' || map->content[2][i] == '\0')
-		return (0);
-	WIN_HEIGHT = ft_atoi_custom(map->content[2], &i);
+	while (map->content[i][j] != ':')
+		j++;
+	j = skip_space(map->content[i], j);
+	WIN_WIDTH = atoi_custom(map->content[i], &j);
+	while (map->content[i][j] != ':')
+		j++;
+	j = skip_space(map->content[i], j);
+	WIN_HEIGHT = atoi_custom(map->content[i], &j);
 }
 
 int			check_errors(t_mlx *mlx, t_map *map)
 {
-	if (check_window(mlx, map) == 0)
-		return (0);
+	if (check_win(map, mlx->cam) == false)
+		return (false);
 }
