@@ -48,6 +48,7 @@ int		read_first_letters(char *str, int i)
 		i++;
 		j++;
 	}
+	tmp_str[i] = '\0';
 	f = find_form(tmp_str);
 	free(tmp_str);
 	return (f);
