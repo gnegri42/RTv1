@@ -71,10 +71,10 @@ typedef	struct		s_ray
 
 typedef	struct 		s_cam
 {
-	t_vec3			camPos;
-	t_vec3			viewDir;
-	float			screenDist;
-	t_vec3			screenCenter;
+	t_vec3			cam_pos;
+	t_vec3			view_dir;
+	float			screen_dist;
+	t_vec3			screen_center;
 	t_vec3			p0;
 	t_vec3			p1;
 	t_vec3			p2;

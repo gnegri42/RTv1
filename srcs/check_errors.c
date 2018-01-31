@@ -19,7 +19,53 @@ static int	check_first_char(t_map *map, int i)
 	return (true);
 }
 
-static int	check_win(t_map *map)
+static int	check_cam(t_cam *cam, char *str)
+{
+	int		j;
+	int		c;
+	float		x;
+	float		y;
+	float		z;
+
+	j = 0;
+	c = 0;
+	while (str[j] >= '0' && str[j] <= '9')
+		j++;
+	x = atoi_custom(str, &j);
+	while (str[j] >= '0' && str[j] <= '9')
+		j++;
+	y = atoi_custom(str, &j);
+	while (str[j] >= '0' && str[j] <= '9')
+		j++;
+	z = atoi_custom(str, &j);
+	cam->cam_pos = vector_assign_values(x, y, z);
+}
+
+static int	check_win(t_cam *cam, char *str)
+{
+	int		j;
+	int		c;
+
+	j = 0;
+	c = 0;
+	while (str[j] != ':')
+		j++;
+	j = skip_space(str, j);
+	if (str[j] >= '0' && str[j] <= '9')
+		WIN_WIDTH = atoi_custom(str, &j);
+	else
+		return (false);
+	while (str[j] != ':')
+		j++;
+	j = skip_space(str, j);
+	if (str[j] >= '0' && str[j] <= '9')
+		WIN_HEIGHT = atoi_custom(str, &j);
+	else
+		return (false);
+	return (true);
+}
+
+int			check_errors(t_mlx *mlx, t_map *map)
 {
 	int		i;
 	int		j;
@@ -27,19 +73,28 @@ static int	check_win(t_map *map)
 	i = 0;
 	j = 0;
 	while (check_first_char(map, i) != true)
+	{
+		j = 0;
+		j = skip_space(map->content[i], j);
+		if (check_first_char(map, i) == true)
+		{
+			if (read_first_letters(map->content[i], j) == WIN)
+			{
+				if (check_win(mlx->cam, map->content[i]) == false)
+					return (false);
+			}
+			else if (read_first_letters(map->content[i], j) == CAM)
+			{
+				if (check_cam(mlx->cam, map->content[i]) == false)
+					return (false);
+			}
+			else if (read_first_letters(map->content[i], j) != 0)
+			{
+				if (read_objects(mlx, map, map->content[i]) == false)
+					return (false);
+			}
+		}
 		i++;
-	while (map->content[i][j] != ':')
-		j++;
-	j = skip_space(map->content[i], j);
-	WIN_WIDTH = atoi_custom(map->content[i], &j);
-	while (map->content[i][j] != ':')
-		j++;
-	j = skip_space(map->content[i], j);
-	WIN_HEIGHT = atoi_custom(map->content[i], &j);
-}
-
-int			check_errors(t_mlx *mlx, t_map *map)
-{
-	if (check_win(map) == false)
-		return (false);
+	}
+	return (true);
 }
