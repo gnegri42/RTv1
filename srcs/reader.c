@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gnegri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 17:42:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/01/29 17:42:10 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/01/31 10:47:15 by gnegri            #+#    #+#             */
+/*   Updated: 2018/01/31 10:47:24 by gnegri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_check_read(int argc, char *argv, int *fd)
 {
 	if (argc != 2)
 	{
-		ft_putstr("Usage: ./wolf3d input_file\n");
+		ft_putstr("Usage: ./rtv1 [param.txt]\n");
 		return (-1);
 	}
 	if ((*fd = open(argv, O_RDONLY)) < 0)
