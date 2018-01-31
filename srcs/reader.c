@@ -12,6 +12,24 @@
 
 #include "rtv1.h"
 
+static int	read_objects(t_map *map)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	while (map->content[i] != '\0')
+	{
+		j = 0;
+		j = skip_space(map->content[i], j);
+		if(map->content[i][j] == )
+		{
+
+		}
+		i++;
+	}
+}
+
 static int	ft_verifs(int fd, t_map *map, char *line)
 {
 	if (get_next_line(fd, &line) < 0)
@@ -51,7 +69,7 @@ static int	ft_check_read(int argc, char *argv, int *fd)
 	return (0);
 }
 
-int			ft_reader(int argc, char *argv, t_map *map)
+int			ft_reader(int argc, char *argv, t_mlx *mlx, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -72,7 +90,8 @@ int			ft_reader(int argc, char *argv, t_map *map)
 		free(line);
 	}
 	map->content = ft_strsplit(map->str, '\n');
-	if (ft_verifs(fd, map, line) != 0)
+	if (ft_verifs(fd, map, line) != 0 && check_errors(mlx, map) != 0)
 		return (-1);
+	read_objects(map);
 	return (0);
 }

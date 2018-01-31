@@ -20,6 +20,7 @@ static int	check_first_char(t_map map, int i)
 }
 
 static int	check_win(t_map map, t_cam *cam)
+
 {
 	int		i;
 	int		j;
@@ -38,7 +39,7 @@ static int	check_win(t_map map, t_cam *cam)
 	WIN_HEIGHT = atoi_custom(map->content[i], &j);
 }
 
-int			check_errors(t_mlx *mlx, t_map map)
+int			check_errors(t_mlx *mlx, t_map *map)
 {
 	if (check_win(map, mlx->cam) == false)
 		return (false);
