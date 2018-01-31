@@ -55,6 +55,12 @@ typedef	struct 		s_sphere
 	float			radius;
 }					t_sphere;
 
+typedef	struct 		s_sphere
+{
+	t_vec3			position;
+	float			radius;
+}					t_sphere;
+
 typedef	struct		s_ray
 {
 	t_vec3			origin;
@@ -112,7 +118,7 @@ t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			check_sphere(t_mlx *mlx, int x, int y);
-int			ft_key_events(int keycode);
+int			check_cylindre(t_mlx *mlx, int x, int y);
 void		draw(t_mlx *mlx , int x, int y);
 int			check_errors(t_mlx *mlx, t_map *map);
 int			atoi_custom(const char *str, int *i);
