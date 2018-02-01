@@ -12,7 +12,22 @@
 
 #include <rtv1.h>
 
-int	main(int argc, char **argv)
+static int	img_loop(t_mlx *mlx, t_img *img)
+{
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1 42");
+	img->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	img->str_img = (int *)mlx_get_data_addr(img->img,
+		&(img->bpp), &(img->s_l), &(img->endian));
+	if (init_camera(mlx) == false)
+		return (-1);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
+	mlx_hook(mlx->win, 2, 1L << 0, key_events, mlx);
+	mlx_loop(mlx->mlx);
+	return (0);
+}
+
+int			main(int argc, char **argv)
 {
 	t_mlx	*mlx;
 	t_img	*img;
@@ -28,14 +43,7 @@ int	main(int argc, char **argv)
 	mlx->img = img;
 	if (ft_reader(argc, argv[1], map) != 0)
 		return (-1);
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1 42");
-	img->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img->str_img = (int *)mlx_get_data_addr(img->img,
-		&(img->bpp), &(img->s_l), &(img->endian));
-	init_camera(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
-	mlx_hook(mlx->win, 2, 1L << 0, key_events, mlx);
-	mlx_loop(mlx->mlx);
+	if (img_loop(mlx, img) == -1)
+		return (-1);
 	return (0);
 }

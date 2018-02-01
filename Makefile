@@ -25,13 +25,16 @@ SRC_NAME = 	main.c\
 			utils2.c\
 			init_data.c\
 			exit_properly.c\
+			init_objects.c\
+			check_objects.c\
 			
 			
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = 
+#-Wall -Werror -Wextra
 
 CPPFLAGS = -I includes -I libft/libft.h
 

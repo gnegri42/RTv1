@@ -12,47 +12,22 @@
 
 #include "rtv1.h"
 
-static int init_object(t_mlx *mlx, t_map *map, char *str, int o)
+int init_object(t_map *map, t_object_list *new_elem, char *str, int o)
 {
 	int i;
-	if (str)
-	{
-		if (mlx)
-		{
-			if(map)
-			{
-					o = 1;
-			}
-		}
-	}
-	i = 0;
-	/*if (o == LIG)
-		i = init_light(mlx, str);
-	if (o == SPH);
-		i = init_sphere(mlx, str);
-	if (o == CYL)
-		i = init_cylindre(mlx, str);
-	if (o == CON)
-		i = init_cone(mlx, str);
-	if (o == PLA);
-		i = init_plan(mlx, str);*/
-	return (i);
-}
 
-int	read_objects(t_mlx *mlx, t_map *map, char *str)
-{
-	int j;
-	int o;
-		
-	j = 0;
-	j = skip_space(str, j);
-	o = read_first_letters(str, j);
-	if (o != 0)
-	{
-		if (init_object(mlx, map, str, o) == -1)
-			return (-1);
-	}
-	return (0);
+	i = 0;
+	if (o == SPH)
+		i = init_sphere(map, new_elem, str);
+/*	if (o == LIG)
+		i = init_light(map, new_elem, str);
+	if (o == CYL)
+		i = init_cylindre(map, new_elem, str);
+	if (o == CON)
+		i = init_cone(map, new_elem, str);
+	if (o == PLA)
+		i = init_plan(map, new_elem, str);*/
+	return (i);
 }
 
 static int	ft_verifs(int fd, t_map *map, char *line)
@@ -104,6 +79,7 @@ int			ft_reader(int argc, char *argv, t_map *map)
 	map->str = ft_strnew(1);
 	if (ft_check_read(argc, argv, &fd) != 0)
 		return (-1);
+	map->nb_line = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
 		tmp = map->str;

@@ -19,7 +19,8 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 	float	new_length;
 
 	distance_sq = vector_dot_product(distance_vector, distance_vector);
-	radius_sq = mlx->map->sphere->radius * mlx->map->sphere->radius;
+//	radius_sq = mlx->map->sphere->radius * mlx->map->sphere->radius;
+	radius_sq = mlx->map->list->sphere.radius * mlx->map->list->sphere.radius;
 	if (distance_sq > radius_sq)
 		mlx->cam->ray->sphere_intersection = 0;
 	new_length = projection - sqrtf(radius_sq - distance_sq);
@@ -33,9 +34,9 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 	return (0);
 }
 
-int	check_sphere(t_mlx *mlx, int x, int y)
+int	sphere_intersection_init(t_mlx *mlx, int x, int y)
 {
-	t_sphere	*sphere;
+/*	t_sphere	*sphere;
 	t_vec3		origin_to_sphere;
 	float		projection;
 	t_vec3		distance_vector;
@@ -52,5 +53,15 @@ int	check_sphere(t_mlx *mlx, int x, int y)
 	distance_vector = vector_substraction(origin_to_sphere, vector_float_product(mlx->cam->ray->direction, projection));
 	sphere_intersection(mlx, distance_vector, projection, x, y);
 	free(sphere);
+	return (0);*/
+	t_vec3		origin_to_sphere;
+	float		projection;
+	t_vec3		distance_vector;
+
+	mlx->cam->ray->sphere_intersection = 0;
+	origin_to_sphere = vector_substraction(mlx->map->list->sphere.position, mlx->cam->ray->origin);
+	projection = vector_dot_product(origin_to_sphere, mlx->cam->ray->direction);
+	distance_vector = vector_substraction(origin_to_sphere, vector_float_product(mlx->cam->ray->direction, projection));
+	sphere_intersection(mlx, distance_vector, projection, x, y);
 	return (0);
 }

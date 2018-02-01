@@ -37,18 +37,16 @@ int		read_first_letters(char *str, int i)
 	char	*tmp_str;
 	int		j;
 	int		f;
-
-	tmp_str = 0;
-	if (!(tmp_str == malloc(sizeof(char) * 4)))
-		return (-1);
+	
+	tmp_str = (char *)malloc(sizeof(char) * 4);
 	j = 0;
 	while (j < 3)
-	{
+	{	
 		tmp_str[j] = str[i];
 		i++;
 		j++;
 	}
-	tmp_str[i] = '\0';
+	tmp_str[3] = '\0';
 	f = find_form(tmp_str);
 	free(tmp_str);
 	return (f);

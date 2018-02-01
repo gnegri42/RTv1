@@ -41,70 +41,81 @@
 # define CON 16
 # define PLA 17
 
-typedef struct		s_vec3
+typedef struct				s_vec3
 {
-	float			x;
-	float			y;
-	float			z;
-}					t_vec3;
+	float					x;
+	float					y;
+	float					z;
+}							t_vec3;
 
-typedef	struct 		s_plan
+typedef	struct 				s_plan
 {
-	t_vec3			position;
-}					t_plan;
+	t_vec3					position;
+}							t_plan;
 
-typedef	struct 		s_sphere
+typedef	struct 				s_sphere
 {
-	t_vec3			position;
-	float			radius;
-}					t_sphere;
+	t_vec3					position;
+	float					radius;
+}							t_sphere;
 
-typedef	struct		s_ray
+typedef	struct				s_object_list
 {
-	t_vec3			origin;
-	t_vec3			direction;
-	float			length;
-	int				sphere_intersection;
-}					t_ray;
+	int						object_nb;
+	int						type;
+	t_sphere				sphere;
+	t_plan					plan;
+	struct s_object_list	*next;
+}							t_object_list;
 
-typedef	struct 		s_cam
+typedef	struct				s_ray
 {
-	t_vec3			cam_pos;
-	t_vec3			view_dir;
-	float			screen_dist;
-	t_vec3			screen_center;
-	t_vec3			p0;
-	t_vec3			p1;
-	t_vec3			p2;
-	t_ray			*ray;
-}					t_cam;
+	t_vec3					origin;
+	t_vec3					direction;
+	float					length;
+	int						sphere_intersection;
+	int						plan_intersection;
+}							t_ray;
 
-typedef struct		s_map
+typedef	struct 				s_cam
 {
-	char			*str;
-	char			**content;
-	int				nb_line;
-	t_sphere		*sphere;
-	t_plan			*plan;
-}					t_map;
+	t_vec3					cam_pos;
+	t_vec3					view_dir;
+	float					screen_dist;
+	t_vec3					screen_center;
+	t_vec3					p0;
+	t_vec3					p1;
+	t_vec3					p2;
+	t_ray					*ray;
+}							t_cam;
 
-typedef struct		s_img
+typedef struct				s_map
 {
-	void			*img;
-	int				*str_img;
-	int				bpp;
-	int				s_l;
-	int				endian;
-}					t_img;
+	char					*str;
+	char					**content;
+	int						nb_line;
+	t_object_list			*list;
+//	t_sphere				*sphere;
+	t_plan					*plan;
+}							t_map;
 
-typedef struct		s_mlx
+typedef struct				s_img
 {
-	void			*mlx;
-	void			*win;
-	t_img			*img;
-	t_map			*map;
-	t_cam			*cam;
-}					t_mlx;
+	void					*img;
+	int						*str_img;
+	int						bpp;
+	int						s_l;
+	int						endian;
+}							t_img;
+
+typedef struct				s_mlx
+{
+	void					*mlx;
+	void					*win;
+	t_img					*img;
+	t_map					*map;
+	t_cam					*cam;
+}							t_mlx;
 
 int			ft_reader(int argc, char *argv, t_map *map);
 int			init_camera(t_mlx *mlx);
@@ -117,22 +128,22 @@ t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
 int			key_events(int keycode, t_mlx *mlx);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
-int			check_sphere(t_mlx *mlx, int x, int y);
+int			sphere_intersection_init(t_mlx *mlx, int x, int y);
 int			check_plan(t_mlx *mlx, int x, int y);
 void		draw(t_mlx *mlx , float x, float y);
 int			init_data(t_mlx *mlx, t_map *map);
 float		atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);
 int			read_first_letters(char *str, int i);
-int			init_objects(t_mlx *mlx, int o);
-int			read_objects(t_mlx *mlx, t_map *map, char *str);
-int 		init_light(t_mlx *mlx, char *str);
-int 		init_sphere(t_mlx *mlx, char *str);
-int 		init_cylindre(t_mlx *mlx, char *str);
-int 		init_cone(t_mlx *mlx, char *str);
-int 		init_plan(t_mlx *mlx, char *str);
+int 		init_light(t_map *map, t_object_list *new_elem, char *str);
+int 		init_sphere(t_map *map, t_object_list *new_elem, char *str);
+int 		init_cylindre(t_map *map, t_object_list *new_elem, char *str);
+int 		init_cone(t_map *map, t_object_list *new_elem, char *str);
+int 		init_plan(t_map *map, t_object_list *new_elem, char *str);
 int			count_int(char *str);
 t_vec3		assign_vectors(char *str, int *j, t_vec3 vec);
 int			exit_properly(t_mlx *mlx);
+int 		init_object(t_map *map, t_object_list *new_elem, char *str, int o);
+int			check_sphere(t_map *map, t_object_list *new_elem, char *str);
 
 #endif

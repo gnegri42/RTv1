@@ -22,11 +22,25 @@ static void	rtv1_free_map(t_mlx *mlx)
 		free(mlx->map->content[x]);
 		x++;
 	}
-}*/
+}
+*/
+static void	rtv1_free_list(t_object_list *list)
+{
+	t_object_list	*tmp;
+
+	tmp = list;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+}
 
 int			exit_properly(t_mlx *mlx)
 {
 	free(mlx->map->str);
+	mlx->map->list ? rtv1_free_list(mlx->map->list) : (0);
 //	mlx->map->content ? rtv1_free_map(mlx) : (0);
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
