@@ -95,7 +95,6 @@ typedef struct				s_map
 	char					**content;
 	int						nb_line;
 	t_object_list			*list;
-//	t_sphere				*sphere;
 	t_plan					*plan;
 }							t_map;
 
@@ -126,6 +125,7 @@ t_vec3		vector_substraction(t_vec3 v1, t_vec3 v2);
 t_vec3 		vector_int_product(t_vec3 v1, int i);
 t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
+t_vec3 		vector_float_substraction(t_vec3 v1, float i);
 int			key_events(int keycode, t_mlx *mlx);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			sphere_intersection_init(t_mlx *mlx, int x, int y);

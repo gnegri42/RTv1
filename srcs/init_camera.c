@@ -17,7 +17,7 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 	t_object_list *tmp;
 
 	tmp = mlx->map->list;
-	while (mlx->map->list->next != NULL)
+	while (mlx->map->list != NULL)
 	{
 		if (mlx->map->list->type == 14)
 			sphere_intersection_init(mlx, x, y);

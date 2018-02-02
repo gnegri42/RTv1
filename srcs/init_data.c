@@ -34,7 +34,7 @@ static int				new_list(t_map *map, char *str, int i, int nb_object)
 	t_object_list *tmp;
 	
 	if (!map->list)
-	{		
+	{
 		if ((map->list = new_list_object(map, str, i, nb_object)) == NULL)
 			return (-1);
 		return (0);
@@ -108,13 +108,5 @@ int						init_data(t_mlx *mlx, t_map *map)
 	printf("%f ", map->list->sphere.position.y);
 	printf("%f\n", map->list->sphere.position.z);
 	printf("%f\n", map->list->sphere.radius);
-	printf("%f ", map->list->next->sphere.position.x);
-	printf("%f ", map->list->next->sphere.position.y);
-	printf("%f\n", map->list->next->sphere.position.z);
-	printf("%f\n", map->list->next->sphere.radius);
-		printf("%f ", map->list->next->next->sphere.position.x);
-	printf("%f ", map->list->next->next->sphere.position.y);
-	printf("%f\n", map->list->next->next->sphere.position.z);
-	printf("%f\n", map->list->next->next->sphere.radius);
 	return (true);
 }

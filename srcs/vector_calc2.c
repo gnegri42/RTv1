@@ -49,3 +49,13 @@ float	vector_dot_product(t_vec3 v1, t_vec3 v2)
 	dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	return (dot);
 }
+
+t_vec3 vector_float_substraction(t_vec3 v1, float i)
+{
+	t_vec3	res;
+
+	res.x = v1.x - i;
+	res.y = v1.y - i;
+	res.z = v1.z - i;
+	return (res);
+}
