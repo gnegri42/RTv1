@@ -32,9 +32,10 @@ int init_sphere(t_map *map, t_object_list *new_elem, char *str)
 
 	if (!(sphere = (t_sphere *)malloc(sizeof(t_sphere))))
 		return (-1);
-	new_elem->sphere = *sphere;	
+	new_elem->sphere = *sphere;
 	if (check_sphere(map, new_elem, str) == false)
 		return (-1);
+	free(sphere);
 	return (0);
 }
 

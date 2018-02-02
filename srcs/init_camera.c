@@ -24,7 +24,7 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 		mlx->map->list = mlx->map->list->next;
 	}
 	mlx->map->list = tmp;
-	//check_cylindre(mlx, x, y);
+	//check_plan(mlx, x, y);
 	return(0);
 }
 
@@ -83,11 +83,11 @@ int			init_camera(t_mlx *mlx)
 	}
 	v1 = vector_float_product(cam->view_dir, cam->screen_dist);
 	cam->screen_center = vector_addition(cam->cam_pos, v1);
-	v1 = vector_assign_values(-WIN_WIDTH, WIN_HEIGHT, 0);
+	v1 = vector_assign_values(-WIN_WIDTH/2, WIN_HEIGHT/2, 0);
 	cam->p0 = vector_addition(cam->screen_center, v1);
-	v1 = vector_assign_values(WIN_WIDTH, WIN_HEIGHT, 0);
+	v1 = vector_assign_values(WIN_WIDTH/2, WIN_HEIGHT/2, 0);
 	cam->p1 = vector_addition(cam->screen_center, v1);
-	v1 = vector_assign_values (-WIN_WIDTH, -WIN_HEIGHT, 0);
+	v1 = vector_assign_values (-WIN_WIDTH/2, -WIN_HEIGHT/2, 0);
 	cam->p2 = vector_addition(cam->screen_center, v1);
 	ray_loop(mlx);
 	return (0);

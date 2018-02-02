@@ -18,17 +18,17 @@ static int		find_form(char *str)
 
 	i = 0;
 	if (ft_strcmp(str, "CAM") == 0)
-		i = CAM;
+		i = 12;
 	if (ft_strcmp(str, "LIG") == 0)
-		i = LIG;
+		i = 13;
 	if (ft_strcmp(str, "SPH") == 0)
-		i = SPH;
+		i = 14;
 	if (ft_strcmp(str, "CYL") == 0)
-		i = CYL;
+		i = 15;
 	if (ft_strcmp(str, "CON") == 0)
-		i = CON;
+		i = 16;
 	if (ft_strcmp(str, "PLA") == 0)
-		i = PLA;
+		i = 17;
 	return (i);
 }
 

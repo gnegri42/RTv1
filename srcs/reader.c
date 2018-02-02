@@ -17,16 +17,18 @@ int init_object(t_map *map, t_object_list *new_elem, char *str, int o)
 	int i;
 
 	i = 0;
-	if (o == SPH)
+	if (o == 14)
 		i = init_sphere(map, new_elem, str);
-/*	if (o == LIG)
+/*	
+	if (o == PLA)
+		i = init_plan(map, new_elem, str);
+	if (o == LIG)
 		i = init_light(map, new_elem, str);
 	if (o == CYL)
 		i = init_cylindre(map, new_elem, str);
 	if (o == CON)
 		i = init_cone(map, new_elem, str);
-	if (o == PLA)
-		i = init_plan(map, new_elem, str);*/
+*/
 	return (i);
 }
 
