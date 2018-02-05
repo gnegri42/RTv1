@@ -12,6 +12,16 @@
 
 #include "rtv1.h"
 
+t_vec3	vector_cross(t_vec3 v1, t_vec3 v2)
+{
+	t_vec3	v;
+
+	v.x = v1.y * v2.z - v1.z * v2.y;
+	v.y = v1.z * v2.x - v1.x * v2.z;
+	v.z = v1.x * v2.y - v1.y * v2.x;
+	return (v);
+}
+
 t_vec3	vector_product(t_vec3 v1, t_vec3 v2)
 {
 	t_vec3	res;

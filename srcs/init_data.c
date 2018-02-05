@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include <rtv1.h>
-#include <stdio.h>
 
-static t_object_list	*new_list_object(t_map *map, char *str, int object, int object_nb)
+static t_object_list	*new_list_object(char *str, int object, int object_nb)
 {
 	t_object_list	*new_elem;
 
@@ -24,7 +23,7 @@ static t_object_list	*new_list_object(t_map *map, char *str, int object, int obj
 	new_elem->type = object;
 	new_elem->object_nb = object_nb;
 	new_elem->next = NULL;
-	if (init_object(map, new_elem, str, object) == false)
+	if (init_object(new_elem, str, object) == false)
 		return (NULL);
 	return (new_elem);
 }
@@ -35,7 +34,7 @@ static int				new_list(t_map *map, char *str, int i, int nb_object)
 	
 	if (!map->list)
 	{
-		if ((map->list = new_list_object(map, str, i, nb_object)) == NULL)
+		if ((map->list = new_list_object(str, i, nb_object)) == NULL)
 			return (-1);
 		return (0);
 	}
@@ -43,7 +42,7 @@ static int				new_list(t_map *map, char *str, int i, int nb_object)
 		tmp = map->list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = new_list_object(map, str, i, nb_object);
+	tmp->next = new_list_object(str, i, nb_object);
 	return (0);
 }
 
@@ -64,7 +63,8 @@ static int				check_cam(t_cam *cam, char *str)
 	int		c;
 
 	j = 0;
-	if ((c = count_int(str)) != 7)
+	c = 0;
+	if ((c = count_int(str)) != 6)
 		return (false);
 	cam->cam_pos = assign_vectors(str, &j, cam->cam_pos);
 	while (str[j] < '0' || str[j] > '9')
@@ -72,7 +72,6 @@ static int				check_cam(t_cam *cam, char *str)
 	cam->view_dir = assign_vectors(str, &j, cam->view_dir);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	cam->screen_dist = atoi_custom(str, &j);
 	return (true);
 }
 
@@ -85,8 +84,8 @@ int						init_data(t_mlx *mlx, t_map *map)
 	i = 0;
 	nb_object = 0;
 	while (i < map->nb_line)
-	{	
-		while (check_first_char(map, i) != true && i < map->nb_line)
+	{
+		while (check_first_char(map, i) == false && i < map->nb_line)
 			i++;
 		j = skip_space(map->content[i], 0);
 		if (read_first_letters(map->content[i], j) == CAM)
@@ -98,15 +97,11 @@ int						init_data(t_mlx *mlx, t_map *map)
 			&& read_first_letters(map->content[i], j) != CAM)
 		{
 			if (new_list(map, map->content[i], read_first_letters(map->content[i], j), nb_object) != 0)
-				return (-1);
+				return (false);
 			else
 				nb_object++;
 		}
 		i++;
 	}
-	printf("%f ", map->list->sphere.position.x);
-	printf("%f ", map->list->sphere.position.y);
-	printf("%f\n", map->list->sphere.position.z);
-	printf("%f\n", map->list->sphere.radius);
 	return (true);
 }

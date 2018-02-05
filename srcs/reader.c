@@ -12,26 +12,6 @@
 
 #include "rtv1.h"
 
-int init_object(t_map *map, t_object_list *new_elem, char *str, int o)
-{
-	int i;
-
-	i = 0;
-	if (o == 14)
-		i = init_sphere(map, new_elem, str);
-/*	
-	if (o == PLA)
-		i = init_plan(map, new_elem, str);
-	if (o == LIG)
-		i = init_light(map, new_elem, str);
-	if (o == CYL)
-		i = init_cylindre(map, new_elem, str);
-	if (o == CON)
-		i = init_cone(map, new_elem, str);
-*/
-	return (i);
-}
-
 static int	ft_verifs(int fd, t_map *map, char *line)
 {
 	if (get_next_line(fd, &line) < 0)
@@ -53,6 +33,21 @@ static int	ft_verifs(int fd, t_map *map, char *line)
 		return (-1);
 	}
 	return (0);
+}
+
+static int	count_lines(char **tab)
+{
+	int nb_line;
+	int i;
+
+	i = 0;
+	nb_line = 0;
+	while (tab[i] != '\0')
+	{
+		i++;
+		nb_line++;
+	}
+	return (nb_line);
 }
 
 static int	ft_check_read(int argc, char *argv, int *fd)
@@ -89,10 +84,10 @@ int			ft_reader(int argc, char *argv, t_map *map)
 		map->str = ft_strjoin(tmp2, "\n");
 		free(tmp);
 		free(tmp2);
-		map->nb_line++;
 		free(line);
 	}
 	map->content = ft_strsplit(map->str, '\n');
+	map->nb_line = count_lines(map->content);
 	if (ft_verifs(fd, map, line) != 0)
 		return (-1);
 	return (0);

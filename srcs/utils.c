@@ -54,6 +54,8 @@ int		read_first_letters(char *str, int i)
 
 int		skip_space(char *str, int i)
 {
+	if (str[i] == '\0')
+		return (0);
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	return (i);
@@ -71,7 +73,7 @@ int		count_int(char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 		{
 			nb_int++;
-			while ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+			while (str[i] >= '0' && str[i] <= '9' && str[i + 1] != '\0')
 				i++;
 		}
 		i++;

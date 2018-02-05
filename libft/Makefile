@@ -6,13 +6,14 @@
 #    By: gnegri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 10:53:26 by gnegri            #+#    #+#              #
-#    Updated: 2018/01/08 10:48:05 by bmuselet         ###   ########.fr        #
+#    Updated: 2018/02/05 12:22:23 by bmuselet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		libft.a
 
-FILES =		ft_memset.c\
+FILES =		ft_deg2rad.c\
+			ft_memset.c\
 			ft_bzero.c\
 			ft_memcpy.c\
 			ft_memccpy.c\

@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   ft_deg2rad.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/30 14:11:50 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/01/30 14:11:51 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/02/05 12:21:13 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/02/05 12:21:54 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "libft.h"
 
-void	draw(t_mlx *mlx , float x, float y, int color)
+float ft_deg2rad(float degrees) 
 {
-	int i;
-
-	i = x + (y * WIN_WIDTH);
-	mlx->img->str_img[i] = color;
+	return (degrees * 4.0 * atan (1.0) / 180.0);
 }

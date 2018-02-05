@@ -34,6 +34,8 @@
 # define ORANGE 0x00FFA500
 # define RED 0xFF0000
 
+# define FOV 2
+
 # define CAM 12
 # define LIG 13
 # define SPH 14
@@ -48,9 +50,17 @@ typedef struct				s_vec3
 	float					z;
 }							t_vec3;
 
+typedef	struct 				s_cylindre
+{
+	t_vec3					position;
+	t_vec3					direction;
+	float					radius;
+}							t_cylindre;
+
 typedef	struct 				s_plan
 {
 	t_vec3					position;
+	t_vec3					rotation;
 }							t_plan;
 
 typedef	struct 				s_sphere
@@ -65,6 +75,7 @@ typedef	struct				s_object_list
 	int						type;
 	t_sphere				sphere;
 	t_plan					plan;
+	t_cylindre				cylindre;
 	struct s_object_list	*next;
 }							t_object_list;
 
@@ -75,17 +86,13 @@ typedef	struct				s_ray
 	float					length;
 	int						sphere_intersection;
 	int						plan_intersection;
+	int						cylindre_intersection;
 }							t_ray;
 
 typedef	struct 				s_cam
 {
 	t_vec3					cam_pos;
 	t_vec3					view_dir;
-	float					screen_dist;
-	t_vec3					screen_center;
-	t_vec3					p0;
-	t_vec3					p1;
-	t_vec3					p2;
 	t_ray					*ray;
 }							t_cam;
 
@@ -118,6 +125,8 @@ typedef struct				s_mlx
 
 int			ft_reader(int argc, char *argv, t_map *map);
 int			init_camera(t_mlx *mlx);
+int			init_data(t_mlx *mlx, t_map *map);
+int 		init_object(t_object_list *new_elem, char *str, int o);
 t_vec3		vector_addition(t_vec3 v1, t_vec3 v2);
 t_vec3 		vector_float_product(t_vec3 v1, float i);
 t_vec3		vector_assign_values(float x, float y, float z);
@@ -126,24 +135,22 @@ t_vec3 		vector_int_product(t_vec3 v1, int i);
 t_vec3		vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3		vector_normalize(t_vec3 v1);
 t_vec3 		vector_float_substraction(t_vec3 v1, float i);
-int			key_events(int keycode, t_mlx *mlx);
+t_vec3		vector_cross(t_vec3 v1, t_vec3 v2);
+t_vec3		assign_vectors(char *str, int *j, t_vec3 vec);
 float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			sphere_intersection_init(t_mlx *mlx, int x, int y);
-int			check_plan(t_mlx *mlx, int x, int y);
-void		draw(t_mlx *mlx , float x, float y);
-int			init_data(t_mlx *mlx, t_map *map);
+int			plan_intersection_init(t_mlx *mlx, float x, float y);
+int			cylindre_intersection_init(t_mlx *mlx, float x, float y);
+int			check_sphere(t_object_list *new_elem, char *str);
+int			check_plan(t_object_list *new_elem, char *str);
+int			check_cylindre(t_object_list *new_elem, char *str);
+void		draw(t_mlx *mlx , float x, float y, int color);
 float		atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);
 int			read_first_letters(char *str, int i);
-int 		init_light(t_map *map, t_object_list *new_elem, char *str);
-int 		init_sphere(t_map *map, t_object_list *new_elem, char *str);
-int 		init_cylindre(t_map *map, t_object_list *new_elem, char *str);
-int 		init_cone(t_map *map, t_object_list *new_elem, char *str);
-int 		init_plan(t_map *map, t_object_list *new_elem, char *str);
 int			count_int(char *str);
-t_vec3		assign_vectors(char *str, int *j, t_vec3 vec);
+int			key_events(int keycode, t_mlx *mlx);
 int			exit_properly(t_mlx *mlx);
-int 		init_object(t_map *map, t_object_list *new_elem, char *str, int o);
-int			check_sphere(t_map *map, t_object_list *new_elem, char *str);
+
 
 #endif

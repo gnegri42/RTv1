@@ -21,22 +21,32 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 	{
 		if (mlx->map->list->type == 14)
 			sphere_intersection_init(mlx, x, y);
+		if (mlx->map->list->type == 17)
+			plan_intersection_init(mlx, x, y);
+		if (mlx->map->list->type == 15)
+			cylindre_intersection_init(mlx, x, y);
 		mlx->map->list = mlx->map->list->next;
 	}
 	mlx->map->list = tmp;
-	//check_plan(mlx, x, y);
 	return(0);
 }
 
 static int	create_ray(t_cam *cam, float i, float j)
 {
-	t_vec3	point_on_screen;
+	t_vec3	forward;
+	t_vec3	right;
+	t_vec3	up;
 	
-	point_on_screen = vector_addition(cam->p0, vector_addition(vector_float_product(vector_substraction(cam->p1, cam->p0), i), 
-		vector_float_product(vector_substraction(cam->p2, cam->p0), j)));
 	cam->ray->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
-	cam->ray->direction = vector_normalize(vector_substraction(point_on_screen, cam->cam_pos));
-	cam->ray->length = 1000000000;
+	forward = vector_substraction(cam->view_dir, cam->cam_pos);
+	forward = vector_normalize(forward);
+	right = vector_cross((t_vec3){0.0, 1.0, 0.0}, forward);
+	right = vector_normalize(right);
+	up = vector_cross(forward, right);
+	cam->ray->direction = (t_vec3){i * right.x + j * up.x + FOV * forward.x, i * right.y + j * up.y
+		+ FOV * forward.y, i * right.z + j * up.z + FOV * forward.z};
+	cam->ray->direction = vector_normalize(cam->ray->direction);
+	cam->ray->length = 1000000000000;
 	return (0);
 }
 
@@ -57,8 +67,8 @@ static int	ray_loop(t_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			i = x / WIN_WIDTH;
-			j = y / WIN_HEIGHT;
+			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
+			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
 			create_ray(mlx->cam, i ,j);
 			check_ray_objects(mlx, x, y);
 			x++;
@@ -71,7 +81,6 @@ static int	ray_loop(t_mlx *mlx)
 int			init_camera(t_mlx *mlx)
 {
 	t_cam 	*cam;
-	t_vec3	v1;
 
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
@@ -81,14 +90,6 @@ int			init_camera(t_mlx *mlx)
 		ft_putstr("Error : cannot load image from this config file.\n");
 		return(false);
 	}
-	v1 = vector_float_product(cam->view_dir, cam->screen_dist);
-	cam->screen_center = vector_addition(cam->cam_pos, v1);
-	v1 = vector_assign_values(-WIN_WIDTH/2, WIN_HEIGHT/2, 0);
-	cam->p0 = vector_addition(cam->screen_center, v1);
-	v1 = vector_assign_values(WIN_WIDTH/2, WIN_HEIGHT/2, 0);
-	cam->p1 = vector_addition(cam->screen_center, v1);
-	v1 = vector_assign_values (-WIN_WIDTH/2, -WIN_HEIGHT/2, 0);
-	cam->p2 = vector_addition(cam->screen_center, v1);
 	ray_loop(mlx);
 	return (0);
 }
