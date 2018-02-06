@@ -65,3 +65,23 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 		j++;
 	return (true);
 }
+
+int	check_cone(t_object_list *new_elem, char *str)
+{
+	int		j;
+	int		c;
+
+	j = 0;
+	if ((c = count_int(str)) != 7)
+		return (false);
+	new_elem->cone.position = assign_vectors(str, &j, new_elem->cone.position);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
+	new_elem->cone.direction = assign_vectors(str, &j, new_elem->cone.direction);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
+	new_elem->cone.radius = atoi_custom(str, &j);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
+	return (true);
+}

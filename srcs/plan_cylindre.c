@@ -44,7 +44,7 @@ int	plan_intersection_init(t_mlx *mlx, float x, float y)
 
 int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 {
-	double	disc;
+	float	disc;
 	float	t0;
 	float	t1;
 	float	a;

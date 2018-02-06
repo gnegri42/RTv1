@@ -50,6 +50,13 @@ typedef struct				s_vec3
 	float					z;
 }							t_vec3;
 
+typedef	struct 				s_cone
+{
+	t_vec3					position;
+	t_vec3					direction;
+	float					radius;
+}							t_cone;
+
 typedef	struct 				s_cylindre
 {
 	t_vec3					position;
@@ -76,6 +83,7 @@ typedef	struct				s_object_list
 	t_sphere				sphere;
 	t_plan					plan;
 	t_cylindre				cylindre;
+	t_cone					cone;
 	struct s_object_list	*next;
 }							t_object_list;
 
@@ -87,6 +95,7 @@ typedef	struct				s_ray
 	int						sphere_intersection;
 	int						plan_intersection;
 	int						cylindre_intersection;
+	int						cone_intersection;
 }							t_ray;
 
 typedef	struct 				s_cam
@@ -141,9 +150,11 @@ float		vector_dot_product(t_vec3 v1, t_vec3 v2);
 int			sphere_intersection_init(t_mlx *mlx, int x, int y);
 int			plan_intersection_init(t_mlx *mlx, float x, float y);
 int			cylindre_intersection_init(t_mlx *mlx, float x, float y);
+int			cone_intersection_init(t_mlx *mlx, float x, float y);
 int			check_sphere(t_object_list *new_elem, char *str);
 int			check_plan(t_object_list *new_elem, char *str);
 int			check_cylindre(t_object_list *new_elem, char *str);
+int			check_cone(t_object_list *new_elem, char *str);
 void		draw(t_mlx *mlx , float x, float y, int color);
 float		atoi_custom(const char *str, int *i);
 int			skip_space(char *str, int i);

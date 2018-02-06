@@ -44,15 +44,21 @@ static int init_cylindre(t_object_list *new_elem, char *str)
 	return (0);
 }
 
-/*static int init_cone(t_object_list *new_elem, char *str)
+static int init_cone(t_object_list *new_elem, char *str)
 {
-		if (str)
-		{
-			if (new_elem)
-			return (0);
-		}
+	t_cone	*cone;
+
+	if (!(cone = (t_cone *)malloc(sizeof(t_cone))))
+		return (-1);
+	new_elem->cone = *cone;
+	if (check_cone(new_elem, str) == false)
+	{
+		free(cone);
+		return (-1);
+	}
+	free(cone);
 	return (0);
-}*/
+}
 
 static int init_plan(t_object_list *new_elem, char *str)
 {
@@ -81,7 +87,7 @@ int init_object(t_object_list *new_elem, char *str, int o)
 		i = init_plan(new_elem, str);
 	if (o == 15)
 		i = init_cylindre(new_elem, str);
-/*	if (o == CON)
-		i = init_cone(map, new_elem, str);*/
+	if (o == 16)
+		i = init_cone(new_elem, str);
 	return (i);
 }
