@@ -62,6 +62,7 @@ typedef	struct 				s_cone
 	t_vec3					position;
 	t_vec3					direction;
 	float					radius;
+	int						color;
 }							t_cone;
 
 typedef	struct 				s_cylindre

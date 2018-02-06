@@ -43,6 +43,6 @@ int	cone_intersection_init(t_mlx *mlx, float x, float y)
 		mlx->cam->ray->cone_intersection = 1;
 	}
 	if (mlx->cam->ray->cone_intersection == 1)
-		draw(mlx, x, y, RED);
+		draw(mlx, x, y, mlx->map->list->cone.color);
 	return (true);
 }

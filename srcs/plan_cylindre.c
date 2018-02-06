@@ -38,7 +38,7 @@ int	plan_intersection_init(t_mlx *mlx, float x, float y)
 		mlx->cam->ray->plan_intersection = 1;
 	}
 	if (mlx->cam->ray->plan_intersection == 1)
-		draw(mlx, x, y, WHITE);
+		draw(mlx, x, y, mlx->map->list->plan.color);
 	return (0);
 }
 
@@ -72,6 +72,6 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 		mlx->cam->ray->cylindre_intersection = 1;
 	}
 	if (mlx->cam->ray->cylindre_intersection == 1)
-		draw(mlx, x, y, BLUE);
+		draw(mlx, x, y, mlx->map->list->cylindre.color);
 	return (true);
 }
