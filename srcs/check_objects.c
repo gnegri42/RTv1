@@ -14,11 +14,12 @@
 
 int	check_sphere(t_object_list *new_elem, char *str)
 {
-	int		j;
-	int		c;
+	int				j;
+	int				c;
+	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 4)
+	if ((c = count_int(str)) != 7)
 		return (false);
 	new_elem->sphere.position = assign_vectors(str, &j, new_elem->sphere.position);
 	while (str[j] < '0' || str[j] > '9')
@@ -26,6 +27,9 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	new_elem->sphere.radius = atoi_custom(str, &j);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
+	col = (t_vec_color3){0, 0, 0};
+	col = assign_colors(str, &j, col);
+	new_elem->sphere.color = rgb_to_hex(col.r, col.g, col.b);
 	return (true);
 }
 

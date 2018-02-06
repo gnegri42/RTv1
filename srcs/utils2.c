@@ -26,7 +26,7 @@ static int	check_negative(char *str, int *j)
 	return (false);
 }
 
-t_vec3	assign_vectors(char *str, int *j, t_vec3 vec)
+t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 {
 	float x;
 	float y;

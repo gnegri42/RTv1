@@ -29,7 +29,7 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 		mlx->cam->ray->sphere_intersection = 1;
 	}
 	if (mlx->cam->ray->sphere_intersection == 1)
-		draw(mlx, x, y, ORANGE);
+		draw(mlx, x, y, mlx->map->list->sphere.color);
 	return (0);
 }
 

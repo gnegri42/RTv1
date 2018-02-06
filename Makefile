@@ -28,6 +28,7 @@ SRC_NAME = 	main.c\
 			exit_properly.c\
 			init_objects.c\
 			check_objects.c\
+			color.c\
 			
 			
 OBJ_PATH = objs
