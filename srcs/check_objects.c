@@ -52,7 +52,7 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 	int		c;
 
 	j = 0;
-	if ((c = count_int(str)) != 6)
+	if ((c = count_int(str)) != 7)
 		return (false);
 	new_elem->cylindre.position = assign_vectors(str, &j, new_elem->cylindre.position);
 	while (str[j] < '0' || str[j] > '9')
