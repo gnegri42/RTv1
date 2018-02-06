@@ -21,6 +21,7 @@ SRC_NAME = 	main.c\
 			key.c\
 			draw.c\
 			sphere.c\
+			cone.c\
 			plan_cylindre.c\
 			utils.c\
 			utils2.c\

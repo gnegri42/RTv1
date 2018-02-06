@@ -25,6 +25,8 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 			plan_intersection_init(mlx, x, y);
 		if (mlx->map->list->type == 15)
 			cylindre_intersection_init(mlx, x, y);
+		if (mlx->map->list->type == 16)
+			cone_intersection_init(mlx, x, y);
 		mlx->map->list = mlx->map->list->next;
 	}
 	mlx->map->list = tmp;
