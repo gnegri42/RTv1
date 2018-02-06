@@ -20,7 +20,10 @@ static int init_sphere(t_object_list *new_elem, char *str)
 		return (-1);
 	new_elem->sphere = *sphere;
 	if (check_sphere(new_elem, str) == false)
+	{
+		free(sphere);
 		return (-1);
+	}
 	free(sphere);
 	return (0);
 }
@@ -33,7 +36,10 @@ static int init_cylindre(t_object_list *new_elem, char *str)
 		return (-1);
 	new_elem->cylindre = *cylindre;
 	if (check_cylindre(new_elem, str) == false)
+	{
+		free(cylindre);
 		return (-1);
+	}
 	free(cylindre);
 	return (0);
 }
@@ -56,7 +62,10 @@ static int init_plan(t_object_list *new_elem, char *str)
 		return (-1);
 	new_elem->plan = *plan;
 	if (check_plan(new_elem, str) == false)
+	{
+		free(plan);
 		return (-1);
+	}
 	free(plan);
 	return (0);
 }
