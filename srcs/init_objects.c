@@ -81,13 +81,15 @@ int init_object(t_object_list *new_elem, char *str, int o)
 	int i;
 
 	i = 0;
+	if (o == 13)
+		i = init_light(new_elem, str);
 	if (o == 14)
 		i = init_sphere(new_elem, str);
-	if (o == 17)
-		i = init_plan(new_elem, str);
 	if (o == 15)
 		i = init_cylindre(new_elem, str);
 	if (o == 16)
 		i = init_cone(new_elem, str);
+	if (o == 17)
+		i = init_plan(new_elem, str);
 	return (i);
 }

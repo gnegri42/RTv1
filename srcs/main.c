@@ -23,6 +23,7 @@ static int	img_loop(t_mlx *mlx, t_img *img)
 		return (-1);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, img->img, 0, 0);
 	mlx_hook(mlx->win, 2, 1L << 0, key_events, mlx);
+	mlx_hook(mlx->win, 17, 1L << 17, red_cross, mlx);
 	mlx_loop(mlx->mlx);
 	return (0);
 }

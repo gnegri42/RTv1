@@ -46,3 +46,10 @@ int			exit_properly(t_mlx *mlx)
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	exit(0);
 }
+
+int			red_cross(t_mlx *mlx)
+{
+	exit_properly(mlx);
+	exit(0);
+	return (0);
+}
