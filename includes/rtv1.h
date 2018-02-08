@@ -61,6 +61,7 @@ typedef	struct 				s_spot
 {
 	t_vec3					spot_pos;
 	t_vec3					spot_dir;
+	foat					intensity;
 	int						color;
 }							t_spot;
 
@@ -68,34 +69,38 @@ typedef	struct 				s_cone
 {
 	t_vec3					position;
 	t_vec3					direction;
-	float					radius;
-	int						color;
 	t_vec3					hit_normal;
+	float					radius;
+	float					albedo;
+	int						color;
 }							t_cone;
 
 typedef	struct 				s_cylindre
 {
 	t_vec3					position;
 	t_vec3					direction;
-	float					radius;
-	int						color;
 	t_vec3					hit_normal;
+	float					radius;
+	float					albedo;
+	int						color;
 }							t_cylindre;
 
 typedef	struct 				s_plan
 {
 	t_vec3					position;
 	t_vec3					rotation;
-	int						color;
 	t_vec3					hit_normal;
+	float					albedo;
+	int						color;
 }							t_plan;
 
 typedef	struct 				s_sphere
 {
 	t_vec3					position;
-	float					radius;
-	int						color;
 	t_vec3					hit_normal;
+	float					radius;
+	float					albedo;
+	int						color;
 }							t_sphere;
 
 typedef	struct				s_object_list
@@ -185,6 +190,7 @@ int				check_sphere(t_object_list *new_elem, char *str);
 int				check_plan(t_object_list *new_elem, char *str);
 int				check_cylindre(t_object_list *new_elem, char *str);
 int				check_cone(t_object_list *new_elem, char *str);
+int				check_light(t_object_list *new_elem, char *str);
 void			draw(t_mlx *mlx , float x, float y, int color);
 void			redraw(t_mlx *mlx);
 float			atoi_custom(const char *str, int *i);

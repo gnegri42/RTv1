@@ -24,6 +24,7 @@ SRC_NAME = 	main.c\
 			cone.c\
 			light.c\
 			plan_cylindre.c\
+			light.c\
 			utils.c\
 			utils2.c\
 			init_data.c\

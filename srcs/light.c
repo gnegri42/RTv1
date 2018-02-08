@@ -27,6 +27,9 @@ static int	check_light(t_object_list *new_elem, char *str)
 	new_elem->spot.spot_dir = assign_vectors(str, &j, new_elem->spot.spot_dir);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
+	new_elem->spot.intensity = atoi_custom(str, &j);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->spot.color = rgb_to_hex(col.r, col.g, col.b);
@@ -38,15 +41,15 @@ int 		init_light(t_object_list *new_elem, char *str)
 	t_spot	*spot;
 
 	if (!(spot = (t_spot *)malloc(sizeof(t_spot))))
-		return (-1);
+		return (false);
 	new_elem->spot = *spot;
 	if (check_light(new_elem, str) == false)
 	{
 		free(spot);
-		return (-1);
+		return (false);
 	}
 	free(spot);
-	return (0);
+	return (true);
 }
 /*
 int	light_ray(mlx)
