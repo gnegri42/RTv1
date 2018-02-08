@@ -11,6 +11,24 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
+/*
+static int	translation_objects(int keycode, t_mlx *mlx)
+{
+	t_vec3	tmp_pos;
+
+	if (keycode == 0)
+		tmp_pos->pos = (t_vec3){mlx->cam->cam_pos_pos->pos.x + 10.0 * mlx->cam->right.x,
+			mlx->cam->cam_pos->pos.y + 10.0 * mlx->cam->right.y, mlx->cam->cam_pos->pos.z + 10.0 * mlx->cam->right.z};
+	else if (keycode == 2)
+		mlx->cam->cam_pos->pos = (t_vec3){mlx->cam->cam_pos->pos.x - 10.0 * mlx->cam->right.x,
+			mlx->cam->cam_pos->pos.y - 10.0 * mlx->cam->right.y, mlx->cam->cam_pos->pos.z - 10.0 * mlx->cam->right.z};
+	else if (keycode == 1)
+		mlx->cam->cam_pos->pos = (t_vec3){mlx->cam->cam_pos->pos.x - 10.0 * mlx->cam->up.x,
+			mlx->cam->cam_pos->pos.y - 10.0 * mlx->cam->up.y, mlx->cam->cam_pos->pos.z - 10.0 * mlx->cam->up.z};
+	else if (keycode == 13)
+		mlx->cam->cam_pos->pos = (t_vec3){mlx->cam->cam_pos->pos.x + 10.0 * mlx->cam->up.x,
+			mlx->cam->cam_pos->pos.y + 10.0 * mlx->cam->up.y, mlx->cam->cam_pos->pos.z + 10.0 * mlx->cam->up.z};
+}*/
 
 static int	translation_camera_2(int keycode, t_mlx *mlx)
 {
@@ -27,13 +45,6 @@ static int	translation_camera_2(int keycode, t_mlx *mlx)
 			mlx->cam->view_dir.y + 10.0 * mlx->cam->up.y, mlx->cam->view_dir.z + 10.0 * mlx->cam->up.z};
 		mlx->cam->cam_pos = (t_vec3){mlx->cam->cam_pos.x + 10.0 * mlx->cam->up.x,
 			mlx->cam->cam_pos.y + 10.0 * mlx->cam->up.y, mlx->cam->cam_pos.z - 10.0 * mlx->cam->up.z};
-	}
-	else if (keycode == 69)
-	{
-		mlx->cam->view_dir = (t_vec3){mlx->cam->view_dir.x + 10.0 * mlx->cam->forward.x,
-			mlx->cam->view_dir.y + 10.0 * mlx->cam->forward.y, mlx->cam->view_dir.z + 10.0 * mlx->cam->forward.z};
-		mlx->cam->cam_pos = (t_vec3){mlx->cam->cam_pos.x + 10.0 * mlx->cam->forward.x,
-			mlx->cam->cam_pos.y + 10.0 * mlx->cam->forward.y, mlx->cam->cam_pos.z + 10.0 * mlx->cam->forward.z};
 	}
 	return (0);
 }
@@ -69,6 +80,7 @@ int			key_events(int keycode, t_mlx *mlx)
 
 	if (keycode == 53)
 		exit_properly(mlx);
+//	translation_camera_objects(keycode, mlx);
 	if (keycode == 123)
 	{
 		tmp_pos = mlx->cam->cam_pos.x;
