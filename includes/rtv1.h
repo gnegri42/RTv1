@@ -57,11 +57,20 @@ typedef struct				s_vec3
 	float					z;
 }							t_vec3;
 
+typedef	struct 				s_light
+{
+	t_vec3					position;
+	t_vec3					direction;
+	float					intensity;
+	int						color;
+}							t_light;
+
 typedef	struct 				s_cone
 {
 	t_vec3					position;
 	t_vec3					direction;
 	float					radius;
+	float					albedo;
 	int						color;
 }							t_cone;
 
@@ -70,6 +79,7 @@ typedef	struct 				s_cylindre
 	t_vec3					position;
 	t_vec3					direction;
 	float					radius;
+	float					albedo;
 	int						color;
 }							t_cylindre;
 
@@ -77,6 +87,7 @@ typedef	struct 				s_plan
 {
 	t_vec3					position;
 	t_vec3					rotation;
+	float					albedo;
 	int						color;
 }							t_plan;
 
@@ -84,6 +95,7 @@ typedef	struct 				s_sphere
 {
 	t_vec3					position;
 	float					radius;
+	float					albedo;
 	int						color;
 }							t_sphere;
 
@@ -95,6 +107,7 @@ typedef	struct				s_object_list
 	t_plan					plan;
 	t_cylindre				cylindre;
 	t_cone					cone;
+	t_light					light;
 	struct s_object_list	*next;
 }							t_object_list;
 
@@ -147,6 +160,7 @@ int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
+int				init_light(t_object_list *new_elem, char *str);
 t_vec3			vector_addition(t_vec3 v1, t_vec3 v2);
 t_vec3 			vector_float_product(t_vec3 v1, float i);
 t_vec3			vector_assign_values(float x, float y, float z);
@@ -168,6 +182,7 @@ int				check_sphere(t_object_list *new_elem, char *str);
 int				check_plan(t_object_list *new_elem, char *str);
 int				check_cylindre(t_object_list *new_elem, char *str);
 int				check_cone(t_object_list *new_elem, char *str);
+int				check_light(t_object_list *new_elem, char *str);
 void			draw(t_mlx *mlx , float x, float y, int color);
 float			atoi_custom(const char *str, int *i);
 int				atoi_color(const char *str, int *i);
