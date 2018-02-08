@@ -26,6 +26,8 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 	if (new_length < mlx->cam->ray->length)
 	{
 		mlx->cam->ray->length = new_length;
+		mlx->cam->ray->hit_object_pos = mlx->map->list->sphere.position;
+		mlx->cam->ray->hit_object_col = mlx->map->list->sphere.color;
 		mlx->cam->ray->sphere_intersection = 1;
 	}
 	if (mlx->cam->ray->sphere_intersection == 1)

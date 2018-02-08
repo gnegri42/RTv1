@@ -35,7 +35,7 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 
 static int	create_ray(t_cam *cam, float i, float j)
 {
-	
+
 	cam->ray->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
 	cam->forward = vector_substraction(cam->view_dir, cam->cam_pos);
 	cam->forward = vector_normalize(cam->forward);

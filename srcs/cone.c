@@ -40,6 +40,8 @@ int	cone_intersection_init(t_mlx *mlx, float x, float y)
 	if (t0 < mlx->cam->ray->length)
 	{
 		mlx->cam->ray->length = t0;
+		mlx->cam->ray->hit_object_pos = mlx->map->list->cone.position;
+		mlx->cam->ray->hit_object_col = mlx->map->list->cone.color;
 		mlx->cam->ray->cone_intersection = 1;
 	}
 	if (mlx->cam->ray->cone_intersection == 1)

@@ -6,7 +6,7 @@
 /*   By: gnegri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 09:37:24 by gnegri            #+#    #+#             */
-/*   Updated: 2018/02/05 12:23:00 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/08 16:31:20 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 float 				ft_deg2rad(float degrees);
-
+float				ft_clamp(float value, float min, float max);
 int					ft_getnbr(char *str);
-
 int					get_next_line(const int fd, char **line);
+
 #endif

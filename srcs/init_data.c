@@ -31,7 +31,7 @@ static t_object_list	*new_list_object(char *str, int object, int object_nb)
 static int				new_list(t_map *map, char *str, int i, int nb_object)
 {
 	t_object_list *tmp;
-	
+
 	if (!map->list)
 	{
 		if ((map->list = new_list_object(str, i, nb_object)) == NULL)

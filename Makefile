@@ -33,8 +33,8 @@ SRC_NAME = 	main.c\
 			check_objects.c\
 			color.c\
 			transformations.c\
-			
-			
+
+
 OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

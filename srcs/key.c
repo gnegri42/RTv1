@@ -29,7 +29,7 @@ static int	translation_objects(int keycode, t_mlx *mlx)
 		mlx->cam->cam_pos->pos = (t_vec3){mlx->cam->cam_pos->pos.x + 10.0 * mlx->cam->up.x,
 			mlx->cam->cam_pos->pos.y + 10.0 * mlx->cam->up.y, mlx->cam->cam_pos->pos.z + 10.0 * mlx->cam->up.z};
 }*/
-
+/*
 static int	translation_camera_2(int keycode, t_mlx *mlx)
 {
 	if (keycode == 1)
@@ -72,16 +72,16 @@ static int	translation_camera(int keycode, t_mlx *mlx)
 	}
 	translation_camera_2(keycode, mlx);
 	return (0);
-}
+}*/
 
 int			key_events(int keycode, t_mlx *mlx)
 {
-	float	tmp_pos;
+//	float	tmp_pos;
 
 	if (keycode == 53)
 		exit_properly(mlx);
 //	translation_camera_objects(keycode, mlx);
-	if (keycode == 123)
+	/*if (keycode == 123)
 	{
 		tmp_pos = mlx->cam->cam_pos.x;
 		mlx->cam->cam_pos.x = mlx->cam->cam_pos.x * cosf(0.05) + mlx->cam->cam_pos.z * sinf(0.05);
@@ -106,6 +106,6 @@ int			key_events(int keycode, t_mlx *mlx)
 		mlx->cam->cam_pos.z = tmp_pos * sinf(0.05) + mlx->cam->cam_pos.z * cosf(0.05);
 	}
 	translation_camera(keycode, mlx);
-	redraw(mlx);
+	redraw(mlx);*/
 	return (0);
 }

@@ -69,7 +69,6 @@ typedef	struct 				s_cone
 {
 	t_vec3					position;
 	t_vec3					direction;
-	t_vec3					hit_normal;
 	float					radius;
 	float					albedo;
 	int						color;
@@ -79,7 +78,6 @@ typedef	struct 				s_cylindre
 {
 	t_vec3					position;
 	t_vec3					direction;
-	t_vec3					hit_normal;
 	float					radius;
 	float					albedo;
 	int						color;
@@ -89,7 +87,6 @@ typedef	struct 				s_plan
 {
 	t_vec3					position;
 	t_vec3					rotation;
-	t_vec3					hit_normal;
 	float					albedo;
 	int						color;
 }							t_plan;
@@ -97,7 +94,6 @@ typedef	struct 				s_plan
 typedef	struct 				s_sphere
 {
 	t_vec3					position;
-	t_vec3					hit_normal;
 	float					radius;
 	float					albedo;
 	int						color;
@@ -124,6 +120,8 @@ typedef	struct				s_ray
 	int						plan_intersection;
 	int						cylindre_intersection;
 	int						cone_intersection;
+	t_vec3 					hit_object_pos;
+	int 					hit_object_col;
 }							t_ray;
 
 typedef	struct 				s_cam
@@ -166,6 +164,7 @@ typedef struct				s_mlx
 int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				ray_loop(t_mlx *mlx);
+int				light_ray(t_mlx *mlx);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
 int 			init_light(t_object_list *new_elem, char *str);
@@ -201,7 +200,7 @@ int				key_events(int keycode, t_mlx *mlx);
 int				exit_properly(t_mlx *mlx);
 int				red_cross(t_mlx *mlx);
 int				rgb_to_hex(int r, int g, int b);
-t_vec3			ft_translation(t_vec3 ex_pos, t_vec3 param);
+t_vec3		ft_translation(t_vec3 ex_pos, t_vec3 param);
 
 
 #endif

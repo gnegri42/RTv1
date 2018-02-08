@@ -35,6 +35,8 @@ int	plan_intersection_init(t_mlx *mlx, float x, float y)
 	if (dist_inter < mlx->cam->ray->length)
 	{
 		mlx->cam->ray->length = dist_inter;
+		mlx->cam->ray->hit_object_pos = mlx->map->list->plan.position;
+		mlx->cam->ray->hit_object_col = mlx->map->list->plan.color;
 		mlx->cam->ray->plan_intersection = 1;
 	}
 	if (mlx->cam->ray->plan_intersection == 1)
@@ -51,7 +53,7 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 	float	b;
 	float	c;
 	t_vec3	dist;
-		
+
 	mlx->cam->ray->cylindre_intersection = 0;
 	dist = vector_substraction(mlx->cam->cam_pos, mlx->map->list->cylindre.position);
 	vector_normalize(mlx->map->list->cylindre.direction);
@@ -59,7 +61,7 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 	b = 2 * (vector_dot_product(mlx->cam->ray->direction, dist) -
 		(vector_dot_product(mlx->cam->ray->direction, mlx->map->list->cylindre.direction) * vector_dot_product(dist, mlx->map->list->cylindre.direction)));
 	c = vector_dot_product(dist, dist) - pow(vector_dot_product(dist, mlx->map->list->cylindre.direction), 2) - pow(mlx->map->list->cylindre.radius, 2);
-	disc = b * b - 4 * a * c;	
+	disc = b * b - 4 * a * c;
 	if (disc < 0)
 		return (-1);
 	t0 = (-b + sqrtf(disc)) / (2 * a);
@@ -69,6 +71,8 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 	if (t0 < mlx->cam->ray->length)
 	{
 		mlx->cam->ray->length = t0;
+		mlx->cam->ray->hit_object_pos = mlx->map->list->plan.position;
+		mlx->cam->ray->hit_object_col = mlx->map->list->plan.color;
 		mlx->cam->ray->cylindre_intersection = 1;
 	}
 	if (mlx->cam->ray->cylindre_intersection == 1)
