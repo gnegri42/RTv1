@@ -32,7 +32,7 @@ static int		find_form(char *str)
 	return (i);
 }
 
-int		read_first_letters(char *str, int i)
+int				read_first_letters(char *str, int i)
 {
 	char	*tmp_str;
 	int		j;
@@ -52,16 +52,7 @@ int		read_first_letters(char *str, int i)
 	return (f);
 }
 
-int		skip_space(char *str, int i)
-{
-	if (str[i] == '\0')
-		return (0);
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
-	return (i);
-}
-
-int		count_int(char *str)
+int				count_int(char *str)
 {
 	int i;
 	int nb_int;
@@ -70,10 +61,10 @@ int		count_int(char *str)
 	nb_int = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] >= '0' && str[i] <= '9')
+		if ((str[i] >= '0' && str[i] <= '9') || (str[i] == '.' && (str[i + 1] >= '0' && str[i + 1] <= '9')))
 		{
 			nb_int++;
-			while (str[i] >= '0' && str[i] <= '9' && str[i + 1] != '\0')
+			while (((str[i] >= '0' && str[i] <= '9') || str[i] == '.') && str[i + 1] != '\0')
 				i++;
 		}
 		i++;
@@ -81,7 +72,26 @@ int		count_int(char *str)
 	return (nb_int);
 }
 
-float	atoi_custom(const char *str, int *i)
+static float	atoi_custom_next(const char *str, int *i, float v)
+{
+	int power;
+	float value;
+
+	power = 2;
+	(*i)++;
+	v = v + (str[*i] - 48) * 0.1;
+	(*i)++;
+	while ((str[*i] >= '0' && str[*i] <= '9') && str[*i + 1] != '\0')
+	{
+		value = ft_power(10, power);
+		v = v + (float)(str[*i] - 48) * (float)(1 / value);
+		(*i)++;
+		power++;
+	}
+	return (v);
+}
+
+float			atoi_custom(const char *str, int *i)
 {
 	float v;
 	float posneg;
@@ -95,9 +105,15 @@ float	atoi_custom(const char *str, int *i)
 		posneg = -1;
 	if (str[*i] == '+' || str[*i] == '-')
 		(*i)++;
-	while (str[*i] >= '0' && str[*i] <= '9')
+	while (((str[*i] >= '0' && str[*i] <= '9') || str[*i] == '.') && str[*i + 1] != '\0')
 	{
-		v = v * 10 + str[*i] - 48;
+		if (str[*i] == '.' && (str[*i + 1] >= '0' && str[*i + 1] <= '9'))
+		{
+			v = atoi_custom_next(str, i, v);
+			break;
+		}
+		else
+			v = v * 10 + str[*i] - 48;
 		(*i)++;
 	}
 	return (posneg * v);

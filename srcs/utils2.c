@@ -12,6 +12,15 @@
 
 #include "rtv1.h"
 
+int			skip_space(char *str, int i)
+{
+	if (str[i] == '\0')
+		return (0);
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
+
 static int	check_negative(char *str, int *j)
 {
 	int *i;

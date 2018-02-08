@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
+
 int	check_sphere(t_object_list *new_elem, char *str)
 {
 	int				j;

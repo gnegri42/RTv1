@@ -73,6 +73,7 @@ FILES =		ft_deg2rad.c\
 			ft_lstmap.c\
 			get_next_line.c\
 			ft_getnbr.c\
+			ft_power.c\
 
 SRCS =		$(FILES)
 

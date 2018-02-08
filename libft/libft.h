@@ -95,6 +95,7 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 float 				ft_deg2rad(float degrees);
+int					ft_power(int value, int power);
 
 int					ft_getnbr(char *str);
 
