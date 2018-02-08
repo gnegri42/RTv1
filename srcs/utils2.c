@@ -26,32 +26,27 @@ static int	check_negative(char *str, int *j)
 	return (false);
 }
 
+void			loop(char *str, int *j)
+{
+	while (str[*j] < '0' || str[*j] > '9')
+	{
+		if (check_negative(str, j) == true)
+			break ;
+		(*j)++;
+	}
+}
+
 t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 {
 	float x;
 	float y;
 	float z;
 
-	while (str[*j] < '0' || str[*j] > '9')
-	{
-		if (check_negative(str, j) == true)
-			break ;
-		(*j)++;
-	}
+	loop(str, j);
 	x = atoi_custom(str, j);
-	while (str[*j] < '0' || str[*j] > '9')
-	{
-		if (check_negative(str, j) == true)
-			break ;
-		(*j)++;
-	}
+	loop(str, j);
 	y = atoi_custom(str, j);
-	while (str[*j] < '0' || str[*j] > '9')
-		{
-		if (check_negative(str, j) == true)
-			break ;
-		(*j)++;
-	}
+	loop(str, j);
 	z = atoi_custom(str, j);
 	vec = vector_assign_values(x, y, z);
 	return (vec);
