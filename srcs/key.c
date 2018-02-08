@@ -95,7 +95,7 @@ int			key_events(int keycode, t_mlx *mlx)
 	}
 	else if (keycode == 125)
 	{
-		tmp_pos = mlx->cam->cam_pos.y > -20000;
+		tmp_pos = mlx->cam->cam_pos.y;
 		mlx->cam->cam_pos.y = mlx->cam->cam_pos.y * cosf(-0.05) + mlx->cam->cam_pos.z * (-sinf(-0.05));
 		mlx->cam->cam_pos.z = tmp_pos * sinf(-0.05) + mlx->cam->cam_pos.z * cosf(-0.05);
 	}
