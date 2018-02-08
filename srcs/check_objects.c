@@ -17,9 +17,10 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	int				j;
 	int				c;
 	t_vec_color3	col;
+	t_vec3			translation;
 
 	j = 0;
-	if ((c = count_int(str)) != 7)
+	if ((c = count_int(str)) != 10)
 		return (false);
 	new_elem->sphere.position = assign_vectors(str, &j, new_elem->sphere.position);
 	while (str[j] < '0' || str[j] > '9')
@@ -30,6 +31,11 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->sphere.color = rgb_to_hex(col.r, col.g, col.b);
+	while (str[j] < '0' || str[j] > '9')
+		j++;
+	translation = (t_vec3){0, 0, 0};
+	translation = assign_vectors(str, &j, translation);
+	new_elem->sphere.position = ft_translation(new_elem->sphere.position, translation);
 	return (true);
 }
 

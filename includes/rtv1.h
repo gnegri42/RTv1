@@ -61,7 +61,7 @@ typedef	struct 				s_spot
 {
 	t_vec3					spot_pos;
 	t_vec3					spot_dir;
-	foat					intensity;
+	float					intensity;
 	int						color;
 }							t_spot;
 
@@ -190,7 +190,6 @@ int				check_sphere(t_object_list *new_elem, char *str);
 int				check_plan(t_object_list *new_elem, char *str);
 int				check_cylindre(t_object_list *new_elem, char *str);
 int				check_cone(t_object_list *new_elem, char *str);
-int				check_light(t_object_list *new_elem, char *str);
 void			draw(t_mlx *mlx , float x, float y, int color);
 void			redraw(t_mlx *mlx);
 float			atoi_custom(const char *str, int *i);
@@ -202,6 +201,7 @@ int				key_events(int keycode, t_mlx *mlx);
 int				exit_properly(t_mlx *mlx);
 int				red_cross(t_mlx *mlx);
 int				rgb_to_hex(int r, int g, int b);
+t_vec3			ft_translation(t_vec3 ex_pos, t_vec3 param);
 
 
 #endif

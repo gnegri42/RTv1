@@ -24,6 +24,7 @@ static int init_sphere(t_object_list *new_elem, char *str)
 		free(sphere);
 		return (-1);
 	}
+	new_elem->sphere.albedo = 0.18;
 	free(sphere);
 	return (0);
 }
@@ -40,6 +41,7 @@ static int init_cylindre(t_object_list *new_elem, char *str)
 		free(cylindre);
 		return (-1);
 	}
+	new_elem->cylindre.albedo = 0.18;
 	free(cylindre);
 	return (0);
 }
@@ -56,6 +58,7 @@ static int init_cone(t_object_list *new_elem, char *str)
 		free(cone);
 		return (-1);
 	}
+	new_elem->cone.albedo = 0.18;
 	free(cone);
 	return (0);
 }
@@ -72,6 +75,7 @@ static int init_plan(t_object_list *new_elem, char *str)
 		free(plan);
 		return (-1);
 	}
+	new_elem->plan.albedo = 0.18;
 	free(plan);
 	return (0);
 }

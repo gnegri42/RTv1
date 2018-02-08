@@ -32,6 +32,7 @@ SRC_NAME = 	main.c\
 			init_objects.c\
 			check_objects.c\
 			color.c\
+			transformations.c\
 			
 			
 OBJ_PATH = objs
