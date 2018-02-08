@@ -2,8 +2,8 @@ fiejrq vjuhygv bjnmbhgyibvh nmugy6t bvnhjmoif
 
 CAM 0 0 -250 0 0 1
 
-SPH 80 -60 0 50 60 250 250
+SPH 0 0 -12 50 60 250 250
+PLA 5 1 1 0 0 0 0 40 30
 SPH -30 20 0 50 60 10 250
-CON 40 0 -20 0 1 0 60 60 80 20
-CYL -5 0 20 0 1 0 10 70 45 38
-
+SPH 30 20 0 50 60 10 250
+CON 0 0 -20 0 1 0 60 204 102 0
