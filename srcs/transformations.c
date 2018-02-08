@@ -11,7 +11,43 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
+
+static t_vec3	ft_rotation_z(t_vec3 ex_pos, float angle)
+{
+	float new_x;
+	float new_y;
+
+	new_x = ex_pos.x * cos(angle) + ex_pos.y * -sin(angle);
+	new_y = ex_pos.x * sin(angle) + ex_pos.y * cos(angle);
+	ex_pos.x = new_x;
+	ex_pos.y = new_y;
+	return (ex_pos);
+}
+
+static t_vec3	ft_rotation_y(t_vec3 ex_pos, float angle)
+{
+	float new_x;
+	float new_z;
+
+	new_x = ex_pos.x * cos(angle) + ex_pos.z * sin(angle);
+	new_z = ex_pos.x * -sin(angle) + ex_pos.z * cos(angle);
+	ex_pos.x = new_x;
+	ex_pos.z = new_z;
+	return (ex_pos);
+}
+
+static t_vec3	ft_rotation_x(t_vec3 ex_pos, float angle)
+{
+	float new_y;
+	float new_z;
+
+	new_y = ex_pos.y * cos(angle) + ex_pos.z * -sin(angle);
+	new_z = ex_pos.y * sin(angle) + ex_pos.z * cos(angle);
+	ex_pos.y = new_y;
+	ex_pos.z = new_z;
+	return (ex_pos);
+}
+
 static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 {
 	t_vec3	new_pos;
@@ -21,13 +57,23 @@ static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 	new_pos.z = ex_pos.z + param.z;
 	return (new_pos);
 }
-
+////////////////////////CHANGER SPHERE POUR LE TYPE DE LÓBJET DANS LA LISTE//////////////////////////
 void			transformations(t_object_list *new_elem, char *str, int *j)
 {
 	t_vec3	translation;
-	//t_vec3	rotation;
+	float	rotation_degree;
+
 	loop(str, j);
 	translation = (t_vec3){0, 0, 0};
 	translation = assign_vectors(str, j, translation);
 	new_elem->sphere.position = ft_translation(new_elem->sphere.position, translation);
+	loop(str, j);
+	rotation_degree = atoi_custom(str, j);
+	if (rotation_degree != 0)
+	{
+		rotation_degree = ft_deg2rad(rotation_degree);
+		new_elem->sphere.position = ft_rotation_x(new_elem->sphere.position, rotation_degree);
+		new_elem->sphere.position = ft_rotation_y(new_elem->sphere.position, rotation_degree);
+		new_elem->sphere.position = ft_rotation_z(new_elem->sphere.position, rotation_degree);
+	}
 }
