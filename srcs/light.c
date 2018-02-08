@@ -3,51 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnegri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 10:13:09 by gnegri            #+#    #+#             */
-/*   Updated: 2018/02/08 10:13:10 by gnegri           ###   ########.fr       */
+/*   Created: 2018/02/06 17:22:42 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/02/06 17:22:43 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rtv1.h"
 
-int	check_light(t_object_list *new_elem, char *str)
+static int	check_light(t_object_list *new_elem, char *str)
 {
-	int				j;
-	int				c;
+	int		j;
+	int		c;
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 8)
+	if ((c = count_int(str)) != 9)
 		return (false);
-	new_elem->light.position = assign_vectors(str, &j, new_elem->light.position);
+	new_elem->spot.spot_pos = assign_vectors(str, &j, new_elem->spot.spot_pos);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	new_elem->light.direction = assign_vectors(str, &j, new_elem->light.direction);
+	new_elem->spot.spot_dir = assign_vectors(str, &j, new_elem->spot.spot_dir);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	new_elem->light.intensity = atoi_custom(str, &j);
+	new_elem->spot.intensity = atoi_custom(str, &j);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
-	new_elem->light.color = rgb_to_hex(col.r, col.g, col.b);
+	new_elem->spot.color = rgb_to_hex(col.r, col.g, col.b);
 	return (true);
 }
 
-int init_light(t_object_list *new_elem, char *str)
+int 		init_light(t_object_list *new_elem, char *str)
 {
-	t_light	*light;
+	t_spot	*spot;
 
-	if (!(light = (t_light *)malloc(sizeof(t_light))))
+	if (!(spot = (t_spot *)malloc(sizeof(t_spot))))
 		return (false);
-	new_elem->light = *light;
+	new_elem->spot = *spot;
 	if (check_light(new_elem, str) == false)
 	{
-		free(light);
+		free(spot);
 		return (false);
 	}
-	free(light);
+	free(spot);
 	return (true);
 }
+/*
+int	light_ray(mlx)
+{
+
+}
+*/

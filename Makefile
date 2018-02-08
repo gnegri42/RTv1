@@ -22,6 +22,7 @@ SRC_NAME = 	main.c\
 			draw.c\
 			sphere.c\
 			cone.c\
+			light.c\
 			plan_cylindre.c\
 			light.c\
 			utils.c\

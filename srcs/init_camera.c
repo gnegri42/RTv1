@@ -21,12 +21,12 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 	{
 		if (mlx->map->list->type == 14)
 			sphere_intersection_init(mlx, x, y);
-		if (mlx->map->list->type == 17)
-			plan_intersection_init(mlx, x, y);
 		if (mlx->map->list->type == 15)
 			cylindre_intersection_init(mlx, x, y);
 		if (mlx->map->list->type == 16)
 			cone_intersection_init(mlx, x, y);
+		if (mlx->map->list->type == 17)
+			plan_intersection_init(mlx, x, y);
 		mlx->map->list = mlx->map->list->next;
 	}
 	mlx->map->list = tmp;
@@ -35,24 +35,21 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 
 static int	create_ray(t_cam *cam, float i, float j)
 {
-	t_vec3	forward;
-	t_vec3	right;
-	t_vec3	up;
 	
 	cam->ray->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
-	forward = vector_substraction(cam->view_dir, cam->cam_pos);
-	forward = vector_normalize(forward);
-	right = vector_cross((t_vec3){0.0, 1.0, 0.0}, forward);
-	right = vector_normalize(right);
-	up = vector_cross(forward, right);
-	cam->ray->direction = (t_vec3){i * right.x + j * up.x + FOV * forward.x, i * right.y + j * up.y
-		+ FOV * forward.y, i * right.z + j * up.z + FOV * forward.z};
+	cam->forward = vector_substraction(cam->view_dir, cam->cam_pos);
+	cam->forward = vector_normalize(cam->forward);
+	cam->right = vector_cross((t_vec3){0.0, 1.0, 0.0}, cam->forward);
+	cam->right = vector_normalize(cam->right);
+	cam->up = vector_cross(cam->forward, cam->right);
+	cam->ray->direction = (t_vec3){i * cam->right.x + j * cam->up.x + FOV * cam->forward.x, i * cam->right.y + j * cam->up.y
+		+ FOV * cam->forward.y, i * cam->right.z + j * cam->up.z + FOV * cam->forward.z};
 	cam->ray->direction = vector_normalize(cam->ray->direction);
 	cam->ray->length = 1000000000000;
 	return (0);
 }
 
-static int	ray_loop(t_mlx *mlx)
+int	ray_loop(t_mlx *mlx)
 {
 	float 	x;
 	float 	y;
