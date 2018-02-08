@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
-t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
+#include <stdio.h>
+static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 {
 	t_vec3	new_pos;
 
@@ -20,4 +20,14 @@ t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 	new_pos.y = ex_pos.y + param.y;
 	new_pos.z = ex_pos.z + param.z;
 	return (new_pos);
+}
+
+void			transformations(t_object_list *new_elem, char *str, int *j)
+{
+	t_vec3	translation;
+	//t_vec3	rotation;
+	loop(str, j);
+	translation = (t_vec3){0, 0, 0};
+	translation = assign_vectors(str, j, translation);
+	new_elem->sphere.position = ft_translation(new_elem->sphere.position, translation);
 }

@@ -18,6 +18,7 @@ void	redraw(t_mlx *mlx)
 	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	ray_loop(mlx);
+	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 }
 
