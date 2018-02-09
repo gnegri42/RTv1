@@ -57,8 +57,8 @@ static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 	new_pos.z = ex_pos.z + param.z;
 	return (new_pos);
 }
-////////////////////////CHANGER SPHERE POUR LE TYPE DE LÓBJET DANS LA LISTE//////////////////////////
-void			transformations(t_object_list *new_elem, char *str, int *j)
+
+void			transformations(t_vec3 *position, char *str, int *j)
 {
 	t_vec3	translation;
 	float	rotation_degree;
@@ -66,14 +66,14 @@ void			transformations(t_object_list *new_elem, char *str, int *j)
 	loop(str, j);
 	translation = (t_vec3){0, 0, 0};
 	translation = assign_vectors(str, j, translation);
-	new_elem->sphere.position = ft_translation(new_elem->sphere.position, translation);
+	*position = ft_translation(*position, translation);
 	loop(str, j);
 	rotation_degree = atoi_custom(str, j);
 	if (rotation_degree != 0)
 	{
 		rotation_degree = ft_deg2rad(rotation_degree);
-		new_elem->sphere.position = ft_rotation_x(new_elem->sphere.position, rotation_degree);
-		new_elem->sphere.position = ft_rotation_y(new_elem->sphere.position, rotation_degree);
-		new_elem->sphere.position = ft_rotation_z(new_elem->sphere.position, rotation_degree);
+		*position = ft_rotation_x(*position, rotation_degree);
+		*position = ft_rotation_y(*position, rotation_degree);
+		*position = ft_rotation_z(*position, rotation_degree);
 	}
 }
