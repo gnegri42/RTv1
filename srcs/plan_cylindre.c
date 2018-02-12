@@ -61,8 +61,8 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 	if (t0 < mlx->cam->ray->length)
 	{
 		mlx->cam->ray->length = t0;
-		mlx->cam->ray->hit_object_pos = mlx->map->list->plan.position;
-		mlx->cam->ray->hit_object_col = mlx->map->list->plan.color;
+		mlx->cam->ray->hit_object_pos = mlx->map->list->cylindre.position;
+		mlx->cam->ray->hit_object_col = mlx->map->list->cylindre.color;
 		mlx->cam->ray->cylindre_intersection = 1;
 	}
 	if (mlx->cam->ray->cylindre_intersection == 1)
