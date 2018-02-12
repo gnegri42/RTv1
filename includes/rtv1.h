@@ -57,13 +57,13 @@ typedef struct				s_vec3
 	float					z;
 }							t_vec3;
 
-typedef	struct 				s_spot
+typedef	struct 				s_light
 {
-	t_vec3					spot_pos;
-	t_vec3					spot_dir;
+	t_vec3					position;
+	t_vec3					direction;
 	float					intensity;
 	int						color;
-}							t_spot;
+}							t_light;
 
 typedef	struct 				s_cone
 {
@@ -107,7 +107,7 @@ typedef	struct				s_object_list
 	t_plan					plan;
 	t_cylindre				cylindre;
 	t_cone					cone;
-	t_spot					spot;
+	t_light					light;
 	struct s_object_list	*next;
 }							t_object_list;
 
@@ -140,6 +140,7 @@ typedef struct				s_map
 	char					**content;
 	int						nb_line;
 	t_object_list			*list;
+	t_object_list			*begin_list;
 	t_plan					*plan;
 }							t_map;
 

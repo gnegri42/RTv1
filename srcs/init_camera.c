@@ -89,6 +89,7 @@ int			init_camera(t_mlx *mlx)
 		ft_putstr("Error : cannot load image from this config file.\n");
 		return(false);
 	}
+	mlx->map->begin_list = mlx->map->list;
 	ray_loop(mlx);
 	return (0);
 }

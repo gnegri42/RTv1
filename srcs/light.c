@@ -11,24 +11,28 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-/*
+#include <stdio.h>
+
 static t_object_list 	*find_light(t_mlx *mlx)
 {
-	t_object_list *tmp;
-	t_object_list *light_source;
+	t_object_list 			*tmp;
+	t_object_list		  *light_source;
 
-	tmp = mlx->map->list;
-	while (mlx->map->list->next != NULL)
+	tmp = mlx->map->begin_list;
+	while (mlx->map->begin_list->next != NULL)
 	{
-		if (mlx->map->list->type == 13)
-			light_source = mlx->map->list;
+		if (mlx->map->begin_list->type == 13)
+		{
+			light_source = mlx->map->begin_list;
+			break ;
+		}
 		else
-			mlx->map->list = mlx->map->list->next;
+			mlx->map->begin_list = mlx->map->begin_list->next;
 	}
-	mlx->map->list = tmp;
+	mlx->map->begin_list = tmp;
 	return (light_source);
 }
-*/
+
 static int	check_light(t_object_list *new_elem, char *str)
 {
 	int		j;
@@ -36,63 +40,55 @@ static int	check_light(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 7)
+	if ((c = count_int(str)) != 10)
 		return (false);
-	new_elem->spot.spot_pos = assign_vectors(str, &j, new_elem->spot.spot_pos);
+	new_elem->light.position = assign_vectors(str, &j, new_elem->light.position);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	new_elem->spot.spot_dir = assign_vectors(str, &j, new_elem->spot.spot_dir);
+	new_elem->light.direction = assign_vectors(str, &j, new_elem->light.direction);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	new_elem->spot.intensity = atoi_custom(str, &j);
+	new_elem->light.intensity = atoi_custom(str, &j);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
-	new_elem->spot.color = rgb_to_hex(col.r, col.g, col.b);
+	new_elem->light.color = rgb_to_hex(col.r, col.g, col.b);
 	return (true);
 }
 
 int 		init_light(t_object_list *new_elem, char *str)
 {
-	t_spot	*spot;
+	t_light	*light;
 
-	if (!(spot = (t_spot *)malloc(sizeof(t_spot))))
+	if (!(light = (t_light *)malloc(sizeof(t_light))))
 		return (false);
-	new_elem->spot = *spot;
+	new_elem->light = *light;
 	if (check_light(new_elem, str) == false)
 	{
-		free(spot);
+		free(light);
 		return (false);
 	}
-	free(spot);
+	free(light);
 	return (true);
 }
 
 int	light_ray(t_mlx *mlx)
 {
-	//t_object_list 	*light_source;
-	t_vec3	hit_point;
-	t_vec3	normale;
-	t_vec3	light_ray_direction;
-	float 	d;
-	int			color;
+	t_object_list	*source;
+	t_vec3			hit_point;
+	t_vec3			normale;
+	float 			d;
+	int				color;
 
-	color = 0;
-	//light_source = find_light(mlx);
+	color = BLACK;
+	source = find_light(mlx);
 	if (mlx->cam->ray->sphere_intersection == 1 || mlx->cam->ray->plan_intersection == 1
 		|| mlx->cam->ray->cone_intersection == 1 || mlx->cam->ray->cylindre_intersection == 1)
 	{
-		hit_point = vector_normalize(vector_addition(mlx->cam->ray->origin, vector_float_product(mlx->cam->ray->direction, mlx->cam->ray->length)));
-		normale = vector_normalize(vector_substraction(hit_point, mlx->cam->ray->hit_object_pos));
-		light_ray_direction = (t_vec3){-50, -100, 0};
-		d = vector_dot_product(normale, light_ray_direction);
-		if (d < 0.0f)
-			d = 0;
-	color = (mlx->cam->ray->hit_object_col);// * rgb_to_hex(255, 255, 255) * d;
-	/*color = (((int)((mlx->cam->ray->hit_object_col * d) / mlx->p * 255) & 0xff) << 16)
-	+ (((int)((mlx->cam->ray->hit_object_col * d) / mlx->p * 255) & 0xff) << 8)
-	+ ((int)((mlx->cam->ray->hit_object_col * d) / mlx->p * 255) & 0xff);*/
+		hit_point = vector_addition(mlx->cam->ray->position, vector_float_product(mlx->cam->ray->direction * mlx->cam->ray->length));
+		normale = vector_normalize(hit_point);
+		color = (mlx->cam->ray->hit_object_col);
 	}
 	return (color);
 }
