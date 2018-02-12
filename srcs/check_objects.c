@@ -28,7 +28,7 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->sphere.color = rgb_to_hex(col.r, col.g, col.b);
-	transformations(&new_elem->sphere.position, str, &j);
+	//transformations(&new_elem->sphere.position, str, &j);
 	return (true);
 }
 
@@ -48,7 +48,7 @@ int	check_plan(t_object_list *new_elem, char *str)
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->plan.color = rgb_to_hex(col.r, col.g, col.b);
-	transformations(&new_elem->plan.position, str, &j);
+	//transformations(&new_elem->plan.position, str, &j);
 	return (true);
 }
 
@@ -70,7 +70,7 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->cylindre.color = rgb_to_hex(col.r, col.g, col.b);
-	transformations(&new_elem->cylindre.position, str, &j);
+	//transformations(&new_elem->cylindre.position, str, &j);
 	return (true);
 }
 
@@ -92,6 +92,6 @@ int	check_cone(t_object_list *new_elem, char *str)
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->cone.color = rgb_to_hex(col.r, col.g, col.b);
-	transformations(&new_elem->cone.position, str, &j);
+	//transformations(&new_elem->cone.position, str, &j);
 	return (true);
 }
