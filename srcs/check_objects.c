@@ -67,10 +67,10 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 	loop(str, &j);
 	new_elem->cylindre.radius = atoi_custom(str, &j);
 	loop(str, &j);
-	col = (t_vec_color3){0, 0, 0};
-	col = assign_colors(str, &j, col);
-	new_elem->cylindre.color = rgb_to_hex(col.r, col.g, col.b);
-	transformations(new_elem, str, &j);
+	//col = (t_vec_color3){0, 0, 0};
+	//col = assign_colors(str, &j, col);
+	//new_elem->cylindre.color = rgb_to_hex(col.r, col.g, col.b);
+	//transformations(new_elem, str, &j);
 	return (true);
 }
 
