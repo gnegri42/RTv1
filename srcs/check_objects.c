@@ -19,7 +19,7 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 10)
+	if ((c = count_int(str)) != 11)
 		return (false);
 	new_elem->sphere.position = assign_vectors(str, &j, new_elem->sphere.position);
 	loop(str, &j);

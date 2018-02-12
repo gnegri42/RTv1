@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-/*
+
 static t_vec3	ft_rotation_z(t_vec3 ex_pos, float angle)
 {
 	float new_x;
@@ -47,7 +47,7 @@ static t_vec3	ft_rotation_x(t_vec3 ex_pos, float angle)
 	ex_pos.z = new_z;
 	return (ex_pos);
 }
-*/
+
 static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 {
 	t_vec3	new_pos;
@@ -69,11 +69,11 @@ void			transformations(t_vec3 *position, char *str, int *j)
 	*position = ft_translation(*position, translation);
 	loop(str, j);
 	rotation_degree = atoi_custom(str, j);
-	/*if (rotation_degree != 0)
+	if (rotation_degree != 0)
 	{
-		rotation_degree = ft_deg2rad(rotation_degree);
+		//rotation_degree = ft_deg2rad(rotation_degree);
 		*position = ft_rotation_x(*position, rotation_degree);
 		*position = ft_rotation_y(*position, rotation_degree);
 		*position = ft_rotation_z(*position, rotation_degree);
-	}*/
+	}
 }
