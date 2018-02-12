@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <rtv1.h>
-
+#include <stdio.h>
 static int	img_loop(t_mlx *mlx, t_img *img)
 {
 	mlx->mlx = mlx_init();
