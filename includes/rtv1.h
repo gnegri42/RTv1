@@ -176,6 +176,7 @@ t_vec3			vector_substraction(t_vec3 v1, t_vec3 v2);
 t_vec3 			vector_int_product(t_vec3 v1, int i);
 t_vec3			vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3			vector_normalize(t_vec3 v1);
+float			norme_vector(t_vec3 xyz);
 t_vec3 			vector_float_substraction(t_vec3 v1, float i);
 t_vec3			vector_cross(t_vec3 v1, t_vec3 v2);
 t_vec3			assign_vectors(char *str, int *j, t_vec3 vec);

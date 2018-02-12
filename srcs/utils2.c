@@ -12,6 +12,14 @@
 
 #include "rtv1.h"
 
+float		norme_vector(t_vec3 xyz)
+{
+	float	res;
+
+	res = sqrt(pow(xyz.x, 2) + pow(xyz.y, 2) + pow(xyz.z, 2));
+	return (res);
+}
+
 int			skip_space(char *str, int i)
 {
 	if (str[i] == '\0')

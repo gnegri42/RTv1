@@ -15,10 +15,11 @@
 
 static t_object_list 	*find_light(t_mlx *mlx)
 {
-	t_object_list 			*tmp;
-	t_object_list		  *light_source;
+	t_object_list 	*tmp;
+	t_object_list	*light_source;
 
 	tmp = mlx->map->begin_list;
+	light_source = NULL;
 	while (mlx->map->begin_list->next != NULL)
 	{
 		if (mlx->map->begin_list->type == 13)
@@ -76,19 +77,25 @@ int 		init_light(t_object_list *new_elem, char *str)
 int	light_ray(t_mlx *mlx)
 {
 	t_object_list	*source;
-	t_vec3			hit_point;
-	t_vec3			normale;
-	float 			d;
-	int				color;
+	t_vec3	hit_point;
+	t_vec3	light;
+  	float	cos_a;
+	float	color;
 
-	color = BLACK;
+	color = mlx->cam->ray->hit_object_col;
+	cos_a = 0;
 	source = find_light(mlx);
 	if (mlx->cam->ray->sphere_intersection == 1 || mlx->cam->ray->plan_intersection == 1
 		|| mlx->cam->ray->cone_intersection == 1 || mlx->cam->ray->cylindre_intersection == 1)
 	{
-		hit_point = vector_addition(mlx->cam->ray->position, vector_float_product(mlx->cam->ray->direction * mlx->cam->ray->length));
-		normale = vector_normalize(hit_point);
-		color = (mlx->cam->ray->hit_object_col);
+		hit_point = vector_addition(mlx->cam->cam_pos, vector_float_product(mlx->cam->ray->direction, mlx->cam->ray->length));
+		light = vector_substraction(source->light.position, hit_point);
+		cos_a = (hit_point.x * light.x + hit_point.y * light.y + hit_point.z * light.z)
+		/ (norme_vector(vector_normalize(hit_point)) * norme_vector(light));
+		if (cos_a < 0 || cos_a > 1)
+			cos_a = 0;
+		//color = mlx->cam->ray->hit_object_col * source->light.color * cos_a;
+		color = mlx->cam->ray->hit_object_col;
 	}
 	return (color);
 }

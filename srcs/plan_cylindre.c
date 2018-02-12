@@ -19,7 +19,6 @@ int	plan_intersection_init(t_mlx *mlx, float x, float y)
 	mlx->cam->ray->plan_intersection = 0;
 	dist_inter = ((vector_dot_product(mlx->map->list->plan.rotation, mlx->map->list->plan.position) -
 		vector_dot_product(mlx->map->list->plan.rotation, mlx->cam->cam_pos)) / vector_dot_product(mlx->map->list->plan.rotation, mlx->cam->ray->direction));
-
 	if (dist_inter < 0.0001)
 		return (false);
 	if (dist_inter < mlx->cam->ray->length)
