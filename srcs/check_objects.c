@@ -39,7 +39,7 @@ int	check_plan(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 12)
+	if ((c = count_int(str)) != 13)
 		return (false);
 	new_elem->plan.position = assign_vectors(str, &j, new_elem->plan.position);
 	loop(str, &j);
@@ -59,7 +59,7 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 13)
+	if ((c = count_int(str)) != 14)
 		return (false);
 	new_elem->cylindre.position = assign_vectors(str, &j, new_elem->cylindre.position);
 	loop(str, &j);

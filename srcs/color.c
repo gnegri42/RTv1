@@ -20,7 +20,7 @@ int 			rgb_to_hex(int r, int g, int b)
      return (rgb_num);
 }
 
-int	atoi_color(const char *str, int *i)
+int				atoi_color(const char *str, int *i)
 {
 	int v;
 	int posneg;
