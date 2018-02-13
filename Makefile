@@ -39,7 +39,8 @@ OBJ_PATH = objs
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = 
+#-Wall -Werror -Wextra
 
 CPPFLAGS = -I includes -I libft/libft.h
 

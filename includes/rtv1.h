@@ -45,9 +45,9 @@
 
 typedef struct				s_vec_color3
 {
-	int						r;
-	int						g;
-	int						b;
+	float						r;
+	float						g;
+	float						b;
 }							t_vec_color3;
 
 typedef struct				s_vec3
@@ -184,6 +184,8 @@ t_vec3			assign_vectors(char *str, int *j, t_vec3 vec);
 t_vec_color3 	color_float_product(t_vec_color3 v1, float i);
 t_vec_color3	vector_assign_colors(int r, int g, int b);
 t_vec_color3	assign_colors(char *str, int *j, t_vec_color3 col);
+t_vec_color3	color_product(t_vec_color3 v1, t_vec_color3 v2);
+t_vec_color3	color_addition(t_vec_color3 v1, t_vec_color3 v2);
 float			vector_dot_product(t_vec3 v1, t_vec3 v2);
 int				sphere_intersection_init(t_mlx *mlx, int x, int y);
 int				plan_intersection_init(t_mlx *mlx, float x, float y);

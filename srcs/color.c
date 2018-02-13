@@ -12,14 +12,6 @@
 
 #include "rtv1.h"
 
-int 			rgb_to_hex(int r, int g, int b)
-{
-    int rgb_num = ((r & 0xff) << 16)
-        + ((g & 0xff) << 8)
-        + (b & 0xff);
-     return (rgb_num);
-}
-
 int				atoi_color(const char *str, int *i)
 {
 	int v;
@@ -42,6 +34,25 @@ int				atoi_color(const char *str, int *i)
 	return (posneg * v);
 }
 
+t_vec_color3	assign_colors(char *str, int *j, t_vec_color3 col)
+{
+	int r;
+	int g;
+	int b;
+
+	while (str[*j] < '0' || str[*j] > '9')
+		(*j)++;
+	r = atoi_color(str, j);
+	while (str[*j] < '0' || str[*j] > '9')
+		(*j)++;
+	g = atoi_color(str, j);
+	while (str[*j] < '0' || str[*j] > '9')
+		(*j)++;
+	b = atoi_color(str, j);
+	col = vector_assign_colors(r, g, b);
+	return (col);
+}
+
 t_vec_color3 	color_float_product(t_vec_color3 v1, float i)
 {
 	t_vec_color3	res;
@@ -62,21 +73,22 @@ t_vec_color3	vector_assign_colors(int r, int g, int b)
 	return (v);
 }
 
-t_vec_color3	assign_colors(char *str, int *j, t_vec_color3 col)
+t_vec_color3	color_product(t_vec_color3 v1, t_vec_color3 v2)
 {
-	int r;
-	int g;
-	int b;
+	t_vec_color3 v;
 
-	while (str[*j] < '0' || str[*j] > '9')
-		(*j)++;
-	r = atoi_color(str, j);
-	while (str[*j] < '0' || str[*j] > '9')
-		(*j)++;
-	g = atoi_color(str, j);
-	while (str[*j] < '0' || str[*j] > '9')
-		(*j)++;
-	b = atoi_color(str, j);
-	col = vector_assign_colors(r, g, b);
-	return (col);
+	v.r = v1.r * v2.r;
+	v.g = v1.g * v2.g;
+	v.b = v1.b * v2.b;
+	return (v);
+}
+
+t_vec_color3	color_addition(t_vec_color3 v1, t_vec_color3 v2)
+{
+	t_vec_color3 v;
+
+	v.r = v1.r + v2.r;
+	v.g = v1.g + v2.g;
+	v.b = v1.b + v2.b;
+	return (v);
 }

@@ -45,7 +45,7 @@ static int	check_light(t_object_list *new_elem, char *str)
 	new_elem->light.position = assign_vectors(str, &j, new_elem->light.position);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
-	new_elem->light.intensity = atoi_custom(str, &j);
+	new_elem->light.intensity = ft_clamp(atoi_custom(str, &j), 0, 1);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
 	col = (t_vec_color3){0, 0, 0};
@@ -70,6 +70,26 @@ int 		init_light(t_object_list *new_elem, char *str)
 	return (true);
 }
 
+static t_vec_color3	specular_light(t_mlx *mlx, t_vec3 light_ray, t_vec3 normale, t_vec3 hit_point, t_object_list *source)
+{
+
+	t_vec3			reflection;
+	t_vec_color3	specular;
+	t_vec_color3	specular_color;
+	float			max_calc;
+	float			shininess;
+
+	shininess = 1;
+	specular_color = (t_vec_color3){255, 255, 255};
+	reflection = vector_normalize(vector_substraction(vector_float_product(normale, (vector_dot_product(light_ray, normale) * 2.0f)), light_ray));
+	max_calc = vector_dot_product(reflection, vector_normalize(vector_substraction(mlx->cam->ray->origin, hit_point)));
+	if (max_calc < 0)
+		max_calc = 0;
+	specular = color_float_product(specular_color, source->light.intensity); 
+	specular = color_float_product(specular, pow(max_calc, shininess));
+	return (specular);
+}
+
 int	light_ray(t_mlx *mlx)
 {
 	t_object_list	*source;
@@ -79,6 +99,9 @@ int	light_ray(t_mlx *mlx)
 	float 			d;
 	int				color;
 	t_vec_color3	vec_color;
+	t_vec_color3	vec_specular;
+	t_vec_color3	ambient;
+
 
 	color = BLACK;
 	source = find_light(mlx);
@@ -93,7 +116,13 @@ int	light_ray(t_mlx *mlx)
 		d = ft_clamp(vector_dot_product(dist, normale), 0.0, 1.0);
 		if (d < 0)
 			d = 0.0f;
-		vec_color = color_float_product(mlx->cam->ray->hit_object_col, d);
+		vec_color = color_float_product(mlx->cam->ray->hit_object_col, source->light.intensity);
+	//	vec_color = color_product(vec_color, source->light.color);
+		vec_color = color_float_product(vec_color, d);
+	//	vec_specular = specular_light(mlx, dist, normale, hit_point, source);
+	//	vec_color = color_addition(vec_color, vec_specular);
+		ambient = color_product(mlx->cam->ray->hit_object_col, (t_vec_color3){0.2, 0.2, 0.2});
+	//	vec_color = color_addition(vec_color, ambient);
 		color = rgb_to_hex(vec_color.r, vec_color.g, vec_color.b);
 	}
 	return (color);

@@ -66,6 +66,17 @@ int	ray_loop(t_mlx *mlx)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
+			if (x == 0 && y ==0.25f * WIN_HEIGHT)
+                ft_putstr("25 percent completed !\n");
+
+            if (x == 0 && y ==0.5f * WIN_HEIGHT)
+                ft_putstr("50 percent completed !\n");
+
+            if (x == 0 && y ==0.75f * WIN_HEIGHT)
+                ft_putstr("75 percent completed !\n");
+
+            if (x == 0 && y == WIN_HEIGHT - 1)
+                ft_putstr("100 percent completed !\n");
 			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
 			create_ray(mlx->cam, i ,j);

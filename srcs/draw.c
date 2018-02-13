@@ -12,6 +12,14 @@
 
 #include "rtv1.h"
 
+int 	rgb_to_hex(int r, int g, int b)
+{
+    int rgb_num = ((r & 0xff) << 16)
+        + ((g & 0xff) << 8)
+        + (b & 0xff);
+     return (rgb_num);
+}
+
 void	redraw(t_mlx *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img);
