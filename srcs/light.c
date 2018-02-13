@@ -122,7 +122,7 @@ int	light_ray(t_mlx *mlx)
 	//	vec_specular = specular_light(mlx, dist, normale, hit_point, source);
 	//	vec_color = color_addition(vec_color, vec_specular);
 		ambient = color_product(mlx->cam->ray->hit_object_col, (t_vec_color3){0.2, 0.2, 0.2});
-	//	vec_color = color_addition(vec_color, ambient);
+		vec_color = color_addition(vec_color, ambient);
 		color = rgb_to_hex(vec_color.r, vec_color.g, vec_color.b);
 	}
 	return (color);
