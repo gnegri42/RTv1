@@ -22,10 +22,11 @@ void	redraw(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 }
 
-void	draw(t_mlx *mlx , float x, float y, int color)
+void	draw(t_mlx *mlx , float x, float y)
 {
 	int i;
-
+	int color;
+	
 	color = light_ray(mlx);
 	i = x + (y * WIN_WIDTH);
 	mlx->img->str_img[i] = color;

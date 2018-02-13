@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include <stdio.h>
 
 static t_object_list 	*find_light(t_mlx *mlx)
 {
@@ -51,7 +50,7 @@ static int	check_light(t_object_list *new_elem, char *str)
 		j++;
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
-	new_elem->light.color = rgb_to_hex(col.r, col.g, col.b);
+	new_elem->light.color = col;
 	return (true);
 }
 
@@ -77,37 +76,25 @@ int	light_ray(t_mlx *mlx)
 	t_vec3			hit_point;
 	t_vec3			dist;
 	t_vec3			normale;
-	t_vec3			view_direction;
-	t_vec3			half_angle;
-	float			blinn_term;
-	float			length;
 	float 			d;
 	int				color;
+	t_vec_color3	vec_color;
 
-	color = mlx->cam->ray->hit_object_col;
-	cos_a = 0;
+	color = BLACK;
 	source = find_light(mlx);
 	if (mlx->cam->ray->sphere_intersection == 1 || mlx->cam->ray->plan_intersection == 1
 		|| mlx->cam->ray->cone_intersection == 1 || mlx->cam->ray->cylindre_intersection == 1)
 	{
 		hit_point = vector_addition(mlx->cam->ray->origin, vector_float_product(mlx->cam->ray->direction, mlx->cam->ray->length));
-		normale = vector_normalize(hit_point);
 		dist = vector_substraction(source->light.position, hit_point);
-		length = vector_length(dist);
-		length = length * length;
-		
 		dist = vector_normalize(dist);
-		d = ft_clamp(vector_dot_product(dist, normale), 0, 1);
-		view_direction = vector_normalize(vector_float_product(mlx->cam->ray->origin, -1));
-		half_angle = vector_normalize(vector_addition(dist, view_direction));
-		blinn_term = vector_dot_product(normale, half_angle);
-		blinn_term = ft_clamp(blinn_term, 0, 1);
-		if (d == 0)
-			blinn_term = 0;
-		if (d > 0)
-		printf("%f\n", d);
-		color = (source->light.color * mlx->cam->ray->hit_object_col * d);
-		//color = (mlx->cam->ray->hit_object_col);
+		normale = vector_substraction(hit_point, mlx->cam->ray->hit_object_pos);
+		normale = vector_normalize(normale); 
+		d = ft_clamp(vector_dot_product(dist, normale), 0.0, 1.0);
+		if (d < 0)
+			d = 0.0f;
+		vec_color = color_float_product(mlx->cam->ray->hit_object_col, d);
+		color = rgb_to_hex(vec_color.r, vec_color.g, vec_color.b);
 	}
 	return (color);
 }

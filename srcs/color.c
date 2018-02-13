@@ -42,6 +42,16 @@ int				atoi_color(const char *str, int *i)
 	return (posneg * v);
 }
 
+t_vec_color3 	color_float_product(t_vec_color3 v1, float i)
+{
+	t_vec_color3	res;
+
+	res.r = v1.r * i;
+	res.g = v1.g * i;
+	res.b = v1.b * i;
+	return (res);
+}
+
 t_vec_color3	vector_assign_colors(int r, int g, int b)
 {
 	t_vec_color3 v;

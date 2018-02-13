@@ -28,10 +28,11 @@ static int	sphere_intersection(t_mlx *mlx, t_vec3 distance_vector, float project
 		mlx->cam->ray->length = new_length;
 		mlx->cam->ray->hit_object_pos = mlx->map->list->sphere.position;
 		mlx->cam->ray->hit_object_col = mlx->map->list->sphere.color;
+		mlx->cam->ray->hit_object_radius = mlx->map->list->sphere.radius;
 		mlx->cam->ray->sphere_intersection = 1;
 	}
 	if (mlx->cam->ray->sphere_intersection == 1)
-		draw(mlx, x, y, mlx->map->list->sphere.color);
+		draw(mlx, x, y);
 	return (0);
 }
 
