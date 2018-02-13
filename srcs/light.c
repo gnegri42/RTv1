@@ -19,6 +19,7 @@ static t_object_list 	*find_light(t_mlx *mlx)
 	t_object_list		  *light_source;
 
 	tmp = mlx->map->begin_list;
+	light_source = NULL;
 	while (mlx->map->begin_list->next != NULL)
 	{
 		if (mlx->map->begin_list->type == 13)
@@ -40,12 +41,9 @@ static int	check_light(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 10)
+	if ((c = count_int(str)) != 7)
 		return (false);
 	new_elem->light.position = assign_vectors(str, &j, new_elem->light.position);
-	while (str[j] < '0' || str[j] > '9')
-		j++;
-	new_elem->light.direction = assign_vectors(str, &j, new_elem->light.direction);
 	while (str[j] < '0' || str[j] > '9')
 		j++;
 	new_elem->light.intensity = atoi_custom(str, &j);
@@ -77,7 +75,12 @@ int	light_ray(t_mlx *mlx)
 {
 	t_object_list	*source;
 	t_vec3			hit_point;
+	t_vec3			dist;
 	t_vec3			normale;
+	t_vec3			view_direction;
+	t_vec3			half_angle;
+	float			blinn_term;
+	float			length;
 	float 			d;
 	int				color;
 
@@ -86,9 +89,24 @@ int	light_ray(t_mlx *mlx)
 	if (mlx->cam->ray->sphere_intersection == 1 || mlx->cam->ray->plan_intersection == 1
 		|| mlx->cam->ray->cone_intersection == 1 || mlx->cam->ray->cylindre_intersection == 1)
 	{
-		hit_point = vector_addition(mlx->cam->ray->position, vector_float_product(mlx->cam->ray->direction * mlx->cam->ray->length));
+		hit_point = vector_addition(mlx->cam->ray->origin, vector_float_product(mlx->cam->ray->direction, mlx->cam->ray->length));
 		normale = vector_normalize(hit_point);
-		color = (mlx->cam->ray->hit_object_col);
+		dist = vector_substraction(source->light.position, hit_point);
+		length = vector_length(dist);
+		length = length * length;
+		
+		dist = vector_normalize(dist);
+		d = ft_clamp(vector_dot_product(dist, normale), 0, 1);
+		view_direction = vector_normalize(vector_float_product(mlx->cam->ray->origin, -1));
+		half_angle = vector_normalize(vector_addition(dist, view_direction));
+		blinn_term = vector_dot_product(normale, half_angle);
+		blinn_term = ft_clamp(blinn_term, 0, 1);
+		if (d == 0)
+			blinn_term = 0;
+		if (d > 0)
+		printf("%f\n", d);
+		color = (source->light.color * mlx->cam->ray->hit_object_col * d);
+		//color = (mlx->cam->ray->hit_object_col);
 	}
 	return (color);
 }

@@ -60,3 +60,11 @@ t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 	vec = vector_assign_values(x, y, z);
 	return (vec);
 }
+
+float		vector_length(t_vec3 v1)
+{
+	float length;
+
+	length = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
+	return (length);
+}
