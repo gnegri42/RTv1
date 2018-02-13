@@ -71,7 +71,7 @@ void			transformations(t_vec3 *position, char *str, int *j)
 	rotation_degree = atoi_custom(str, j);
 	if (rotation_degree != 0)
 	{
-		//rotation_degree = ft_deg2rad(rotation_degree);
+		rotation_degree = ft_deg2rad(rotation_degree);
 		*position = ft_rotation_x(*position, rotation_degree);
 		*position = ft_rotation_y(*position, rotation_degree);
 		*position = ft_rotation_z(*position, rotation_degree);
