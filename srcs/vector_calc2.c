@@ -32,24 +32,15 @@ t_vec3	vector_product(t_vec3 v1, t_vec3 v2)
 	return (res);
 }
 
-t_vec3	vector_normalize(t_vec3 v1)
+t_vec3	vector_normalize(t_vec3 v)
 {
-	t_vec3	res;
-	double	length;
+	float	n;
 
-	length = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
-	if (length == 0)
-	{
-		res.x = 0;
-		res.y = 0;
-		res.z = 0;
-		return (res);
-	}
-	length = 1 / length;
-	res.x = v1.x * length;
-	res.y = v1.y * length;
-	res.z = v1.z * length;
-	return (res);
+	n = 1.0 / sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	v.x *= n;
+	v.y *= n;
+	v.z *= n;
+	return (v);
 }
 
 float	vector_dot_product(t_vec3 v1, t_vec3 v2)
