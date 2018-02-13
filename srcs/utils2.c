@@ -12,14 +12,6 @@
 
 #include "rtv1.h"
 
-float		norme_vector(t_vec3 xyz)
-{
-	float	res;
-
-	res = sqrt(pow(xyz.x, 2) + pow(xyz.y, 2) + pow(xyz.z, 2));
-	return (res);
-}
-
 int			skip_space(char *str, int i)
 {
 	if (str[i] == '\0')
@@ -67,4 +59,12 @@ t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 	z = atoi_custom(str, j);
 	vec = vector_assign_values(x, y, z);
 	return (vec);
+}
+
+float		vector_length(t_vec3 v1)
+{
+	float length;
+
+	length = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
+	return (length);
 }
