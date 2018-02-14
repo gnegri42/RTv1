@@ -55,28 +55,13 @@ int	ray_loop(t_mlx *mlx)
 	float 	y;
 	float 	i;
 	float	j;
-	t_ray	*ray;
-
+	
 	y = 0;
-	if (!(ray = (t_ray *)malloc(sizeof(t_ray))))
-		return (-1);
-	mlx->cam->ray = ray;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			if (x == 0 && y ==0.25f * WIN_HEIGHT)
-                ft_putstr("25 percent completed !\n");
-
-            if (x == 0 && y ==0.5f * WIN_HEIGHT)
-                ft_putstr("50 percent completed !\n");
-
-            if (x == 0 && y ==0.75f * WIN_HEIGHT)
-                ft_putstr("75 percent completed !\n");
-
-            if (x == 0 && y == WIN_HEIGHT - 1)
-                ft_putstr("100 percent completed !\n");
 			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
 			create_ray(mlx->cam, i ,j);
@@ -91,6 +76,7 @@ int	ray_loop(t_mlx *mlx)
 int			init_camera(t_mlx *mlx)
 {
 	t_cam 	*cam;
+	t_ray	*ray;
 
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
@@ -101,6 +87,9 @@ int			init_camera(t_mlx *mlx)
 		return(false);
 	}
 	mlx->map->begin_list = mlx->map->list;
+	if (!(ray = (t_ray *)malloc(sizeof(t_ray))))
+		return (-1);
+	mlx->cam->ray = ray;
 	ray_loop(mlx);
 	return (0);
 }

@@ -60,8 +60,9 @@ typedef struct				s_vec3
 typedef	struct 				s_light
 {
 	t_vec3					position;
-	t_vec3					direction;
 	float					intensity;
+	t_vec3					hit_point;
+	t_vec3					dist;
 	t_vec_color3			color;
 }							t_light;
 
@@ -123,16 +124,17 @@ typedef	struct				s_ray
 	t_vec3 					hit_object_pos;
 	t_vec_color3			hit_object_col;
 	float					hit_object_radius;
+
 }							t_ray;
 
 typedef	struct 				s_cam
 {
 	t_vec3					cam_pos;
 	t_vec3					view_dir;
-	t_ray					*ray;
 	t_vec3					forward;
 	t_vec3					right;
 	t_vec3					up;
+	t_ray					*ray;
 }							t_cam;
 
 typedef struct				s_map
@@ -140,9 +142,9 @@ typedef struct				s_map
 	char					*str;
 	char					**content;
 	int						nb_line;
+	int						nb_light;
 	t_object_list			*list;
 	t_object_list			*begin_list;
-	t_plan					*plan;
 }							t_map;
 
 typedef struct				s_img
@@ -167,6 +169,7 @@ int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				ray_loop(t_mlx *mlx);
 int				light_ray(t_mlx *mlx);
+int				light_hit(t_mlx *mlx, t_object_list	*source);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
 int 			init_light(t_object_list *new_elem, char *str);
@@ -186,6 +189,7 @@ t_vec_color3	vector_assign_colors(int r, int g, int b);
 t_vec_color3	assign_colors(char *str, int *j, t_vec_color3 col);
 t_vec_color3	color_product(t_vec_color3 v1, t_vec_color3 v2);
 t_vec_color3	color_addition(t_vec_color3 v1, t_vec_color3 v2);
+t_vec_color3	color_mix(t_vec_color3 v1, t_vec_color3 v2);
 float			vector_dot_product(t_vec3 v1, t_vec3 v2);
 int				sphere_intersection_init(t_mlx *mlx, int x, int y);
 int				plan_intersection_init(t_mlx *mlx, float x, float y);

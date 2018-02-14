@@ -12,7 +12,7 @@
 
 #include <rtv1.h>
 
-static void	rtv1_free_list(t_object_list *list)
+/*static void	rtv1_free_list(t_object_list *list)
 {
 	t_object_list	*tmp;
 
@@ -23,15 +23,16 @@ static void	rtv1_free_list(t_object_list *list)
 		free(list);
 		list = tmp;
 	}
-}
+}*/
 
 int			exit_properly(t_mlx *mlx)
 {
 	free(mlx->map->str);
-	mlx->map->list ? rtv1_free_list(mlx->map->list) : (0);
+//	mlx->map->list ? rtv1_free_list(mlx->map->list) : (0); /// ca fait segfault mais on en a besoin
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	exit(0);
+	// tableau de ray a free
 }
 
 int			red_cross(t_mlx *mlx)

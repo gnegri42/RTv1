@@ -12,7 +12,7 @@
 
 #include <rtv1.h>
 
-static t_object_list	*new_list_object(char *str, int object, int object_nb)
+static t_object_list	*new_list_object(t_map *map, char *str, int object, int object_nb)
 {
 	t_object_list	*new_elem;
 
@@ -25,6 +25,8 @@ static t_object_list	*new_list_object(char *str, int object, int object_nb)
 	new_elem->next = NULL;
 	if (init_object(new_elem, str, object) == false)
 		return (NULL);
+	if (new_elem->type == 13)
+		map->nb_light += 1;
 	return (new_elem);
 }
 
@@ -34,7 +36,7 @@ static int				new_list(t_map *map, char *str, int i, int nb_object)
 
 	if (!map->list)
 	{
-		if ((map->list = new_list_object(str, i, nb_object)) == NULL)
+		if ((map->list = new_list_object(map, str, i, nb_object)) == NULL)
 			return (-1);
 		return (0);
 	}
@@ -42,7 +44,7 @@ static int				new_list(t_map *map, char *str, int i, int nb_object)
 		tmp = map->list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
-	tmp->next = new_list_object(str, i, nb_object);
+	tmp->next = new_list_object(map, str, i, nb_object);
 	return (0);
 }
 

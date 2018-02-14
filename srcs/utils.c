@@ -116,5 +116,7 @@ float			atoi_custom(const char *str, int *i)
 			v = v * 10 + str[*i] - 48;
 		(*i)++;
 	}
+	if (((str[*i] >= '0' && str[*i] <= '9') || str[*i] == '.') && str[*i + 1] == '\0')
+		v = v * 10 + str[*i] - 48;
 	return (posneg * v);
 }
