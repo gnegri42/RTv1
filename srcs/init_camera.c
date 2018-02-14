@@ -33,19 +33,19 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 	return(0);
 }
 
-static int	create_ray(t_cam *cam, float i, float j)
+static int	create_ray(t_mlx *mlx, t_cam *cam, float i, float j)
 {
 
-	cam->ray->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
+	cam->ray[mlx->map->light_count]->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
 	cam->forward = vector_substraction(cam->view_dir, cam->cam_pos);
 	cam->forward = vector_normalize(cam->forward);
 	cam->right = vector_cross((t_vec3){0.0, 1.0, 0.0}, cam->forward);
 	cam->right = vector_normalize(cam->right);
 	cam->up = vector_cross(cam->forward, cam->right);
-	cam->ray->direction = (t_vec3){i * cam->right.x + j * cam->up.x + FOV * cam->forward.x, i * cam->right.y + j * cam->up.y
+	cam->ray[mlx->map->light_count]->direction = (t_vec3){i * cam->right.x + j * cam->up.x + FOV * cam->forward.x, i * cam->right.y + j * cam->up.y
 		+ FOV * cam->forward.y, i * cam->right.z + j * cam->up.z + FOV * cam->forward.z};
-	cam->ray->direction = vector_normalize(cam->ray->direction);
-	cam->ray->length = 1000000000000;
+	cam->ray[mlx->map->light_count]->direction = vector_normalize(cam->ray[mlx->map->light_count]->direction);
+	cam->ray[mlx->map->light_count]->length = 1000000000000;
 	return (0);
 }
 
@@ -64,20 +64,22 @@ int	ray_loop(t_mlx *mlx)
 		{
 			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
-			create_ray(mlx->cam, i ,j);
+			create_ray(mlx, mlx->cam, i ,j);
 			check_ray_objects(mlx, x, y);
 			x++;
 		}
 		y++;
 	}
-	return(0);
+	return (0);
 }
 
 int			init_camera(t_mlx *mlx)
 {
 	t_cam 	*cam;
-	t_ray	*ray;
+	t_ray	**ray_source;
+	int		i;
 
+	i = 0;
 	if (!(cam = (t_cam *)malloc(sizeof(t_cam))))
 		return (-1);
 	mlx->cam = cam;
@@ -87,9 +89,17 @@ int			init_camera(t_mlx *mlx)
 		return(false);
 	}
 	mlx->map->begin_list = mlx->map->list;
-	if (!(ray = (t_ray *)malloc(sizeof(t_ray))))
+	mlx->map->light_list = mlx->map->begin_list;
+	if (!(ray_source = (t_ray **)malloc(sizeof(t_ray *) * mlx->map->nb_light + 1)))
 		return (-1);
-	mlx->cam->ray = ray;
+	while (i < (mlx->map->nb_light + 1))
+	{
+		if(!(ray_source[i] = (t_ray *)malloc(sizeof(t_ray))))
+			return (-1);
+		i++;
+	}
+	mlx->cam->ray = ray_source;
+	mlx->map->light_count = 0;
 	ray_loop(mlx);
 	return (0);
 }

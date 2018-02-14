@@ -77,14 +77,16 @@ static int	ray_loop_shadow(t_mlx *mlx, t_object_list *source)
 	return(0);
 }*/
 
-int	light_hit(t_mlx *mlx, t_object_list	*source)
+int	light_hit(t_mlx *mlx)
 {
 	int	hit;
 
 	hit = 0;
 	ray_loop(mlx);
-	if (mlx->cam->ray->sphere_intersection == 1 || mlx->cam->ray->plan_intersection == 1
-		|| mlx->cam->ray->cone_intersection == 1 || mlx->cam->ray->cylindre_intersection == 1)
+	if (mlx->cam->ray[mlx->map->light_count]->sphere_intersection == 1
+		|| mlx->cam->ray[mlx->map->light_count]->plan_intersection == 1
+		|| mlx->cam->ray[mlx->map->light_count]->cone_intersection == 1
+		|| mlx->cam->ray[mlx->map->light_count]->cylindre_intersection == 1)
 		hit = 1;
 	return (hit);
 }

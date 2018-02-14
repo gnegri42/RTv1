@@ -22,13 +22,13 @@ int	cone_intersection_init(t_mlx *mlx, float x, float y)
 	float	c;
 	t_vec3	dist;
 
-	mlx->cam->ray->cone_intersection = 0;
+	mlx->cam->ray[mlx->map->light_count]->cone_intersection = 0;
 	dist = vector_substraction(mlx->cam->cam_pos, mlx->map->list->cone.position);
 	vector_normalize(mlx->map->list->cone.direction);
-	a = vector_dot_product(mlx->cam->ray->direction, mlx->cam->ray->direction) - (1 + pow(tan(mlx->map->list->cone.radius), 2)) *
-		pow(vector_dot_product(mlx->cam->ray->direction, mlx->map->list->cone.direction), 2);
-	b = 2 * (vector_dot_product(mlx->cam->ray->direction, dist) - (1 + pow(tan(mlx->map->list->cone.radius), 2))
-		* vector_dot_product(mlx->cam->ray->direction, mlx->map->list->cone.direction) * vector_dot_product(dist, mlx->map->list->cone.direction));
+	a = vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->cam->ray[mlx->map->light_count]->direction) - (1 + pow(tan(mlx->map->list->cone.radius), 2)) *
+		pow(vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->map->list->cone.direction), 2);
+	b = 2 * (vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, dist) - (1 + pow(tan(mlx->map->list->cone.radius), 2))
+		* vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->map->list->cone.direction) * vector_dot_product(dist, mlx->map->list->cone.direction));
 	c = vector_dot_product(dist, dist) - (1 + pow(tan(mlx->map->list->cone.radius), 2)) * pow(vector_dot_product(dist, mlx->map->list->cone.direction), 2);
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
@@ -37,14 +37,14 @@ int	cone_intersection_init(t_mlx *mlx, float x, float y)
 	t1 = (-b - sqrtf(disc)) / (2 * a);
 	if (t0 > t1)
 		t0 = t1;
-	if (t0 < mlx->cam->ray->length)
+	if (t0 < mlx->cam->ray[mlx->map->light_count]->length)
 	{
-		mlx->cam->ray->length = t0;
-		mlx->cam->ray->hit_object_pos = mlx->map->list->cone.position;
-		mlx->cam->ray->hit_object_col = mlx->map->list->cone.color;
-		mlx->cam->ray->cone_intersection = 1;
+		mlx->cam->ray[mlx->map->light_count]->length = t0;
+		mlx->cam->ray[mlx->map->light_count]->hit_object_pos = mlx->map->list->cone.position;
+		mlx->cam->ray[mlx->map->light_count]->hit_object_col = mlx->map->list->cone.color;
+		mlx->cam->ray[mlx->map->light_count]->cone_intersection = 1;
 	}
-	if (mlx->cam->ray->cone_intersection == 1)
+	if (mlx->cam->ray[mlx->map->light_count]->cone_intersection == 1)
 		draw(mlx, x, y);
 	return (true);
 }
