@@ -81,7 +81,7 @@ int	check_cone(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 14)
+	if ((c = count_int(str)) != 16)
 		return (false);
 	new_elem->cone.position = assign_vectors(str, &j, new_elem->cone.position);
 	loop(str, &j);

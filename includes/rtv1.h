@@ -45,9 +45,9 @@
 
 typedef struct				s_vec_color3
 {
-	float						r;
-	float						g;
-	float						b;
+	float					r;
+	float					g;
+	float					b;
 }							t_vec_color3;
 
 typedef struct				s_vec3
