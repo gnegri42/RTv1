@@ -147,6 +147,7 @@ typedef struct				s_map
 	t_object_list			*list;
 	t_object_list			*begin_list;
 	t_object_list			*light_list;
+	int						final_color;
 }							t_map;
 
 typedef struct				s_img

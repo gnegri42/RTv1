@@ -64,8 +64,13 @@ int	ray_loop(t_mlx *mlx)
 		{
 			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
-			create_ray(mlx, mlx->cam, i ,j);
-			check_ray_objects(mlx, x, y);
+			while (mlx->map->light_count < mlx->map->nb_light)
+			{
+				create_ray(mlx, mlx->cam, i ,j);
+				check_ray_objects(mlx, x, y);
+				mlx->map->light_count++;
+			}
+			mlx->map->light_count = 0;
 			x++;
 		}
 		y++;
@@ -90,9 +95,9 @@ int			init_camera(t_mlx *mlx)
 	}
 	mlx->map->begin_list = mlx->map->list;
 	mlx->map->light_list = mlx->map->begin_list;
-	if (!(ray_source = (t_ray **)malloc(sizeof(t_ray *) * mlx->map->nb_light + 1)))
+	if (!(ray_source = (t_ray **)malloc(sizeof(t_ray *) * mlx->map->nb_light)))
 		return (-1);
-	while (i < (mlx->map->nb_light + 1))
+	while (i < (mlx->map->nb_light))
 	{
 		if(!(ray_source[i] = (t_ray *)malloc(sizeof(t_ray))))
 			return (-1);

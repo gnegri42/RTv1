@@ -28,6 +28,11 @@
 int			exit_properly(t_mlx *mlx)
 {
 	free(mlx->map->str);
+	while (mlx->map->light_count < mlx->map->nb_light)
+	{
+		free(mlx->cam->ray[mlx->map->light_count]);
+		mlx->map->light_count++;
+	}
 //	mlx->map->list ? rtv1_free_list(mlx->map->list) : (0); /// ca fait segfault mais on en a besoin
 	mlx_destroy_image(mlx->mlx, mlx->img->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);

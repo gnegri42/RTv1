@@ -22,9 +22,7 @@ static t_object_list 	*find_light(t_mlx *mlx)
 		if (mlx->map->light_list->type == 13)
 		{
 			light_source = mlx->map->light_list;
-		//	printf("%f\n", mlx->map->light_list->light.position.x);
-		//	printf("%f\n", mlx->map->light_list->light.position.y);
-		//	printf("%f\n", mlx->map->light_list->light.position.z);
+			mlx->map->light_list = mlx->map->light_list->next;
 			return (light_source);
 		}
 		else 
@@ -98,15 +96,17 @@ int	light_ray(t_mlx *mlx)
 	t_object_list	*source;
 	t_vec3			normale;
 	float 			d;
-	int				color;
+	t_vec_color3	tmp_color;
 	t_vec_color3	vec_color;
 	t_vec_color3	vec_specular;
 	t_vec_color3	ambient;
 
-	color = BLACK;
-	source = find_light(mlx);
+	mlx->map->final_color = BLACK;
+	mlx->map->light_list = mlx->map->begin_list;
+	tmp_color = (t_vec_color3){0, 0, 0};
 	while (mlx->map->light_count < mlx->map->nb_light)
-	{
+	{	
+		source = find_light(mlx);
 		if (mlx->cam->ray[0]->sphere_intersection == 1 || mlx->cam->ray[0]->plan_intersection == 1
 			|| mlx->cam->ray[0]->cone_intersection == 1 || mlx->cam->ray[0]->cylindre_intersection == 1)
 		{
@@ -119,7 +119,6 @@ int	light_ray(t_mlx *mlx)
 			d = ft_clamp(vector_dot_product(source->light.dist, normale), 0.0, 1.0);
 			if (d < 0)
 				d = 0.0f;
-			vec_color = (t_vec_color3){0, 0, 0};
 			vec_color = color_mix(mlx->cam->ray[mlx->map->light_count]->hit_object_col, source->light.color);
 			ambient = color_float_product((t_vec_color3){0.4, 0.4, 0.4}, source->light.intensity);
 			ambient = color_product(vec_color, ambient);
@@ -130,12 +129,13 @@ int	light_ray(t_mlx *mlx)
 		//	if (light_hit(mlx, source) == 1)
 		//		vec_color = ambient;
 			vec_color = color_mix(vec_color, ambient);
-			color = rgb_to_hex(vec_color.r, vec_color.g, vec_color.b);
+			if (tmp_color.r == 0 && tmp_color.g == 0 && tmp_color.b == 0)
+				tmp_color = vec_color;
+			tmp_color = color_mix(tmp_color, vec_color);
+			mlx->map->final_color = rgb_to_hex(vec_color.r, vec_color.g, vec_color.b);
 		}
 		mlx->map->light_count++;
-		if (mlx->map->light_count <= mlx->map->nb_light)
-			source = find_light(mlx);
 	}
 	mlx->map->light_count = 0;
-	return (color);
+	return (mlx->map->final_color);
 }
