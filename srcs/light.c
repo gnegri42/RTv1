@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
+#include <stdio.h>
 static t_object_list 	*find_light(t_mlx *mlx)
 {
 	t_object_list	*light_source;
@@ -105,7 +105,7 @@ int	light_ray(t_mlx *mlx)
 	mlx->map->light_list = mlx->map->begin_list;
 	tmp_color = (t_vec_color3){0, 0, 0};
 	while (mlx->map->light_count < mlx->map->nb_light)
-	{	
+	{
 		source = find_light(mlx);
 		if (mlx->cam->ray[0]->sphere_intersection == 1 || mlx->cam->ray[0]->plan_intersection == 1
 			|| mlx->cam->ray[0]->cone_intersection == 1 || mlx->cam->ray[0]->cylindre_intersection == 1)
