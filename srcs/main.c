@@ -42,6 +42,7 @@ int			main(int argc, char **argv)
 		return (-1);
 	mlx->map = map;
 	mlx->img = img;
+	mlx->map->shadow = 0;
 	if (ft_reader(argc, argv[1], map) != 0)
 		return (-1);
 	if (img_loop(mlx, img) == -1)

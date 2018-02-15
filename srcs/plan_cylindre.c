@@ -12,13 +12,13 @@
 
 #include "rtv1.h"
 
-int	plan_intersection_init(t_mlx *mlx, float x, float y)
+int	plan_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 {
 	float	dist_inter;
 
 	mlx->cam->ray[mlx->map->light_count]->plan_intersection = 0;
 	dist_inter = ((vector_dot_product(mlx->map->list->plan.rotation, mlx->map->list->plan.position) -
-		vector_dot_product(mlx->map->list->plan.rotation, mlx->cam->cam_pos)) / vector_dot_product(mlx->map->list->plan.rotation, mlx->cam->ray[mlx->map->light_count]->direction));
+		vector_dot_product(mlx->map->list->plan.rotation, origin)) / vector_dot_product(mlx->map->list->plan.rotation, direction));
 	if (dist_inter < 0.0001)
 		return (false);
 	if (dist_inter < mlx->cam->ray[mlx->map->light_count]->length)
@@ -28,12 +28,12 @@ int	plan_intersection_init(t_mlx *mlx, float x, float y)
 		mlx->cam->ray[mlx->map->light_count]->hit_object_col = mlx->map->list->plan.color;
 		mlx->cam->ray[mlx->map->light_count]->plan_intersection = 1;
 	}
-	if (mlx->cam->ray[mlx->map->light_count]->plan_intersection == 1)
-		draw(mlx, x, y);
+	if (mlx->cam->ray[mlx->map->light_count]->plan_intersection == 1 && mlx->map->shadow == 0)
+		draw(mlx, mlx->x, mlx->y);
 	return (0);
 }
 
-int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
+int	cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 {
 	float	disc;
 	float	t0;
@@ -44,11 +44,11 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 	t_vec3	dist;
 
 	mlx->cam->ray[mlx->map->light_count]->cylindre_intersection = 0;
-	dist = vector_substraction(mlx->cam->cam_pos, mlx->map->list->cylindre.position);
+	dist = vector_substraction(origin, mlx->map->list->cylindre.position);
 	vector_normalize(mlx->map->list->cylindre.direction);
-	a = vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->cam->ray[mlx->map->light_count]->direction) - pow(vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->map->list->cylindre.direction), 2);
-	b = 2 * (vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, dist) -
-		(vector_dot_product(mlx->cam->ray[mlx->map->light_count]->direction, mlx->map->list->cylindre.direction) * vector_dot_product(dist, mlx->map->list->cylindre.direction)));
+	a = vector_dot_product(direction, direction) - pow(vector_dot_product(direction, mlx->map->list->cylindre.direction), 2);
+	b = 2 * (vector_dot_product(direction, dist) -
+		(vector_dot_product(direction, mlx->map->list->cylindre.direction) * vector_dot_product(dist, mlx->map->list->cylindre.direction)));
 	c = vector_dot_product(dist, dist) - pow(vector_dot_product(dist, mlx->map->list->cylindre.direction), 2) - pow(mlx->map->list->cylindre.radius, 2);
 	disc = b * b - 4 * a * c;
 	if (disc < 0)
@@ -64,7 +64,7 @@ int	cylindre_intersection_init(t_mlx *mlx, float x, float y)
 		mlx->cam->ray[mlx->map->light_count]->hit_object_col = mlx->map->list->cylindre.color;
 		mlx->cam->ray[mlx->map->light_count]->cylindre_intersection = 1;
 	}
-	if (mlx->cam->ray[mlx->map->light_count]->cylindre_intersection == 1)
-		draw(mlx, x, y);
+	if (mlx->cam->ray[mlx->map->light_count]->cylindre_intersection == 1 && mlx->map->shadow == 0)
+		draw(mlx, mlx->x, mlx->y);
 	return (true);
 }

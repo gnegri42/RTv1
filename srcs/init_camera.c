@@ -12,7 +12,7 @@
 
 #include <rtv1.h>
 
-static int	check_ray_objects(t_mlx *mlx, float x, float y)
+int	check_ray_objects(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 {
 	t_object_list *tmp;
 
@@ -20,13 +20,13 @@ static int	check_ray_objects(t_mlx *mlx, float x, float y)
 	while (mlx->map->list != NULL)
 	{
 		if (mlx->map->list->type == 14)
-			sphere_intersection_init(mlx, x, y);
+			sphere_intersection_init(mlx, origin, direction);
 		if (mlx->map->list->type == 15)
-			cylindre_intersection_init(mlx, x, y);
+			cylindre_intersection_init(mlx, origin, direction);
 		if (mlx->map->list->type == 16)
-			cone_intersection_init(mlx, x, y);
+			cone_intersection_init(mlx, origin, direction);
 		if (mlx->map->list->type == 17)
-			plan_intersection_init(mlx, x, y);
+			plan_intersection_init(mlx, origin, direction);
 		mlx->map->list = mlx->map->list->next;
 	}
 	mlx->map->list = tmp;
@@ -51,29 +51,31 @@ static int	create_ray(t_mlx *mlx, t_cam *cam, float i, float j)
 
 int	ray_loop(t_mlx *mlx)
 {
-	float 	x;
-	float 	y;
 	float 	i;
 	float	j;
+	t_vec3	origin;
+	t_vec3	direction;
 	
-	y = 0;
-	while (y < WIN_HEIGHT)
+	mlx->y = 0;
+	while (mlx->y < WIN_HEIGHT)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		mlx->x = 0;
+		while (mlx->x < WIN_WIDTH)
 		{
-			i = (2 * (x + 0.5) / (float)WIN_WIDTH - 1);
-			j = (1 - 2 * (y + 0.5) / (float)WIN_HEIGHT);
+			i = (2 * (mlx->x + 0.5) / (float)WIN_WIDTH - 1);
+			j = (1 - 2 * (mlx->y + 0.5) / (float)WIN_HEIGHT);
 			while (mlx->map->light_count < mlx->map->nb_light)
 			{
 				create_ray(mlx, mlx->cam, i ,j);
-				check_ray_objects(mlx, x, y);
+				origin = mlx->cam->ray[mlx->map->light_count]->origin;
+				direction = mlx->cam->ray[mlx->map->light_count]->direction;
+				check_ray_objects(mlx, origin, direction);
 				mlx->map->light_count++;
 			}
 			mlx->map->light_count = 0;
-			x++;
+			mlx->x++;
 		}
-		y++;
+		mlx->y++;
 	}
 	return (0);
 }

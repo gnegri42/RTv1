@@ -149,6 +149,7 @@ typedef struct				s_map
 	t_object_list			*list;
 	t_object_list			*begin_list;
 	t_object_list			*light_list;
+	int						shadow;
 	int						final_color;
 }							t_map;
 
@@ -168,13 +169,15 @@ typedef struct				s_mlx
 	t_img					*img;
 	t_map					*map;
 	t_cam					*cam;
+	float					x;
+	float					y;
 }							t_mlx;
 
 int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				ray_loop(t_mlx *mlx);
 int				light_ray(t_mlx *mlx);
-int				light_hit(t_mlx *mlx);
+int				light_hit(t_mlx *mlx, t_object_list *source);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
 int 			init_light(t_object_list *new_elem, char *str);
@@ -196,14 +199,15 @@ t_vec_color3	color_product(t_vec_color3 v1, t_vec_color3 v2);
 t_vec_color3	color_addition(t_vec_color3 v1, t_vec_color3 v2);
 t_vec_color3	color_mix(t_vec_color3 v1, t_vec_color3 v2);
 float			vector_dot_product(t_vec3 v1, t_vec3 v2);
-int				sphere_intersection_init(t_mlx *mlx, int x, int y);
-int				plan_intersection_init(t_mlx *mlx, float x, float y);
-int				cylindre_intersection_init(t_mlx *mlx, float x, float y);
-int				cone_intersection_init(t_mlx *mlx, float x, float y);
+int				sphere_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
+int				plan_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
+int				cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
+int				cone_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
 int				check_sphere(t_object_list *new_elem, char *str);
 int				check_plan(t_object_list *new_elem, char *str);
 int				check_cylindre(t_object_list *new_elem, char *str);
 int				check_cone(t_object_list *new_elem, char *str);
+int				check_ray_objects(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
 void			draw(t_mlx *mlx , float x, float y);
 void			redraw(t_mlx *mlx);
 float			atoi_custom(const char *str, int *i);

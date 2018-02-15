@@ -120,14 +120,14 @@ int	light_ray(t_mlx *mlx)
 			if (d < 0)
 				d = 0.0f; 
 			vec_color = color_mix(mlx->cam->ray[mlx->map->light_count_2]->hit_object_col, source->light.color);
-			ambient = color_float_product((t_vec_color3){0.4, 0.4, 0.4}, source->light.intensity);
+			ambient = color_float_product((t_vec_color3){0.5, 0.5, 0.5}, source->light.intensity);
 			ambient = color_product(vec_color, ambient);
 			vec_color = color_float_product(vec_color, source->light.intensity);
 			vec_color = color_float_product(vec_color, d);
 			vec_specular = specular_light(mlx, source->light.dist, normale, source->light.hit_point, source);
 			vec_color = color_mix(vec_color, vec_specular);
-		//	if (light_hit(mlx, source) == 1)
-		//		vec_color = ambient;
+			//if (light_hit(mlx, source) == 1)
+			//	vec_color = ambient;
 			vec_color = color_mix(vec_color, ambient);
 			if (tmp_color.r == 0 && tmp_color.g == 0 && tmp_color.b == 0)
 				tmp_color = vec_color;
