@@ -63,6 +63,7 @@ typedef	struct 				s_light
 	float					intensity;
 	t_vec3					hit_point;
 	t_vec3					dist;
+	float					length;
 	t_vec_color3			color;
 }							t_light;
 

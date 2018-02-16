@@ -14,7 +14,7 @@
 
 int	light_hit(t_mlx *mlx, t_object_list *source)
 {
-	int	hit;
+	int		hit;
 
 	hit = 0;
 	mlx->map->shadow = 1;
@@ -23,7 +23,10 @@ int	light_hit(t_mlx *mlx, t_object_list *source)
 		|| mlx->cam->ray[mlx->map->light_count]->plan_intersection == 1
 		|| mlx->cam->ray[mlx->map->light_count]->cone_intersection == 1
 		|| mlx->cam->ray[mlx->map->light_count]->cylindre_intersection == 1)
-		hit = 1;
+	{
+		if (mlx->cam->ray[mlx->map->light_count]->length < source->light.length && mlx->cam->ray[mlx->map->light_count]->length > 0.0001)
+			hit = 1;
+	}	
 	mlx->map->shadow = 0;
 	return (hit);
 }

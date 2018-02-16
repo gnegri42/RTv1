@@ -113,6 +113,9 @@ int	light_ray(t_mlx *mlx)
 			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
 				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
 			source->light.dist = vector_substraction(source->light.position, source->light.hit_point);
+			
+			source->light.length = sqrtf(vector_dot_product(source->light.dist, source->light.dist));
+
 			source->light.dist = vector_normalize(source->light.dist);
 			normale = vector_substraction(source->light.hit_point, mlx->cam->ray[mlx->map->light_count_2]->hit_object_pos);
 			normale = vector_normalize(normale); 
