@@ -113,8 +113,10 @@ int	light_ray(t_mlx *mlx)
 			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
 				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
 			source->light.dist = vector_substraction(source->light.position, source->light.hit_point);
-			
-			source->light.length = sqrtf(vector_dot_product(source->light.dist, source->light.dist));
+
+			source->light.length = sqrt(vector_dot_product(source->light.dist, source->light.dist));
+			source->light.length = sqrt(source->light.length);
+
 
 			source->light.dist = vector_normalize(source->light.dist);
 			normale = vector_substraction(source->light.hit_point, mlx->cam->ray[mlx->map->light_count_2]->hit_object_pos);
@@ -129,8 +131,12 @@ int	light_ray(t_mlx *mlx)
 			vec_color = color_float_product(vec_color, d);
 			vec_specular = specular_light(mlx, source->light.dist, normale, source->light.hit_point, source);
 			vec_color = color_mix(vec_color, vec_specular);
-			//if (light_hit(mlx, source) == 1)
-			//	vec_color = ambient;
+			/*if (light_hit(mlx, source, normale) == 1)
+			{
+				printf("d\n");
+				vec_color = (t_vec_color3){255, 255, 255};
+				vec_color = ambient;
+			}*/
 			vec_color = color_mix(vec_color, ambient);
 			if (tmp_color.r == 0 && tmp_color.g == 0 && tmp_color.b == 0)
 				tmp_color = vec_color;

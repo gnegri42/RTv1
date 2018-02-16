@@ -68,3 +68,4 @@ int	cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 		draw(mlx, mlx->x, mlx->y);
 	return (true);
 }
+

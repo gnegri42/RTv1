@@ -178,7 +178,7 @@ int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				ray_loop(t_mlx *mlx);
 int				light_ray(t_mlx *mlx);
-int				light_hit(t_mlx *mlx, t_object_list *source);
+int				light_hit(t_mlx *mlx, t_object_list *source, t_vec3	normale);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
 int 			init_light(t_object_list *new_elem, char *str);
