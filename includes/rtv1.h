@@ -95,6 +95,7 @@ typedef	struct 				s_plan
 typedef	struct 				s_sphere
 {
 	t_vec3					position;
+	t_vec3					direction;
 	float					radius;
 	float					albedo;
 	t_vec_color3			color;
@@ -220,6 +221,7 @@ int				exit_properly(t_mlx *mlx);
 int				red_cross(t_mlx *mlx);
 int				rgb_to_hex(int r, int g, int b);
 void			transformations(t_vec3 *position, t_vec3 *direction, char *str, int *j);
+void			ft_rotation(t_vec3 *position, t_vec3 rotation_degree);
 void			loop(char *str, int *j);
 
 
