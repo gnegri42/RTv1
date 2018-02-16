@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
+#include <stdio.h>
 int	check_sphere(t_object_list *new_elem, char *str)
 {
 	int				j;
@@ -19,16 +19,18 @@ int	check_sphere(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 11)
+	if ((c = count_int(str)) != 13)
 		return (false);
 	new_elem->sphere.position = assign_vectors(str, &j, new_elem->sphere.position);
+	new_elem->sphere.direction = (t_vec3){1, 0, 0};
 	loop(str, &j);
 	new_elem->sphere.radius = atoi_custom(str, &j);
 	loop(str, &j);
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
 	new_elem->sphere.color = col;
-	//transformations(&new_elem->sphere.position, str, &j);
+	new_elem->sphere.direction = (t_vec3){1, 0, 0};
+	transformations(&new_elem->sphere.position, &new_elem->sphere.direction, str, &j);
 	return (true);
 }
 
@@ -39,11 +41,10 @@ int	check_plan(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 15)
+	if ((c = count_int(str)) != 12)
 		return (false);
 	new_elem->plan.position = assign_vectors(str, &j, new_elem->plan.position);
-	loop(str, &j);
-	new_elem->plan.rotation = assign_vectors(str, &j, new_elem->plan.rotation);
+	new_elem->plan.rotation = (t_vec3){1, 0, 0};
 	loop(str, &j);
 	col = (t_vec_color3){0, 0, 0};
 	col = assign_colors(str, &j, col);
@@ -59,11 +60,10 @@ int	check_cylindre(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 16)
+	if ((c = count_int(str)) != 13)
 		return (false);
 	new_elem->cylindre.position = assign_vectors(str, &j, new_elem->cylindre.position);
-	loop(str, &j);
-	new_elem->cylindre.direction = assign_vectors(str, &j, new_elem->cylindre.direction);
+	new_elem->cylindre.direction = (t_vec3){0, 1, 0};
 	loop(str, &j);
 	new_elem->cylindre.radius = atoi_custom(str, &j);
 	loop(str, &j);
@@ -81,11 +81,10 @@ int	check_cone(t_object_list *new_elem, char *str)
 	t_vec_color3	col;
 
 	j = 0;
-	if ((c = count_int(str)) != 16)
+	if ((c = count_int(str)) != 13)
 		return (false);
 	new_elem->cone.position = assign_vectors(str, &j, new_elem->cone.position);
-	loop(str, &j);
-	new_elem->cone.direction = assign_vectors(str, &j, new_elem->cone.direction);
+	new_elem->cone.direction = (t_vec3){0, 1, 0};
 	loop(str, &j);
 	new_elem->cone.radius = atoi_custom(str, &j);
 	loop(str, &j);

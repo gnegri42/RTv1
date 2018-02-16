@@ -34,6 +34,7 @@ SRC_NAME = 	main.c\
 			color.c\
 			color2.c\
 			transformations.c\
+			rotation.c\
 			shadow.c\
 
 
