@@ -67,7 +67,7 @@ static t_vec3	ft_translation(t_vec3 ex_pos, t_vec3 param)
 	return (new_pos);
 }
 
-void			transformations(t_vec3 *position, char *str, int *j)
+void			transformations(t_vec3 *position, t_vec3 *direction, char *str, int *j)
 {
 	t_vec3	translation;
 	t_vec3	rotation_degree;
@@ -82,4 +82,7 @@ void			transformations(t_vec3 *position, char *str, int *j)
 	*position = ft_rotation_x(*position, rotation_degree.x);
 	*position = ft_rotation_y(*position, rotation_degree.y);
 	*position = ft_rotation_z(*position, rotation_degree.z);
+	*direction = ft_rotation_x(*direction, rotation_degree.x);
+	*direction = ft_rotation_y(*direction, rotation_degree.y);
+	*direction = ft_rotation_z(*direction, rotation_degree.z);
 }
