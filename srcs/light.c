@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-
+#include <stdio.h>
 static t_object_list 	*find_light(t_mlx *mlx)
 {
 	t_object_list	*light_source;
