@@ -31,7 +31,7 @@ void			transformations(t_vec3 *position, t_vec3 *direction, char *str, int *j)
 
 	loop(str, j);
 	tmp_pos = *position;
-	inv_pos = vector_float_product(tmp_pos, -1);
+	inv_pos = vector_double_product(tmp_pos, -1);
 	*position = ft_translation(*position, inv_pos);
 	rotation_degree = (t_vec3){0, 0, 0};
 	rotation_degree = assign_vectors(str, j, rotation_degree);

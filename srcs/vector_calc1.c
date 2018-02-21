@@ -32,7 +32,7 @@ t_vec3 vector_int_product(t_vec3 v1, int i)
 	return (res);
 }
 
-t_vec3	vector_assign_values(float x, float y, float z)
+t_vec3	vector_assign_values(double x, double y, double z)
 {
 	t_vec3 v;
 
@@ -52,7 +52,7 @@ t_vec3	vector_addition(t_vec3 v1, t_vec3 v2)
 	return (res);
 }
 
-t_vec3 vector_float_product(t_vec3 v1, float i)
+t_vec3 vector_double_product(t_vec3 v1, double i)
 {
 	t_vec3	res;
 

@@ -30,7 +30,7 @@ void	redraw(t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
 }
 
-void	draw(t_mlx *mlx , float x, float y)
+void	draw(t_mlx *mlx , double x, double y)
 {
 	int i;
 	int color;
