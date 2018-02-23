@@ -110,6 +110,28 @@ int	light_ray(t_mlx *mlx)
 		if (mlx->cam->ray[0]->sphere_intersection == 1 || mlx->cam->ray[0]->plan_intersection == 1
 			|| mlx->cam->ray[0]->cone_intersection == 1 || mlx->cam->ray[0]->cylindre_intersection == 1)
 		{
+			/*
+			METHODE N.2
+
+			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
+				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
+			normale = vector_substraction(source->light.hit_point, mlx->cam->ray[mlx->map->light_count_2]->hit_object_pos);
+			normale = vector_normalize(normale);
+			source->light.dist = vector_substraction(source->light.position, source->light.hit_point);
+			source->light.dist = vector_normalize(source->light.dist);
+			d = ft_clamp(vector_dot_product(source->light.dist, normale), 0.0, 1.0);
+			if (d < 0)
+				d = 0.0f;
+			vec_color = color_mix(mlx->cam->ray[mlx->map->light_count_2]->hit_object_col, source->light.color);
+			vec_specular = specular_light(mlx, source->light.dist, normale, source->light.hit_point, source);
+			vec_color = color_mix(vec_color, vec_specular);
+			ambient = color_float_product((t_vec_color3){0.5, 0.5, 0.5}, source->light.intensity);
+			ambient = color_product(vec_color, ambient);
+			if (light_hit(mlx, source) == 1)
+				vec_color = (t_vec_color3){0, 0, 0};
+			tmp_color =	color_mix(vec_color, color_float_product(color_float_product(source->light.color, source->light.intensity), d));
+			mlx->map->final_color = rgb_to_hex(tmp_color.r, tmp_color.g, tmp_color.b);
+			*/
 			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
 				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
 			source->light.dist = vector_substraction(source->light.position, source->light.hit_point);
