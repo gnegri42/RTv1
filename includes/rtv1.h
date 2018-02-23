@@ -45,24 +45,25 @@
 
 typedef struct				s_vec_color3
 {
-	float					r;
-	float					g;
-	float					b;
+	double					r;
+	double					g;
+	double					b;
 }							t_vec_color3;
 
 typedef struct				s_vec3
 {
-	float					x;
-	float					y;
-	float					z;
+	double					x;
+	double					y;
+	double					z;
 }							t_vec3;
 
 typedef	struct 				s_light
 {
 	t_vec3					position;
-	float					intensity;
+	double					intensity;
 	t_vec3					hit_point;
 	t_vec3					dist;
+	double					length;
 	t_vec_color3			color;
 }							t_light;
 
@@ -70,8 +71,8 @@ typedef	struct 				s_cone
 {
 	t_vec3					position;
 	t_vec3					direction;
-	float					radius;
-	float					albedo;
+	double					radius;
+	double					albedo;
 	t_vec_color3			color;
 }							t_cone;
 
@@ -79,8 +80,8 @@ typedef	struct 				s_cylindre
 {
 	t_vec3					position;
 	t_vec3					direction;
-	float					radius;
-	float					albedo;
+	double					radius;
+	double					albedo;
 	t_vec_color3			color;
 }							t_cylindre;
 
@@ -88,7 +89,7 @@ typedef	struct 				s_plan
 {
 	t_vec3					position;
 	t_vec3					rotation;
-	float					albedo;
+	double					albedo;
 	t_vec_color3			color;
 }							t_plan;
 
@@ -96,8 +97,8 @@ typedef	struct 				s_sphere
 {
 	t_vec3					position;
 	t_vec3					direction;
-	float					radius;
-	float					albedo;
+	double					radius;
+	double					albedo;
 	t_vec_color3			color;
 }							t_sphere;
 
@@ -117,7 +118,7 @@ typedef	struct				s_ray
 {
 	t_vec3					origin;
 	t_vec3					direction;
-	float					length;
+	double					length;
 	int						sphere_intersection;
 	int						plan_intersection;
 	int						cylindre_intersection;
@@ -125,8 +126,7 @@ typedef	struct				s_ray
 	int						color;
 	t_vec3 					hit_object_pos;
 	t_vec_color3			hit_object_col;
-	float					hit_object_radius;
-
+	double					hit_object_radius;
 }							t_ray;
 
 typedef	struct 				s_cam
@@ -170,36 +170,36 @@ typedef struct				s_mlx
 	t_img					*img;
 	t_map					*map;
 	t_cam					*cam;
-	float					x;
-	float					y;
+	double					x;
+	double					y;
 }							t_mlx;
 
 int				ft_reader(int argc, char *argv, t_map *map);
 int				init_camera(t_mlx *mlx);
 int				ray_loop(t_mlx *mlx);
 int				light_ray(t_mlx *mlx);
-int				light_hit(t_mlx *mlx, t_object_list *source);
+int				light_hit(t_mlx *mlx, t_object_list *source, t_vec3	normale);
 int				init_data(t_mlx *mlx, t_map *map);
 int 			init_object(t_object_list *new_elem, char *str, int o);
 int 			init_light(t_object_list *new_elem, char *str);
 t_vec3			vector_addition(t_vec3 v1, t_vec3 v2);
-t_vec3 			vector_float_product(t_vec3 v1, float i);
-t_vec3			vector_assign_values(float x, float y, float z);
+t_vec3 			vector_double_product(t_vec3 v1, double i);
+t_vec3			vector_assign_values(double x, double y, double z);
 t_vec3			vector_substraction(t_vec3 v1, t_vec3 v2);
 t_vec3 			vector_int_product(t_vec3 v1, int i);
 t_vec3			vector_product(t_vec3 v1, t_vec3 v2);
 t_vec3			vector_normalize(t_vec3 v1);
-float			vector_length(t_vec3 v1);
-t_vec3 			vector_float_substraction(t_vec3 v1, float i);
+double			vector_length(t_vec3 v1);
+t_vec3 			vector_double_substraction(t_vec3 v1, double i);
 t_vec3			vector_cross(t_vec3 v1, t_vec3 v2);
 t_vec3			assign_vectors(char *str, int *j, t_vec3 vec);
-t_vec_color3 	color_float_product(t_vec_color3 v1, float i);
+t_vec_color3 	color_double_product(t_vec_color3 v1, double i);
 t_vec_color3	vector_assign_colors(int r, int g, int b);
 t_vec_color3	assign_colors(char *str, int *j, t_vec_color3 col);
 t_vec_color3	color_product(t_vec_color3 v1, t_vec_color3 v2);
 t_vec_color3	color_addition(t_vec_color3 v1, t_vec_color3 v2);
 t_vec_color3	color_mix(t_vec_color3 v1, t_vec_color3 v2);
-float			vector_dot_product(t_vec3 v1, t_vec3 v2);
+double			vector_dot_product(t_vec3 v1, t_vec3 v2);
 int				sphere_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
 int				plan_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
 int				cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
@@ -209,9 +209,9 @@ int				check_plan(t_object_list *new_elem, char *str);
 int				check_cylindre(t_object_list *new_elem, char *str);
 int				check_cone(t_object_list *new_elem, char *str);
 int				check_ray_objects(t_mlx *mlx, t_vec3 origin, t_vec3 direction);
-void			draw(t_mlx *mlx , float x, float y);
+void			draw(t_mlx *mlx , double x, double y);
 void			redraw(t_mlx *mlx);
-float			atoi_custom(const char *str, int *i);
+double			atoi_custom(const char *str, int *i);
 int				atoi_color(const char *str, int *i);
 int				skip_space(char *str, int i);
 int				read_first_letters(char *str, int i);

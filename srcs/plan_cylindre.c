@@ -14,7 +14,7 @@
 
 int	plan_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 {
-	float	dist_inter;
+	double	dist_inter;
 
 	mlx->cam->ray[mlx->map->light_count]->plan_intersection = 0;
 	dist_inter = ((vector_dot_product(mlx->map->list->plan.rotation, mlx->map->list->plan.position) -
@@ -35,12 +35,12 @@ int	plan_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 
 int	cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 {
-	float	disc;
-	float	t0;
-	float	t1;
-	float	a;
-	float	b;
-	float	c;
+	double	disc;
+	double	t0;
+	double	t1;
+	double	a;
+	double	b;
+	double	c;
 	t_vec3	dist;
 
 	mlx->cam->ray[mlx->map->light_count]->cylindre_intersection = 0;
@@ -68,3 +68,4 @@ int	cylindre_intersection_init(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 		draw(mlx, mlx->x, mlx->y);
 	return (true);
 }
+

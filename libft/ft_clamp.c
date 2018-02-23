@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-float	ft_clamp(float value, float min, float max)
+double	ft_clamp(double value, double min, double max)
 {
 	if (value < min)
 		value = min;

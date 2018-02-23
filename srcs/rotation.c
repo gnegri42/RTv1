@@ -12,10 +12,10 @@
 
 #include "rtv1.h"
 
-static t_vec3	ft_rotation_z(t_vec3 ex_pos, float angle)
+static t_vec3	ft_rotation_z(t_vec3 ex_pos, double angle)
 {
-	float new_x;
-	float new_y;
+	double new_x;
+	double new_y;
 	t_vec3	new_pos;
 
 	angle = ft_deg2rad(angle);
@@ -27,10 +27,10 @@ static t_vec3	ft_rotation_z(t_vec3 ex_pos, float angle)
 	return (new_pos);
 }
 
-static t_vec3	ft_rotation_y(t_vec3 ex_pos, float angle)
+static t_vec3	ft_rotation_y(t_vec3 ex_pos, double angle)
 {
-	float new_x;
-	float new_z;
+	double new_x;
+	double new_z;
 	t_vec3	new_pos;
 
 	angle = ft_deg2rad(angle);
@@ -42,10 +42,10 @@ static t_vec3	ft_rotation_y(t_vec3 ex_pos, float angle)
 	return (new_pos);
 }
 
-static t_vec3	ft_rotation_x(t_vec3 ex_pos, float angle)
+static t_vec3	ft_rotation_x(t_vec3 ex_pos, double angle)
 {
-	float 	new_y;
-	float 	new_z;
+	double 	new_y;
+	double 	new_z;
 	t_vec3	new_pos;
 
 	angle = ft_deg2rad(angle);

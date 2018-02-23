@@ -33,7 +33,7 @@ int	check_ray_objects(t_mlx *mlx, t_vec3 origin, t_vec3 direction)
 	return(0);
 }
 
-static int	create_ray(t_mlx *mlx, t_cam *cam, float i, float j)
+static int	create_ray(t_mlx *mlx, t_cam *cam, double i, double j)
 {
 
 	cam->ray[mlx->map->light_count]->origin = vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
@@ -51,8 +51,8 @@ static int	create_ray(t_mlx *mlx, t_cam *cam, float i, float j)
 
 int	ray_loop(t_mlx *mlx)
 {
-	float 	i;
-	float	j;
+	double 	i;
+	double	j;
 	t_vec3	origin;
 	t_vec3	direction;
 	
@@ -62,8 +62,8 @@ int	ray_loop(t_mlx *mlx)
 		mlx->x = 0;
 		while (mlx->x < WIN_WIDTH)
 		{
-			i = (2 * (mlx->x + 0.5) / (float)WIN_WIDTH - 1);
-			j = (1 - 2 * (mlx->y + 0.5) / (float)WIN_HEIGHT);
+			i = (2 * (mlx->x + 0.5) / (double)WIN_WIDTH - 1);
+			j = (1 - 2 * (mlx->y + 0.5) / (double)WIN_HEIGHT);
 			while (mlx->map->light_count < mlx->map->nb_light)
 			{
 				create_ray(mlx, mlx->cam, i ,j);

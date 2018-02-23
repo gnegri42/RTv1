@@ -12,7 +12,7 @@
 
 #include "rtv1.h"
 
-t_vec_color3 	color_float_product(t_vec_color3 v1, float i)
+t_vec_color3 	color_double_product(t_vec_color3 v1, double i)
 {
 	t_vec_color3	res;
 

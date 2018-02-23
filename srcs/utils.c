@@ -72,10 +72,10 @@ int				count_int(char *str)
 	return (nb_int);
 }
 
-static float	atoi_custom_next(const char *str, int *i, float v)
+static double	atoi_custom_next(const char *str, int *i, double v)
 {
 	int power;
-	float value;
+	double value;
 
 	power = 2;
 	(*i)++;
@@ -84,17 +84,17 @@ static float	atoi_custom_next(const char *str, int *i, float v)
 	while ((str[*i] >= '0' && str[*i] <= '9') && str[*i + 1] != '\0')
 	{
 		value = ft_power(10, power);
-		v = v + (float)(str[*i] - 48) * (float)(1 / value);
+		v = v + (double)(str[*i] - 48) * (double)(1 / value);
 		(*i)++;
 		power++;
 	}
 	return (v);
 }
 
-float			atoi_custom(const char *str, int *i)
+double			atoi_custom(const char *str, int *i)
 {
-	float v;
-	float posneg;
+	double v;
+	double posneg;
 
 	v = 0;
 	posneg = 1;

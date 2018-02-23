@@ -76,18 +76,18 @@ static t_vec_color3	specular_light(t_mlx *mlx, t_vec3 light_ray, t_vec3 normale,
 	t_vec3			reflection;
 	t_vec_color3	specular;
 	t_vec_color3	specular_color;
-	float			max_calc;
-	float			shininess;
+	double			max_calc;
+	double			shininess;
 
-	shininess = 150;
+	shininess = 200;
 	specular_color = (t_vec_color3){255, 255, 255};
-	reflection = vector_normalize(vector_substraction(vector_float_product(normale, (vector_dot_product(light_ray, normale))
+	reflection = vector_normalize(vector_substraction(vector_double_product(normale, (vector_dot_product(light_ray, normale))
 	 * 2.0f), light_ray));
 	max_calc = vector_dot_product(reflection, vector_normalize(vector_substraction(mlx->cam->ray[mlx->map->light_count_2]->origin, hit_point)));
 	if (max_calc < 0)
 		max_calc = 0;
-	specular = color_float_product(specular_color, source->light.intensity); 
-	specular = color_float_product(specular, pow(max_calc, shininess));
+	specular = color_double_product(specular_color, source->light.intensity); 
+	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
 
@@ -95,7 +95,7 @@ int	light_ray(t_mlx *mlx)
 {
 	t_object_list	*source;
 	t_vec3			normale;
-	float 			d;
+	double 			d;
 	t_vec_color3	tmp_color;
 	t_vec_color3	vec_color;
 	t_vec_color3	vec_specular;
@@ -104,14 +104,14 @@ int	light_ray(t_mlx *mlx)
 	mlx->map->light_list = mlx->map->begin_list;
 	tmp_color = (t_vec_color3){0, 0, 0};
 	mlx->map->light_count_2 = 0;
-	while (mlx->map->light_count_2 < mlx->map->nb_light)
-	{	
+	//while (mlx->map->light_count_2 < mlx->map->nb_light)
+	//{	
 		source = find_light(mlx);
 		if (mlx->cam->ray[0]->sphere_intersection == 1 || mlx->cam->ray[0]->plan_intersection == 1
 			|| mlx->cam->ray[0]->cone_intersection == 1 || mlx->cam->ray[0]->cylindre_intersection == 1)
 		{
 			/*
-			METHODE N.2
+			////////METHODE N.2 DE GEOF POUR TESTER UN CALCUL DIFFERENT
 
 			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
 				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
@@ -132,31 +132,41 @@ int	light_ray(t_mlx *mlx)
 			tmp_color =	color_mix(vec_color, color_float_product(color_float_product(source->light.color, source->light.intensity), d));
 			mlx->map->final_color = rgb_to_hex(tmp_color.r, tmp_color.g, tmp_color.b);
 			*/
+
+			// CALCUL DE LA DIFFUSE LIGHT //
+
 			source->light.hit_point = vector_addition(mlx->cam->ray[mlx->map->light_count_2]->origin, 
-				vector_float_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
+				vector_double_product(mlx->cam->ray[mlx->map->light_count_2]->direction, mlx->cam->ray[mlx->map->light_count_2]->length));
 			source->light.dist = vector_substraction(source->light.position, source->light.hit_point);
+			//source->light.length = sqrt(vector_dot_product(source->light.dist, source->light.dist));
 			source->light.dist = vector_normalize(source->light.dist);
 			normale = vector_substraction(source->light.hit_point, mlx->cam->ray[mlx->map->light_count_2]->hit_object_pos);
 			normale = vector_normalize(normale); 
 			d = ft_clamp(vector_dot_product(source->light.dist, normale), 0.0, 1.0);
-			if (d < 0)
-				d = 0.0f; 
-			vec_color = color_mix(mlx->cam->ray[mlx->map->light_count_2]->hit_object_col, source->light.color);
-			ambient = color_float_product((t_vec_color3){0.5, 0.5, 0.5}, source->light.intensity);
-			ambient = color_product(vec_color, ambient);
-			vec_color = color_float_product(vec_color, source->light.intensity);
-			vec_color = color_float_product(vec_color, d);
-			vec_specular = specular_light(mlx, source->light.dist, normale, source->light.hit_point, source);
-			vec_color = color_mix(vec_color, vec_specular);
-			//if (light_hit(mlx, source) == 1)
-			//	vec_color = ambient;
-			vec_color = color_mix(vec_color, ambient);
-			if (tmp_color.r == 0 && tmp_color.g == 0 && tmp_color.b == 0)
+
+			///////////////////////////////
+
+			vec_color = mlx->cam->ray[mlx->map->light_count_2]->hit_object_col;
+			//vec_color = color_mix(mlx->cam->ray[mlx->map->light_count_2]->hit_object_col, source->light.color);
+			//ambient = color_double_product((t_vec_color3){0.5, 0.5, 0.5}, source->light.intensity);
+			//ambient = color_product(vec_color, ambient);
+			//vec_color = color_double_product(vec_color, source->light.intensity);
+			vec_color = color_double_product(vec_color, d);
+			//vec_specular = specular_light(mlx, source->light.dist, normale, source->light.hit_point, source);
+			//vec_color = color_mix(vec_color, vec_specular);
+			if (light_hit(mlx, source, normale) == 1)
+			{
+				//printf("d\n");
+				vec_color = (t_vec_color3){255, 255, 255};
+				//vec_color = ambient;
+			}
+			//vec_color = color_mix(vec_color, ambient);
+			//if (tmp_color.r == 0 && tmp_color.g == 0 && tmp_color.b == 0)
 				tmp_color = vec_color;
-			tmp_color = color_mix(tmp_color, vec_color);
+			//tmp_color = color_mix(tmp_color, vec_color);
 			mlx->map->final_color = rgb_to_hex(tmp_color.r, tmp_color.g, tmp_color.b);
 		}
-		mlx->map->light_count_2++;
-	}
+	//	mlx->map->light_count_2++;
+	//}
 	return (mlx->map->final_color);
 }

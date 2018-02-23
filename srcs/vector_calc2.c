@@ -34,7 +34,7 @@ t_vec3	vector_product(t_vec3 v1, t_vec3 v2)
 
 t_vec3	vector_normalize(t_vec3 v)
 {
-	float	n;
+	double	n;
 
 	n = 1.0 / sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 	v.x *= n;
@@ -43,15 +43,15 @@ t_vec3	vector_normalize(t_vec3 v)
 	return (v);
 }
 
-float	vector_dot_product(t_vec3 v1, t_vec3 v2)
+double	vector_dot_product(t_vec3 v1, t_vec3 v2)
 {
-	float	dot;
+	double	dot;
 
 	dot = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	return (dot);
 }
 
-t_vec3 vector_float_substraction(t_vec3 v1, float i)
+t_vec3 vector_double_substraction(t_vec3 v1, double i)
 {
 	t_vec3	res;
 

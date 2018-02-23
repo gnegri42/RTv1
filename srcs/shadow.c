@@ -12,17 +12,14 @@
 
 #include "rtv1.h"
 
-int	light_hit(t_mlx *mlx, t_object_list *source)
+int	light_hit(t_mlx *mlx, t_object_list *source, t_vec3	normale)
 {
-	int	hit;
+	int		hit;
 
 	hit = 0;
 	mlx->map->shadow = 1;
 	check_ray_objects(mlx, source->light.hit_point, source->light.dist);
-	if (mlx->cam->ray[mlx->map->light_count]->sphere_intersection == 1
-		|| mlx->cam->ray[mlx->map->light_count]->plan_intersection == 1
-		|| mlx->cam->ray[mlx->map->light_count]->cone_intersection == 1
-		|| mlx->cam->ray[mlx->map->light_count]->cylindre_intersection == 1)
+	//if (source->light.length <= mlx->cam->ray[mlx->map->light_count]->length)
 		hit = 1;
 	mlx->map->shadow = 0;
 	return (hit);

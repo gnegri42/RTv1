@@ -76,7 +76,7 @@ static int	translation_camera(int keycode, t_mlx *mlx)
 
 int			key_events(int keycode, t_mlx *mlx)
 {
-//	float	tmp_pos;
+//	double	tmp_pos;
 
 	if (keycode == 53)
 		exit_properly(mlx);

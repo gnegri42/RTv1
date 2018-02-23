@@ -47,9 +47,9 @@ void			loop(char *str, int *j)
 
 t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 {
-	float x;
-	float y;
-	float z;
+	double x;
+	double y;
+	double z;
 
 	loop(str, j);
 	x = atoi_custom(str, j);
@@ -61,9 +61,9 @@ t_vec3			assign_vectors(char *str, int *j, t_vec3 vec)
 	return (vec);
 }
 
-float		vector_length(t_vec3 v1)
+double		vector_length(t_vec3 v1)
 {
-	float length;
+	double length;
 
 	length = sqrt(v1.x * v1.x + v1.y * v1.y + v1.z * v1.z);
 	return (length);
