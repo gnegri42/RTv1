@@ -123,7 +123,6 @@ typedef	struct				s_ray
 	int						plan_intersection;
 	int						cylindre_intersection;
 	int						cone_intersection;
-	int						color;
 	t_vec3 					hit_object_pos;
 	t_vec_color3			hit_object_col;
 	double					hit_object_radius;

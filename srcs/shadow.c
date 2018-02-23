@@ -19,7 +19,7 @@ int	light_hit(t_mlx *mlx, t_object_list *source, t_vec3	normale)
 	hit = 0;
 	mlx->map->shadow = 1;
 	check_ray_objects(mlx, source->light.hit_point, source->light.dist);
-	//if (source->light.length <= mlx->cam->ray[mlx->map->light_count]->length)
+	if (source->light.length > mlx->cam->ray[mlx->map->light_count]->length)
 		hit = 1;
 	mlx->map->shadow = 0;
 	return (hit);
